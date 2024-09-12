@@ -11,7 +11,7 @@ body, html {
     padding: 0;
     height: 100%;
     width: 100%;
-    overflow: hidden;
+    overflow-x: hidden;
     background-color: #000;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #fff;
@@ -21,7 +21,7 @@ body, html {
     display: grid;
     grid-template-columns: 1fr minmax(auto, 1200px) 1fr;
     grid-template-rows: auto 1fr auto;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .nav {
@@ -130,7 +130,6 @@ p {
     position: fixed;
     top: 0;
     left: 0;
-    filter: url('#goo');
     pointer-events: none;
     z-index: 1;
     display: flex;
@@ -193,7 +192,6 @@ p {
     }
 }
 </style>
-<script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="grid-container">
@@ -216,13 +214,12 @@ p {
     </div>
 
     <div class="social-icons">
-        <a href="https://twitter.com/Navaura" target="_blank"><i class="fab fa-twitter"></i></a>
-        <a href="https://instagram.com/Navaura" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://behance.net/Navaura" target="_blank"><i class="fab fa-behance"></i></a>
+        <a href="https://twitter.com/Navaura" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+        <a href="https://instagram.com/Navaura" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+        <a href="https://behance.net/Navaura" target="_blank" rel="noopener noreferrer"><i class="fab fa-behance"></i></a>
     </div>
 </div>
 
-<!-- Sections for About, Services, Contact -->
 <section id="about" style="padding: 100px 20px; text-align: center;">
     <h2>About Us</h2>
     <p>Learn more about our mission to blend design and technology in a way that transforms experiences.</p>
@@ -243,14 +240,6 @@ p {
     <p>Dive deeper into our projects and explore the limits of creativity with NAVAURA.</p>
 </section>
 
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-    <defs>
-        <filter id="goo">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="20" result="blur" />
-            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
-            <feBlend in="SourceGraphic" in2="goo" />
-        </filter>
-    </defs>
-</svg>
+<script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous" defer></script>
 </body>
 </html>
