@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<base href="https://www.navaura.in/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blurry Wobble Landing Page</title>
+<style>
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-color: #000;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr minmax(auto, 1200px) 1fr;
+    grid-template-rows: auto 1fr auto;
+    height: 100vh;
+}
+
+.nav {
+    grid-column: 3;
+    grid-row: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 2rem;
+}
+
+.nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 1.5rem;
+    font-size: 1rem;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.nav a:hover {
+    opacity: 1;
+}
+
+.container {
+    grid-column: 2;
+    grid-row: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.content {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+}
+
+h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 700;
+}
+
+p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+    opacity: 0.8;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #fff;
+    color: #000;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.cta-button:hover {
+    background-color: #000;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(255,255,255,0.5);
+}
+
+.social-icons {
+    grid-column: 1;
+    grid-row: 3;
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+}
+
+.social-icons a {
+    color: #fff;
+    text-decoration: none;
+    margin-right: 1rem;
+    font-size: 1.5rem;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.social-icons a:hover {
+    opacity: 1;
+}
+
+.gooey-wobble {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    filter: url('#goo');
+    pointer-events: none;
+    z-index: 1;
+}
+
+.blob {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    filter: blur(40px);
+}
+
+#blob1 {
+    width: 300px;
+    height: 300px;
+    top: 20%;
+    left: 20%;
+    animation: wobble1 20s infinite alternate;
+}
+
+#blob2 {
+    width: 250px;
+    height: 250px;
+    top: 60%;
+    left: 50%;
+    animation: wobble2 25s infinite alternate;
+}
+
+#blob3 {
+    width: 200px;
+    height: 200px;
+    top: 30%;
+    left: 70%;
+    animation: wobble3 22s infinite alternate;
+}
+
+@keyframes wobble1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(100px, -50px) scale(1.2); }
+}
+
+@keyframes wobble2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-150px, 100px) scale(0.8); }
+}
+
+@keyframes wobble3 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(50px, 150px) scale(1.5); }
+}
+
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr auto auto;
+    }
+
+    .nav, .social-icons {
+        grid-column: 1;
+        justify-content: center;
+    }
+
+    .nav {
+        grid-row: 1;
+    }
+
+    .container {
+        grid-column: 1;
+        grid-row: 2;
+        padding: 1rem;
+    }
+
+    .social-icons {
+        grid-row: 3;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+}
+
+.container {
+    grid-column: 2;
+    grid-row: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.content {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+}
+
+h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 700;
+}
+
+p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+    opacity: 0.8;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #fff;
+    color: #000;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.cta-button:hover {
+    background-color: #000;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(255,255,255,0.5);
+}
+
+.social-icons {
+    grid-column: 1;
+    grid-row: 3;
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+}
+
+.social-icons a {
+    color: #fff;
+    text-decoration: none;
+    margin-right: 1rem;
+    font-size: 1.5rem;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.social-icons a:hover {
+    opacity: 1;
+}
+
+.gooey-wobble {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    filter: url('#goo');
+    pointer-events: none;
+    z-index: 1;
+}
+
+.blob {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    filter: blur(40px);
+}
+
+#blob1 {
+    width: 300px;
+    height: 300px;
+    top: 20%;
+    left: 20%;
+    animation: wobble1 20s infinite alternate;
+}
+
+#blob2 {
+    width: 250px;
+    height: 250px;
+    top: 60%;
+    left: 50%;
+    animation: wobble2 25s infinite alternate;
+}
+
+#blob3 {
+    width: 200px;
+    height: 200px;
+    top: 30%;
+    left: 70%;
+    animation: wobble3 22s infinite alternate;
+}
+
+@keyframes wobble1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(100px, -50px) scale(1.2); }
+}
+
+@keyframes wobble2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-150px, 100px) scale(0.8); }
+}
+
+@keyframes wobble3 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(50px, 150px) scale(1.5); }
+}
+
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr auto auto;
+    }
+
+    .nav, .social-icons {
+        grid-column: 1;
+        justify-content: center;
+    }
+
+    .nav {
+        grid-row: 1;
+    }
+
+    .container {
+        grid-column: 1;
+        grid-row: 2;
+        padding: 1rem;
+    }
+
+    .social-icons {
+        grid-row: 3;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+}
+</style>
+<script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="grid-container">
+    <div class="gooey-wobble">
+        <div class="blob" id="blob1"></div>
+        <div class="blob" id="blob2"></div>
+        <div class="blob" id="blob3"></div>
+    </div>
+
+    <nav class="nav">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="container" id="home">
+        <div class="content">
+            <h1>NAVAURA</h1>
+            <p>Immerse yourself in a world where design meets technology. Our unique blend of aesthetics and innovation creates an unforgettable visual experience that pushes the boundaries of digital art.</p>
+            <a href="#explore" class="cta-button">Start Your Journey</a>
+        </div>
+    </div>
+
+    <div class="social-icons">
+        <a href="https://twitter.com/Navaura" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://instagram.com/Navaura" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://behance.net/Navaura" target="_blank"><i class="fab fa-behance"></i></a>
+    </div>
+</div>
+
+<!-- Sections for About, Services, Contact -->
+<section id="about" style="padding: 100px 20px; text-align: center;">
+    <h2>About Us</h2>
+    <p>Learn more about our mission to blend design and technology in a way that transforms experiences.</p>
+</section>
+
+<section id="services" style="padding: 100px 20px; text-align: center;">
+    <h2>Our Services</h2>
+    <p>Discover the range of services we offer to help bring your creative visions to life.</p>
+</section>
+
+<section id="contact" style="padding: 100px 20px; text-align: center;">
+    <h2>Contact Us</h2>
+    <p>Get in touch with us for more information, partnerships, or just to say hello.</p>
+</section>
+
+<section id="explore" style="padding: 100px 20px; text-align: center;">
+    <h2>Explore More</h2>
+    <p>Dive deeper into our projects and explore the limits of creativity with NAVAURA.</p>
+</section>
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <defs>
+        <filter id="goo">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="20" result="blur" />
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
+            <feBlend in="SourceGraphic" in2="goo" />
+        </filter>
+    </defs>
+</svg>
+</body>
+</html>
