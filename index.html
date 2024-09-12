@@ -4,7 +4,7 @@
 <base href="https://www.navaura.in/">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blurry Wobble Landing Page</title>
+<title>Navaura - Design Meets Technology</title>
 <style>
 body, html {
     margin: 0;
@@ -12,9 +12,28 @@ body, html {
     height: 100%;
     width: 100%;
     overflow-x: hidden;
-    background-color: #000;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0a0a0a;
+    font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #fff;
+    line-height: 1.6;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
 }
 
 .grid-container {
@@ -25,15 +44,32 @@ body, html {
 }
 
 .nav {
-    grid-column: 3;
+    grid-column: 1 / -1;
     grid-row: 1;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
-    padding: 2rem;
+    padding: 1rem 5%;
+    background-color: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    width: 90%;
+    z-index: 1000;
 }
 
-.nav a {
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+}
+
+.nav-links a {
     color: #fff;
     text-decoration: none;
     margin-left: 1.5rem;
@@ -42,7 +78,7 @@ body, html {
     transition: opacity 0.3s ease;
 }
 
-.nav a:hover {
+.nav-links a:hover {
     opacity: 1;
 }
 
@@ -53,12 +89,12 @@ body, html {
     justify-content: center;
     align-items: center;
     z-index: 2;
+    padding: 4rem 0;
 }
 
 .content {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     border-radius: 20px;
     padding: 3rem;
     box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
@@ -68,7 +104,7 @@ body, html {
 }
 
 h1 {
-    font-size: 4rem;
+    font-size: 3.5rem;
     margin-bottom: 1rem;
     text-transform: uppercase;
     letter-spacing: 3px;
@@ -76,7 +112,7 @@ h1 {
 }
 
 p {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     max-width: 600px;
     margin: 0 auto 2rem;
     line-height: 1.6;
@@ -85,36 +121,37 @@ p {
 
 .cta-button {
     display: inline-block;
-    padding: 15px 30px;
-    background-color: #fff;
-    color: #000;
+    padding: 12px 30px;
+    background-color: #3498db;
+    color: #fff;
     text-decoration: none;
     border-radius: 50px;
     font-weight: bold;
-    font-size: 1.1rem;
+    font-size: 1rem;
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
 .cta-button:hover {
-    background-color: #000;
-    color: #fff;
-    box-shadow: 0 0 20px rgba(255,255,255,0.5);
+    background-color: #2980b9;
+    box-shadow: 0 0 20px rgba(52, 152, 219, 0.5);
 }
 
 .social-icons {
-    grid-column: 1;
+    grid-column: 1 / -1;
     grid-row: 3;
     display: flex;
+    justify-content: center;
     align-items: center;
     padding: 2rem;
+    background-color: rgba(10, 10, 10, 0.8);
 }
 
 .social-icons a {
     color: #fff;
     text-decoration: none;
-    margin-right: 1rem;
+    margin: 0 1rem;
     font-size: 1.5rem;
     opacity: 0.7;
     transition: opacity 0.3s ease;
@@ -131,15 +168,13 @@ p {
     top: 0;
     left: 0;
     pointer-events: none;
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    z-index: -1;
+    overflow: hidden;
 }
 
 .blob {
     position: absolute;
-    background-color: rgba(255, 255, 255, 0.3);
+    background: linear-gradient(45deg, #3498db, #2980b9);
     border-radius: 50%;
     filter: blur(40px);
     animation: wobble 20s infinite alternate;
@@ -153,42 +188,69 @@ p {
     transform: translate(-50%, -50%);
 }
 
+#blob2 {
+    width: 200px;
+    height: 200px;
+    top: 20%;
+    left: 20%;
+    animation-delay: -5s;
+}
+
+#blob3 {
+    width: 250px;
+    height: 250px;
+    bottom: 20%;
+    right: 20%;
+    animation-delay: -10s;
+}
+
 @keyframes wobble {
     0%, 100% { transform: translate(-50%, -50%) scale(1); }
-    50% { transform: translate(-50%, -50%) scale(1.2); }
+    50% { transform: translate(-50%, -50%) scale(1.2) rotate(10deg); }
+}
+
+section {
+    padding: 100px 5%;
+    text-align: center;
+}
+
+section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
 }
 
 @media (max-width: 768px) {
-    .grid-container {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto 1fr auto auto;
-    }
-
-    .nav, .social-icons {
-        grid-column: 1;
-        justify-content: center;
-    }
-
     .nav {
-        grid-row: 1;
-    }
-
-    .container {
-        grid-column: 1;
-        grid-row: 2;
+        flex-direction: column;
         padding: 1rem;
     }
 
-    .social-icons {
-        grid-row: 3;
+    .nav-links {
+        margin-top: 1rem;
+    }
+
+    .nav-links a {
+        margin: 0 0.5rem;
+    }
+
+    .container {
+        padding: 2rem 1rem;
     }
 
     h1 {
-        font-size: 3rem;
+        font-size: 2.5rem;
     }
 
     p {
         font-size: 1rem;
+    }
+
+    section {
+        padding: 50px 5%;
+    }
+
+    section h2 {
+        font-size: 2rem;
     }
 }
 </style>
@@ -197,12 +259,17 @@ p {
 <div class="grid-container">
     <div class="gooey-wobble">
         <div class="blob" id="blob1"></div>
+        <div class="blob" id="blob2"></div>
+        <div class="blob" id="blob3"></div>
     </div>
 
     <nav class="nav">
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#contact">Contact</a>
+        <a href="#home" class="logo">NAVAURA</a>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+        </div>
     </nav>
 
     <div class="container" id="home">
@@ -220,24 +287,32 @@ p {
     </div>
 </div>
 
-<section id="about" style="padding: 100px 20px; text-align: center;">
+<section id="about">
     <h2>About Us</h2>
-    <p>Learn more about our mission to blend design and technology in a way that transforms experiences.</p>
+    <p>At Navaura, we're passionate about blending cutting-edge technology with innovative design. Our mission is to transform digital experiences and push the boundaries of what's possible in the world of creative technology.</p>
 </section>
 
-<section id="services" style="padding: 100px 20px; text-align: center;">
+<section id="services">
     <h2>Our Services</h2>
-    <p>Discover the range of services we offer to help bring your creative visions to life.</p>
+    <p>We offer a wide range of services to bring your creative visions to life:</p>
+    <ul style="list-style-type: none; padding: 0;">
+        <li>Interactive Web Design</li>
+        <li>Digital Art Installations</li>
+        <li>Augmented Reality Experiences</li>
+        <li>Creative Technology Consulting</li>
+    </ul>
 </section>
 
-<section id="contact" style="padding: 100px 20px; text-align: center;">
+<section id="contact">
     <h2>Contact Us</h2>
-    <p>Get in touch with us for more information, partnerships, or just to say hello.</p>
+    <p>Ready to start your journey with Navaura? Get in touch with us for more information, partnerships, or to discuss your next project.</p>
+    <a href="mailto:info@navaura.in" class="cta-button">Email Us</a>
 </section>
 
-<section id="explore" style="padding: 100px 20px; text-align: center;">
+<section id="explore">
     <h2>Explore More</h2>
-    <p>Dive deeper into our projects and explore the limits of creativity with NAVAURA.</p>
+    <p>Dive deeper into our projects and explore the limits of creativity with Navaura. Check out our portfolio to see how we've helped clients transform their ideas into reality.</p>
+    <a href="#" class="cta-button">View Portfolio</a>
 </section>
 
 <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous" defer></script>
