@@ -146,7 +146,7 @@ nav {
 }
 
 .hero h1 {
-    font-size: 6vw;
+    font-size: 5vw;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: -0.02em;
@@ -156,19 +156,26 @@ nav {
     overflow: hidden;
 }
 
-.hero h1 span {
+
+
+.reveal-char {
     display: inline-block;
-    animation: reveal 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+    opacity: 0;
+    transform: translateY(100%);
+    animation: revealChar 0.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
 }
 
-@keyframes reveal {
+@keyframes revealChar {
     0% {
+        opacity: 0;
         transform: translateY(100%);
     }
     100% {
+        opacity: 1;
         transform: translateY(0);
     }
 }
+
 
 .hero p {
     font-size: 1.5rem;
@@ -236,55 +243,59 @@ nav {
 }
 
 
-        /* Innovative Features Section */
-        .features {
-            padding: 10rem 0;
-            position: relative;
-        }
+ /* Innovative Features Section */
+.features {
+    padding: 10rem 0;
+    position: relative;
+}
 
-        .section-title {
-            font-size: 4rem;
-            text-align: left;
-            margin-bottom: 4rem;
-            color: var(--accent-color);
-            text-transform: uppercase;
-            letter-spacing: -0.02em;
-        }
+.section-title {
+    font-size: 4rem;
+    text-align: left;
+    margin-bottom: 4rem;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+}
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 2rem;
-        }
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 2rem;
+}
 
-        .feature-card {
-            grid-column: span 6;
-            background: rgba(255,255,255,0.05);
-            padding: 2rem;
-            transition: transform 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
+.feature-card {
+    grid-column: span 6;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none; /* Ensure link styling doesn't affect appearance */
+    color: inherit; /* Inherit color from parent */
+    display: block; /* Make sure the entire card is clickable */
+}
 
-        .feature-card:nth-child(odd) {
-            transform: translateY(4rem);
-        }
+.feature-card:nth-child(odd) {
+    transform: translateY(4rem);
+}
 
-        .feature-card:hover {
-            transform: scale(1.05);
-        }
+.feature-card:hover {
+    transform: scale(1.05);
+    background-color: rgba(255, 255, 255, 0.1); /* Lightly highlight on hover */
+}
 
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: var(--accent-color);
-        }
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+}
 
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--secondary-accent);
-        }
+.feature-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--secondary-accent);
+}
 
         /* Innovative About Section */
         .about {
@@ -376,6 +387,21 @@ nav {
                 grid-column: span 12;
             }
         }
+        .button-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.button-link:hover {
+    background-color: #0056b3;
+}
+
     </style>
 </head>
 <body>
@@ -399,9 +425,9 @@ nav {
             <div class="hero-bg"></div>
             <div class="container hero-content">
                 <h1>
-                    <span>SARVESHAM</span><br>
-                    <span>KRUTE</span><br>
-                    <span>BHABISHYAM</span>
+                    <span class="reveal-text">"SARVESHAM</span><br>
+                    <span class="reveal-text">KRUTE</span><br>
+                    <span class="reveal-text">BHABISHYAM"</span>
                 </h1>
                 <p>Navaura: Future For all</p>
                 <a href="#contact" class="cta-btn"><span>INITIATE CONTACT</span></a>
@@ -410,41 +436,44 @@ nav {
 
         <section id="features" class="features">
             <div class="container">
-                <h2 class="section-title">CORE TECH</h2>
+                <h2 class="section-title">We're working on</h2>
                 <div class="features-grid">
-                    <div class="feature-card">
+                    <a href="https://cv.navaura.in" class="feature-card">
                         <div class="feature-icon">&#9883;</div>
-                        <h3>QUANTUM NEXUS</h3>
-                        <p>Harnessing quantum entanglement for instantaneous global communication.</p>
-                    </div>
-                    <div class="feature-card">
+                        <h3>Chakra View</h3>
+                        <p>An AI Resume Friendly tool, will help you to get your desirable Jobs.</p>
+                    </a>
+                    <a href="https://lap.navaura.in" class="feature-card">
                         <div class="feature-icon">&#9731;</div>
-                        <h3>NEURAL MESH</h3>
+                        <h3>LAP -- Local Advance Paraphraser</h3>
                         <p>Seamless brain-computer interfaces for direct thought-to-digital translation.</p>
-                    </div>
-                    <div class="feature-card">
+                    </a>
+                    <a href="https://elev.navaura.in" class="feature-card">
                         <div class="feature-icon">&#9762;</div>
                         <h3>BIOCRYPT</h3>
                         <p>DNA-based encryption for unbreakable data security and storage.</p>
-                    </div>
-                    <div class="feature-card">
+                    </a>
+                    <a href="https://bob.navaura.in" class="feature-card">
                         <div class="feature-icon">&#9784;</div>
                         <h3>REALITYFUSION</h3>
                         <p>Blending physical and digital realities into a seamless existential experience.</p>
-                    </div>
+                    </a>
                 </div>
             </div>
         </section>
+        
+        
 
         <section id="about" class="about">
             <div class="container about-content">
                 <div class="about-text">
                     <h2 class="section-title">OUR VISION</h2>
-                    <p>At Navaura, we don't just push boundaries—we obliterate them. Our team of visionary technomancers is dedicated to forging a future where the lines between human potential and technological capability cease to exist.</p>
-                    <p>From quantum-powered neural networks to reality-altering interfaces, we're not just preparing for the future—we're creating it.</p>
+                    <p>At Navaura , we do not just push boundaries—we kill them . Our squad of visionary technomancers is dedicated to forge a future where human potential and technological capacity converge seamlessly .</p>
+                    <p>From quantum-powered neural networks to reality-altering interfaces , we're non simply train for the future—we're make it .</p>
+                    <p>We bring AI to every industry and make it accessible for everyone , empowering businesses and individuals likewise .</p>
                 </div>
                 <div class="about-image">
-                    <img src="/api/placeholder/600/400" alt="Navaura's Visionary Tech">
+                    <img src="founder2.jpg" alt="Navaura's Visionary Tech">
                 </div>
             </div>
         </section>
@@ -478,10 +507,37 @@ nav {
             document.querySelector('.hero-bg').style.transform = `translateY(${scrollPosition * 0.5}px)`;
         });
 
-        // Reveal animation for hero title
-        document.querySelectorAll('.hero h1 span').forEach((span, index) => {
-            span.style.animationDelay = `${index * 0.5}s`;
-        });
+// Function to split text into spans
+function splitTextIntoSpans(element) {
+    const text = element.textContent;
+    element.innerHTML = text.split('').map(char => 
+        `<span class="reveal-char">${char}</span>`
+    ).join('');
+}
+
+// Function to animate the text reveal
+function animateTextReveal(element, delay = 0) {
+    const chars = element.querySelectorAll('.reveal-char');
+    chars.forEach((char, index) => {
+        char.style.animationDelay = `${delay + (index * 0.05)}s`;
+    });
+}
+
+// Apply the effect to all elements with class 'reveal-text'
+function initTextReveal() {
+    const revealElements = document.querySelectorAll('.reveal-text');
+    revealElements.forEach((element, index) => {
+        splitTextIntoSpans(element);
+        animateTextReveal(element, index * 0.5);
+    });
+}
+
+// Initialize the effect when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', initTextReveal);
+
+// Recalculate on window resize for responsiveness
+window.addEventListener('resize', initTextReveal);
+
     </script>
 </body>
 </html>
