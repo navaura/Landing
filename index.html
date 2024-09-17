@@ -22,6 +22,7 @@
 <!-- Android Chrome Icon -->
 <link rel="icon" href="android-chrome-512x512.png" sizes="512x512" type="image/png">
 <link rel="icon" href="android-chrome-192x192.png" sizes="512x512" type="image/png">
+
 <meta name="robots" content="index, follow">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,6 +32,86 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
+        @media (max-width: 480px) {
+    /* Hero Section */
+    .hero h1 {
+        font-size: 8vw; /* Reduce font size for smaller screens */
+    }
+
+    .hero p {
+        font-size: 1rem!important; /* Reduce paragraph size */
+        margin-bottom: 1rem;
+    }
+
+    .cta-btn {
+        padding: 0.8rem 1.5rem; /* Smaller buttons */
+        font-size: 0.875rem;
+    }
+
+    .burger {
+                display: block!important;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 100%;
+                background-color: var(--bg-color);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.3s ease-in-out;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 1rem 0;
+            }
+
+    /* Features Section */
+    .features-grid {
+        grid-template-columns: 1fr; /* Single column for smaller screens */
+        gap: 1rem;
+    }
+
+    /* About Section */
+    .about-content {
+        grid-template-columns: 1fr; /* Stack content vertically */
+        gap: 2rem;
+    }
+
+    .about-image img {
+        width: 100%; /* Ensure image spans full width */
+    }
+
+    /* Footer */
+    .social-links {
+        flex-direction: column;
+        margin-bottom: 1rem;
+    }
+
+    .social-links a {
+        font-size: 1rem;
+        margin: 0.5rem 0;
+    }
+}
+
+/* Burger Menu Toggle */
+.burger.active + .nav-links {
+    display: flex; /* Show navigation on click */
+}
+.burger {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+            z-index: 1001; /* Ensure it's above the nav menu */
+        }
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 
 :root {
@@ -103,6 +184,9 @@ nav {
 .nav-links {
     display: flex;
     list-style: none;
+    max-width: 33%;
+    max-height: 341px;
+    text-align: center;
 }
 
 .nav-links li {
@@ -370,11 +454,11 @@ nav {
         /* Responsive Design */
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 10vw;
+                font-size: 10vw!important;
             }
 
             .hero p {
-                font-size: 1.2rem;
+                font-size: 1.2rem!important;
             }
 
             .features-grid {
@@ -416,17 +500,20 @@ nav {
 </head>
 <body>
     <header>
-        <nav class="container">
-            <div class="logo">
-            <img src="/logo.png" alt="Navaura Logo">
-                <h1>Navaura™</h1>
-            </div>
+        <div class="logo">
+            <img src="logo.png" alt="Navaura Logo">
+            <h1>Navaura</h1>
+        </div>
+        <nav>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#features">Features</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <div class="burger">
+                <i class="fas fa-bars"></i>
+            </div>
         </nav>
     </header>
 
@@ -510,8 +597,23 @@ nav {
         <p>&copy; 2024 Navaura™. Sarveshyam Kruti Bhabishyam.</p>
     </div>
 </footer>
+<script>        document.addEventListener('DOMContentLoaded', function() {
+    const burger = document.querySelector('.burger');
+    const navLinks = document.querySelector('.nav-links');
 
+    burger.addEventListener('click', function() {
+        navLinks.classList.toggle('active');
+        burger.classList.toggle('active');
+    });
 
+    // Close menu when a link is clicked
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            burger.classList.remove('active');
+        });
+    });
+});</script>
 
     <script>
         // Smooth scrolling for anchor links
