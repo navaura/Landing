@@ -73,6 +73,15 @@
                 margin: 1rem 0;
             }
 
+            .modal-content {
+              width: 100vw!important;
+    max-width: 76%!important;
+
+    left: 0;
+    top: 0;
+    position: absolute;
+        }
+
     /* Features Section */
     .features-grid {
         grid-template-columns: 1fr; /* Single column for smaller screens */
@@ -145,7 +154,7 @@ body {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
+            width: 96%;
             z-index: 1000;
             mix-blend-mode: difference;
             background-color: var(--bg-color);
@@ -177,6 +186,7 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 2rem 0;
+    
 }
 
 
@@ -247,6 +257,7 @@ nav {
     line-height: 1.2;
     margin-bottom: 2rem;
     position: relative;
+    text-align: left;
     overflow: hidden;
 }
 
@@ -479,7 +490,7 @@ nav {
                 grid-template-columns: 1fr;
             }
 
-            .about-text, .about-image {
+ .about-image {
                 grid-column: span 12;
             }
         }
@@ -497,11 +508,145 @@ nav {
 .button-link:hover {
     background-color: #0056b3;
 }
+h1 {
+            text-align: center;
+            color: #4A90E2;
+            margin-bottom: 40px;
+        }
+        form {
+            margin-top: 20px;
+        }
+        .service {
+            margin-bottom: 20px;
+        }
+        label {
+            font-size: 1.1em;
+            color: #444;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
+        .explanation {
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            color: #666;
+        }
+        input[type="checkbox"], textarea {
+            margin-right: 10px;
+        }
+        textarea, input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            font-size: 1em;
+            background-color: #fafafa62;
+            transition: background-color 0.2s ease;
+        }
+        textarea:focus, input:focus {
+            background-color: #f1f1f136;
+        }
+        .total {
+            text-align: right;
+            font-size: 24px;
+            font-weight: bold;
+            color: #28a745;
+        }
+        .maintenance {
+            margin: 20px 0;
+        }
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2em;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+        .submit-btn:hover {
+            background-color: #357ABD;
+        }
+        details {
+            margin-top: 10px;
+            border-left: 3px solid #4A90E2;
+            padding-left: 10px;
+        }
+        summary {
+            font-size: 1em;
+            color: #4A90E2;
+            cursor: pointer;
+        }
+        .costcontainer {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #ffffff11;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+       /* Updated and new styles */
+       #content-wrapper {
+            transition: filter 0.3s ease;
+        }
 
-    </style>
+        .blur-effect {
+            filter: blur(5px);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 415px;
+            max-width: 80%;
+            color: #ffffff;
+        }
+
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+  </style>
 </head>
 <body>
-    <header>
+  <div id="content-wrapper">
+    <header >
         <div class="logo">
             <img src="logo.png" alt="Navaura Logo">
             <h1>Navaura™</h1>
@@ -511,6 +656,7 @@ nav {
                 <li><a href="#home">Home</a></li>
                 <li><a href="#features">Features</a></li>
                 <li><a href="#about">About</a></li>
+                <li><a href="#estimateForm">Services</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <div class="burger">
@@ -579,7 +725,143 @@ nav {
             </div>
         </section>
     </main>
+    <div class="costcontainer">
+      <h1>select services and estimate the cost</h1>
+    <form id="estimateForm">
+      <!-- Service 1: Website Build -->
+      <div class="service">
+          <label for="websiteBuild">
+              <span>Website Build (Landing Page)</span>
+              <span>*₹5,000</span>
+          </label>
+          <input type="checkbox" id="websiteBuild" value="5000">
+          <div>Estimated Delivery: <strong>1 Weeks</strong></div>
+          <details>
+              <summary>Why ₹5,000?</summary>
+              <p class="explanation">
+                  This package includes a modern, single-page website optimized for performance, design, and basic SEO. It's perfect for startups looking to establish an online presence quickly and affordably.
+              </p>
+          </details>
+      </div>
 
+      <!-- Service 2: Web App (Custom) -->
+      <div class="service">
+          <label for="webApp">
+              <span>Web App for Brand Needs</span>
+              <span>*₹10,000</span>
+          </label>
+          <input type="checkbox" id="webApp" value="10000">
+          <textarea id="webAppInput" placeholder="Describe your requirements (up to 1000 letters)" rows="4"></textarea>
+          <div>Estimated Delivery: <strong>3 Weeks</strong></div>
+          <details>
+              <summary>Why ₹10,000?</summary>
+              <p class="explanation">
+                  Develop a feature-rich custom web app tailored to your business needs. This includes front-end and back-end development, ensuring your application is scalable and user-friendly.
+              </p>
+          </details>
+      </div>
+
+      <!-- Service 3: APK Build -->
+      <div class="service">
+          <label for="apkBuild">
+              <span>APK Build</span>
+              <span>*₹7,500</span>
+          </label>
+          <input type="checkbox" id="apkBuild" value="7500">
+          <div>Estimated Delivery: <strong>2 Weeks</strong></div>
+          <details>
+              <summary>Why ₹7,500?</summary>
+              <p class="explanation">
+                  Convert your web app into a fully functional Android APK, ensuring compatibility across various devices. This includes testing and optimization for performance.
+              </p>
+          </details>
+      </div>
+
+      <!-- Service 4: Full Stack Application -->
+      <div class="service">
+          <label for="fullStack">
+              <span>Full Stack Application (Python)</span>
+              <span>*₹25,000</span>
+          </label>
+          <input type="checkbox" id="fullStack" value="25000">
+          <div>Estimated Delivery: <strong>7 Weeks</strong></div>
+          <details>
+              <summary>Why ₹25,000?</summary>
+              <p class="explanation">
+                  Comprehensive front and backend development using Python, including API integrations and database management. This ensures a robust and scalable application tailored to your business operations.
+              </p>
+          </details>
+      </div>
+
+      <!-- Service 5: AI Chatbot (Generic) -->
+      <div class="service">
+          <label for="aiChatbotGeneric">
+              <span>AI Chatbot (Generic)</span>
+              <span>*₹12,000</span>
+          </label>
+          <input type="checkbox" id="aiChatbotGeneric" value="12000">
+          <div>Estimated Delivery: <strong>2 Weeks</strong></div>
+          <details>
+              <summary>Why ₹12,000?</summary>
+              <p class="explanation">
+                  A basic AI chatbot that can answer FAQs and provide support without requiring business-specific training data. Ideal for enhancing customer interaction and support.
+              </p>
+          </details>
+      </div>
+
+      <!-- Service 6: AI Chatbot (Business Specific) -->
+      <div class="service">
+          <label for="aiChatbotCustom">
+              <span>Custom Data-Fed AI Chatbot (Business Specific)</span>
+              <span>*₹30,000</span>
+          </label>
+          <input type="checkbox" id="aiChatbotCustom" value="30000">
+          <div>Estimated Delivery: <strong>5 Weeks</strong></div>
+          <details>
+              <summary>Why ₹30,000?</summary>
+              <p class="explanation">
+                  A fully customized AI chatbot trained on your business data for highly personalized customer interactions. This includes data integration, training, and continuous optimization to meet your specific needs.
+              </p>
+          </details>
+      </div>
+
+      <!-- Service 7: Insider AI/Non-AI Office Automation -->
+      <div class="service">
+          <label for="insiderApp">
+              <span>Insider AI/Non-AI Application for Office Automation</span>
+              <span>*₹50,000</span>
+          </label>
+          <input type="checkbox" id="insiderApp" value="50000">
+          <div>Estimated Delivery: <strong>9 Weeks</strong></div>
+          <details>
+              <summary>Why ₹50,000?</summary>
+              <p class="explanation">
+                  Automate office workflows to increase efficiency and reduce manual tasks through custom AI or non-AI office applications. This includes process analysis, development, and implementation tailored to your business operations.
+              </p>
+          </details>
+      </div>
+
+      <!-- Maintenance Option -->
+      <div class="maintenance">
+          <label for="maintenance">
+              <input type="checkbox" id="maintenance">
+              <span>Annual Maintenance (10% of total)</span>
+          </label>
+          <details>
+              <summary>Why 10%?</summary>
+              <p class="explanation">
+                  Ensure your application stays updated and secure throughout the year with an affordable maintenance plan. This covers regular updates, security patches, and ongoing support to keep your systems running smoothly.
+              </p>
+          </details>
+      </div>
+
+      <div class="total">Total: ₹<span id="totalAmount">0</span></div>
+      <p>*Prices are average; these can fluctuate based on your needs and those of your app.</p>
+      <button type="submit" class="submit-btn" id="estimateBtn">Send Estimate</button>
+      
+  </form>
+
+</div>
 <footer id="contact">
     <div class="container">
         <div class="social-links">
@@ -599,6 +881,24 @@ nav {
         <p>&copy; 2024 Navaura™. Sarveshyam Kruti Bhabishyam.</p>
     </div>
 </footer>
+</div>
+  <!-- Modal for User Information -->
+  <div id="userInfoModal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>Contact Information</h2>
+        <p>Please provide real contact information so we can connect with you.</p>
+        <form id="contactForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+            <label for="contactNumber">Contact Number:</label>
+            <input type="tel" id="contactNumber" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+  </div>
 <script>        document.addEventListener('DOMContentLoaded', function() {
     const burger = document.querySelector('.burger');
     const navLinks = document.querySelector('.nav-links');
@@ -666,5 +966,142 @@ document.addEventListener('DOMContentLoaded', initTextReveal);
 window.addEventListener('resize', initTextReveal);
 
     </script>
+    <script>
+      const modal = document.getElementById('userInfoModal');
+      const contentWrapper = document.getElementById('content-wrapper');
+      const closeBtn = document.querySelector('.close-btn');
+
+      document.getElementById('estimateBtn').addEventListener('click', function(event) {
+          event.preventDefault();
+          modal.style.display = 'block';
+          contentWrapper.classList.add('blur-effect');
+      });
+
+      function closeModal() {
+          modal.style.display = 'none';
+          contentWrapper.classList.remove('blur-effect');
+      }
+
+      closeBtn.addEventListener('click', closeModal);
+
+      window.onclick = function(event) {
+          if (event.target == modal) {
+              closeModal();
+          }
+      }
+
+      document.getElementById('contactForm').addEventListener('submit', function(event) {
+          event.preventDefault();
+
+          const name = document.getElementById('name').value;
+          const email = document.getElementById('email').value;
+          const contactNumber = document.getElementById('contactNumber').value;
+
+          // Send data to Flask backend
+          fetch('/submit_estimate', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                  name: name,
+                  email: email,
+                  contactNumber: contactNumber
+              })
+          })
+          .then(response => response.json())
+          .then(data => {
+              console.log('Success:', data);
+              closeModal();
+          })
+          .catch((error) => {
+              console.error('Error:', error);
+          });
+      });
+  </script>
+    <script>
+      const estimateBtn = document.getElementById('estimateBtn');
+      const websiteBuild = document.getElementById('websiteBuild');
+      const webApp = document.getElementById('webApp');
+      const apkBuild = document.getElementById('apkBuild');
+      const fullStack = document.getElementById('fullStack');
+      const aiChatbotGeneric = document.getElementById('aiChatbotGeneric');
+      const aiChatbotCustom = document.getElementById('aiChatbotCustom');
+      const insiderApp = document.getElementById('insiderApp');
+      const maintenance = document.getElementById('maintenance');
+      const totalAmount = document.getElementById('totalAmount');
+  
+      function calculateTotal() {
+          let total = 0;
+          let selectedServices = [];
+  
+          // Calculate base service costs
+          if (websiteBuild.checked) {
+              total += parseInt(websiteBuild.value);
+              selectedServices.push(websiteBuild.dataset.name);
+          }
+          if (webApp.checked) {
+              total += parseInt(webApp.value);
+              selectedServices.push(webApp.dataset.name);
+          }
+          if (apkBuild.checked) {
+              total += parseInt(apkBuild.value);
+              selectedServices.push(apkBuild.dataset.name);
+          }
+          if (fullStack.checked) {
+              total += parseInt(fullStack.value);
+              selectedServices.push(fullStack.dataset.name);
+          }
+          if (aiChatbotGeneric.checked) {
+              total += parseInt(aiChatbotGeneric.value);
+              selectedServices.push(aiChatbotGeneric.dataset.name);
+          }
+          if (aiChatbotCustom.checked) {
+              total += parseInt(aiChatbotCustom.value);
+              selectedServices.push(aiChatbotCustom.dataset.name);
+          }
+          if (insiderApp.checked) {
+              total += parseInt(insiderApp.value);
+              selectedServices.push(insiderApp.dataset.name);
+          }
+  
+          // Apply maintenance fee (10%)
+          if (maintenance.checked) {
+              total *= 1.10; // Increase total by 10%
+          }
+  
+          // Update total on the page
+          totalAmount.innerText = Math.round(total);
+          estimateBtn.disabled = selectedServices.length === 0;
+          return selectedServices;
+      }
+  
+      // Prevent both AI chatbot options from being selected at once
+      aiChatbotGeneric.addEventListener('change', () => {
+          if (aiChatbotGeneric.checked) {
+              aiChatbotCustom.checked = false; // Uncheck custom AI chatbot
+          }
+          calculateTotal();
+      });
+  
+      aiChatbotCustom.addEventListener('change', () => {
+          if (aiChatbotCustom.checked) {
+              aiChatbotGeneric.checked = false; // Uncheck generic AI chatbot
+          }
+          calculateTotal();
+      });
+  
+      // Attach event listeners to other checkboxes
+      websiteBuild.addEventListener('change', calculateTotal);
+      webApp.addEventListener('change', calculateTotal);
+      apkBuild.addEventListener('change', calculateTotal);
+      fullStack.addEventListener('change', calculateTotal);
+      insiderApp.addEventListener('change', calculateTotal);
+      maintenance.addEventListener('change', calculateTotal);
+  
+      // Initial total calculation
+      calculateTotal();
+  </script>
+  
 </body>
 </html>
