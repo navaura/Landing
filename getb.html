@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Blogs</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #4CAF50;
+            text-align: center;
+        }
+
+        #blogContent {
+            font-size: 1.15em;
+            line-height: 1.6;
+            margin-top: 20px;
+            color: #444;
+        }
+
+        .blog-post {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background-color: #f1f1f1;
+        }
+
+        .blog-title {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        /* Responsive */
+        @media only screen and (max-width: 600px) {
+            .container {
+                margin: 20px;
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Saved Blogs</h1>
+        <div id="blogContent"></div>
+    </div>
+
+    <script>
+        async function fetchBlogs() {
+            try {
+                const response = await fetch('https://natural-legally-trout.ngrok-free.app/get_blogs');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const blogs = await response.json();
+                displayBlogs(blogs);
+            } catch (error) {
+                console.error('Error fetching blogs:', error);
+                document.getElementById('blogContent').innerHTML = '<p>Error loading blogs. Please try again.</p>';
+            }
+        }
+
+        function displayBlogs(blogs) {
+            const blogContent = document.getElementById('blogContent');
+            blogContent.innerHTML = ''; // Clear previous content
+
+            // Reverse the blogs array to show the latest ones on top
+            blogs.reverse().forEach(blog => {
+                const blogPost = document.createElement('div');
+                blogPost.classList.add('blog-post');
+                
+                // Get the first few words from the content for the title
+                const contentWords = blog.content.split(' ');
+                const titleWords = contentWords.slice(0, 5).join(' ') + '....'; // First 5 words + "...."
+                
+                // Remove special characters from the title
+                const cleanTitle = titleWords.replace(/[^\w\s]/g, '').trim(); // Remove special chars and trim whitespace
+
+                const title = document.createElement('div');
+                title.classList.add('blog-title');
+                title.textContent = cleanTitle; // Set cleaned title
+
+                // Format the content
+                let content = blog.content
+                    .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')  // Convert **bold** to <b>
+                    .replace(/\*(.*?)\*/g, '<i>$1</i>')     // Convert *italic* to <i>
+                    .replace(/\n/g, '<br>')                 // Convert newlines to <br>
+                    .replace(/(?:\r\n|\r|\n)/g, '<p>');     // Ensure new paragraphs
+
+                const contentDiv = document.createElement('div');
+                contentDiv.innerHTML = content; // Render formatted content
+
+                blogPost.appendChild(title);
+                blogPost.appendChild(contentDiv);
+                blogContent.appendChild(blogPost);
+            });
+        }
+
+        // Fetch blogs when the page loads
+        window.onload = fetchBlogs;
+    </script>
+</body>
+</html>
