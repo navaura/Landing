@@ -510,7 +510,7 @@ nav {
 }
 h1 {
             text-align: center;
-            color: #4A90E2;
+            color: var(--accent-color);
             margin-bottom: 40px;
         }
         form {
@@ -567,7 +567,7 @@ h1 {
             width: 100%;
             padding: 15px;
             font-size: 1.2em;
-            background-color: #4A90E2;
+            background-color: var(--accent-color);
             color: white;
             border: none;
             border-radius: 8px;
@@ -580,68 +580,129 @@ h1 {
         }
         details {
             margin-top: 10px;
-            border-left: 3px solid #4A90E2;
+            border-left: 3px solid  var(--secondary-accent);
             padding-left: 10px;
         }
         summary {
             font-size: 1em;
-            color: #4A90E2;
+            color:  var(--secondary-accent);
             cursor: pointer;
         }
         .costcontainer {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #ffffff11;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-       /* Updated and new styles */
-       #content-wrapper {
-            transition: filter 0.3s ease;
-        }
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    transition: all 0.3s ease;
+}
 
-        .blur-effect {
-            filter: blur(5px);
-        }
+.costcontainer:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
 
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.4);
-        }
+#content-wrapper {
+    transition: filter 0.3s ease;
+}
 
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 415px;
-            max-width: 80%;
-            color: #ffffff;
-        }
+.blur-effect {
+    filter: blur(8px);
+}
 
-        .close-btn {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+    backdrop-filter: blur(5px);
+}
 
-        .close-btn:hover,
-        .close-btn:focus {
-            color: #000;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        
+.modal-content {
+    background: linear-gradient(135deg, #f6f9fc, #e9f1f7);
+    margin: 10% auto;
+    padding: 30px;
+    border: none;
+    border-radius: 16px;
+    width: 415px;
+    max-width: 80%;
+    color: #333;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    animation: modalFadeIn 0.5s;
+}
+
+@keyframes modalFadeIn {
+    from {opacity: 0; transform: translateY(-50px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.close-btn {
+    color: #777;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: #333;
+    text-decoration: none;
+}
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 15px;
+    font-weight: bold;
+    color: #555;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus {
+    border-color: var(--accent-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+button[type="submit"] {
+    margin-top: 20px;
+    padding: 12px 20px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: rgb(187, 36, 187);
+}
   </style>
 </head>
 <body>
@@ -655,6 +716,7 @@ h1 {
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#features">Features</a></li>
+                <li><a href="getb.html">AI-Blogs</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#estimateForm">Services</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -899,6 +961,7 @@ h1 {
         </form>
     </div>
   </div>
+  
 <script>        document.addEventListener('DOMContentLoaded', function() {
     const burger = document.querySelector('.burger');
     const navLinks = document.querySelector('.nav-links');
