@@ -262,6 +262,50 @@ nav {
 }
 
 
+.blog-snippet {
+            width: 300px;
+            height: 500px;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            padding: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 162, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: absolute;
+            left: 60%;
+            top: 20%;
+        }
+
+        .blog-title {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+            color: #00a2ff;
+        }
+
+        .blog-content {
+            font-size: 0.9em;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .read-more {
+            background-color: #00a2ff;
+            color: #000;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 0.9em;
+            text-transform: uppercase;
+        }
+
+        .read-more:hover {
+            background-color: #ff00cc;
+        }
 
 .reveal-char {
     display: inline-block;
@@ -493,6 +537,23 @@ nav {
  .about-image {
                 grid-column: span 12;
             }
+
+            .blog-snippet {
+            width: 300px;
+            height: 500px;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            padding: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 162, 255, 0.1);
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            position: absolute;
+            left: 60%;
+            top: 20%;
+        }
         }
         .button-link {
     display: inline-block;
@@ -739,6 +800,12 @@ button[type="submit"]:hover {
                 <p>Navaura: Future For all</p>
                 <a href="#contact" class="cta-btn"><span>INITIATE CONTACT</span></a>
             </div>
+            <div class="blog-snippet" id="blogSnippet">
+                <div class="blog-title" id="blogTitle">Loading...</div>
+                <div class="blog-content" id="blogContent">Fetching content...</div>
+                <button class="read-more" id="readMoreBtn">Read More</button>
+            </div>
+        
         </section>
 
         <section id="features" class="features">
@@ -1165,6 +1232,49 @@ window.addEventListener('resize', initTextReveal);
       // Initial total calculation
       calculateTotal();
   </script>
+      <script>
+        let blogs = [];
+
+        function fetchBlogs() {
+            fetch('https://natural-legally-trout.ngrok-free.app/get_blogs', {
+                method: 'GET',
+                headers: {
+                    'ngrok-skip-browser-warning': 'true'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                blogs = data.reverse();
+                displayRandomBlogSnippet();
+            })
+            .catch(error => {
+                console.error('Error fetching blogs:', error);
+                document.getElementById('blogContent').textContent = 'Error loading blog. Please try again later.';
+            });
+        }
+
+        function displayRandomBlogSnippet() {
+  const randomIndex = Math.floor(Math.random() * blogs.length);
+  const selectedBlog = blogs[randomIndex];
   
+  const contentWords = selectedBlog.content.split(' ');
+  const blogTitle = contentWords.slice(0, 5).join(' ') + '...';
+  const blogSnippet = contentWords.slice(0, 40).join(' ') + '...';
+
+  document.getElementById('blogTitle').textContent = blogTitle;
+  document.getElementById('blogContent').textContent = blogSnippet;
+}
+
+document.getElementById('readMoreBtn').addEventListener('click', function() {
+  window.location.href = '/getb.html';
+});
+
+        window.onload = fetchBlogs;
+    </script>
 </body>
 </html>
