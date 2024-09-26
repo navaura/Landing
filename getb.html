@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7059602797340547"
-     crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7059602797340547"
+     crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src * 'unsafe-inline'; img-src * data: blob: 'unsafe-inline'; frame-src *; style-src * 'unsafe-inline';">
     <title>Navaura™ - AI-Blogs</title>
@@ -80,6 +80,8 @@
 
         #blogContent {
             margin-top: 30px;
+            position: relative;
+            padding-bottom: 60px; /* Space for navigation buttons */
         }
 
         .blog-post {
@@ -111,9 +113,13 @@
         }
 
         .navigation {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
             display: flex;
             justify-content: space-between;
-            margin-top: 20px;
+            padding: 0 20px 20px;
         }
 
         .nav-button {
@@ -151,6 +157,30 @@
             transform: translateY(-3px);
         }
 
+        .random-content {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+        }
+
+        .random-content h2 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .blog-preview {
+            cursor: pointer;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .blog-preview:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
         @media only screen and (max-width: 768px) {
             .container {
                 padding: 10px;
@@ -159,6 +189,12 @@
             h1 {
                 font-size: 2.5rem;
                 margin-top: 100px;
+            }
+
+            .navigation {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
             }
         }
     </style>
@@ -176,9 +212,9 @@
     <div class="container">
         <h1>AI-Blogs</h1>
         <div id="blogContent"></div>
-        <div class="navigation">
-            <button id="prevButton" class="nav-button">Previous</button>
-            <button id="nextButton" class="nav-button">Next</button>
+        <div class="random-content">
+            <h2>Explore More</h2>
+            <div id="randomContent"></div>
         </div>
     </div>
 
@@ -213,7 +249,7 @@
                 console.log('Fetched data:', data);
                 blogs = data.reverse();
                 displayBlog(currentBlogIndex);
-                updateNavButtons();
+                displayRandomContent();
             })
             .catch(error => {
                 console.error('Error fetching blogs:', error);
@@ -222,76 +258,113 @@
         }
 
         function displayBlog(index) {
-    const blogContent = document.getElementById('blogContent');
-    blogContent.innerHTML = '';
+            const blogContent = document.getElementById('blogContent');
+            blogContent.innerHTML = '';
 
-    const blog = blogs[index];
-    const blogPost = document.createElement('div');
-    blogPost.classList.add('blog-post');
+            const blog = blogs[index];
+            const blogPost = document.createElement('div');
+            blogPost.classList.add('blog-post');
 
-    // Extract and clean the title from the first few words of the content
-    const contentWords = blog.content.split(' ');
-    const titleWords = contentWords.slice(0, 5).join(' ') + '....';
-    const cleanTitle = titleWords.replace(/[^\w\s]/g, '').trim();
+            const contentWords = blog.content.split(' ');
+            const titleWords = contentWords.slice(0, 5).join(' ') + '....';
+            const cleanTitle = titleWords.replace(/[^\w\s]/g, '').trim();
 
-    const title = document.createElement('h2');
-    title.classList.add('blog-title');
-    title.textContent = cleanTitle;
+            const title = document.createElement('h2');
+            title.classList.add('blog-title');
+            title.textContent = cleanTitle;
 
-    // Create and set the blog timestamp (manually parsing your custom format)
-    const timestamp = document.createElement('p');
-    timestamp.classList.add('blog-timestamp');
-    timestamp.textContent = `Published on: ${formatCustomTimestamp(blog.timestamp)}`;
+            const timestamp = document.createElement('p');
+            timestamp.classList.add('blog-timestamp');
+            timestamp.textContent = `Published on: ${formatCustomTimestamp(blog.timestamp)}`;
 
-    // Handle the blog content with bold, italics, and line breaks
-    let content = blog.content
-        .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
-        .replace(/\*(.*?)\*/g, '<i>$1</i>')
-        .replace(/\n/g, '<br>')
-        .replace(/(?:\r\n|\r|\n)/g, '<p>');
+            let content = blog.content
+                .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
+                .replace(/\*(.*?)\*/g, '<i>$1</i>')
+                .replace(/\n/g, '<br>')
+                .replace(/(?:\r\n|\r|\n)/g, '<p>');
 
-    const contentDiv = document.createElement('div');
-    contentDiv.classList.add('blog-content');
-    contentDiv.innerHTML = content;
+            const contentDiv = document.createElement('div');
+            contentDiv.classList.add('blog-content');
+            contentDiv.innerHTML = content;
 
-    // Append title, timestamp, and content to the blog post
-    blogPost.appendChild(title);
-    blogPost.appendChild(timestamp);  // Add parsed timestamp here
-    blogPost.appendChild(contentDiv);
-    blogContent.appendChild(blogPost);
-}
+            blogPost.appendChild(title);
+            blogPost.appendChild(timestamp);
+            blogPost.appendChild(contentDiv);
+            blogContent.appendChild(blogPost);
 
-// Function to parse and reformat the custom timestamp string
-function formatCustomTimestamp(timestamp) {
-    // Example format: '14:04, 25/09/2024' -> 'Sep 25, 2024, 14:04'
-    const [timePart, datePart] = timestamp.split(', ');
-    const [day, month, year] = datePart.split('/');
-    
-    const date = new Date(`${year}-${month}-${day}T${timePart}`);
-    return date.toLocaleString();  // Return formatted timestamp
-}
+            // Add navigation buttons
+            const navigation = document.createElement('div');
+            navigation.classList.add('navigation');
 
+            const prevButton = document.createElement('button');
+            prevButton.textContent = 'Previous';
+            prevButton.classList.add('nav-button');
+            prevButton.onclick = () => {
+                if (currentBlogIndex > 0) {
+                    currentBlogIndex--;
+                    displayBlog(currentBlogIndex);
+                }
+            };
 
-        function updateNavButtons() {
-            document.getElementById('prevButton').disabled = currentBlogIndex === 0;
-            document.getElementById('nextButton').disabled = currentBlogIndex === blogs.length - 1;
+            const nextButton = document.createElement('button');
+            nextButton.textContent = 'Next';
+            nextButton.classList.add('nav-button');
+            nextButton.onclick = () => {
+                if (currentBlogIndex < blogs.length - 1) {
+                    currentBlogIndex++;
+                    displayBlog(currentBlogIndex);
+                }
+            };
+
+            navigation.appendChild(prevButton);
+            navigation.appendChild(nextButton);
+            blogContent.appendChild(navigation);
+
+            // Update button states
+            prevButton.disabled = currentBlogIndex === 0;
+            nextButton.disabled = currentBlogIndex === blogs.length - 1;
         }
 
-        document.getElementById('prevButton').addEventListener('click', () => {
-            if (currentBlogIndex > 0) {
-                currentBlogIndex--;
-                displayBlog(currentBlogIndex);
-                updateNavButtons();
-            }
-        });
+        function formatCustomTimestamp(timestamp) {
+            const [timePart, datePart] = timestamp.split(', ');
+            const [day, month, year] = datePart.split('/');
+            
+            const date = new Date(`${year}-${month}-${day}T${timePart}`);
+            return date.toLocaleString();
+        }
 
-        document.getElementById('nextButton').addEventListener('click', () => {
-            if (currentBlogIndex < blogs.length - 1) {
-                currentBlogIndex++;
-                displayBlog(currentBlogIndex);
-                updateNavButtons();
-            }
-        });
+        function displayRandomContent() {
+            const randomContent = document.getElementById('randomContent');
+            randomContent.innerHTML = '';
+
+            const randomBlogs = getRandomBlogs(3);
+            randomBlogs.forEach((blog, index) => {
+                const blogPreview = document.createElement('div');
+                blogPreview.classList.add('blog-preview');
+
+                const title = document.createElement('h3');
+                title.textContent = blog.content.split(' ').slice(0, 5).join(' ') + '...';
+
+                const snippet = document.createElement('p');
+                snippet.textContent = blog.content.split(' ').slice(0, 20).join(' ') + '...';
+
+                blogPreview.appendChild(title);
+                blogPreview.appendChild(snippet);
+
+                blogPreview.onclick = () => {
+                    currentBlogIndex = blogs.findIndex(b => b.id === blog.id);
+                    displayBlog(currentBlogIndex);
+                    window.scrollTo(0, 0);
+                };
+
+                randomContent.appendChild(blogPreview);
+            });
+        }
+
+        function getRandomBlogs(count) {
+            const shuffled = [...blogs].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
 
         window.onload = fetchBlogs;
     </script>
