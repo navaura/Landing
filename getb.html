@@ -17,7 +17,11 @@
             --accent-color: #00a2ff;
             --secondary-accent: #ff00cc;
         }
-
+.logo-link {
+    display: flex;
+    text-decoration: none; /* Removes the underline from the text */
+    align-items: center; /* Aligns the image and text */
+}
         * {
             margin: 0;
             padding: 0;
@@ -202,10 +206,12 @@
 <body>
     <header>
         <div class="container">
-            <div class="logo">
-                <img src="logo.png" alt="Navaura Logo">
-                <span>Navaura™</span>
-            </div>
+<div class="logo">
+    <a href="https://www.navaura.in" class="logo-link">
+        <img src="logo.png" alt="Navaura Logo">
+        <h1>Navaura™</h1>
+    </a>
+</div>
         </div>
     </header>
 
