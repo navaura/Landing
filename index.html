@@ -677,7 +677,11 @@ h1 {
 .blur-effect {
     filter: blur(8px);
 }
-
+.logo-link {
+    display: flex;
+    text-decoration: none; /* Removes the underline from the text */
+    align-items: center; /* Aligns the image and text */
+}
 .modal {
     display: none;
     position: fixed;
@@ -774,7 +778,7 @@ button[type="submit"]:hover {
   <div id="content-wrapper">
     <header >
 <div class="logo">
-    <a href="https://www.navaura.in">
+    <a href="https://www.navaura.in" class="logo-link">
         <img src="logo.png" alt="Navaura Logo">
         <h1>Navaura™</h1>
     </a>
