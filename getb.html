@@ -17,11 +17,7 @@
             --accent-color: #00a2ff;
             --secondary-accent: #ff00cc;
         }
-.logo-link {
 
-    text-decoration: none; /* Removes the underline from the text */
-
-}
         * {
             margin: 0;
             padding: 0;
@@ -34,6 +30,7 @@
             color: var(--text-color);
             line-height: 1.6;
             overflow-x: hidden;
+            padding-top: 80px; /* Add padding to account for fixed header */
         }
 
         .container {
@@ -54,29 +51,31 @@
             padding: 1rem 0;
         }
 
-        .logo {
+        .logo-link {
+            text-decoration: none;
             display: flex;
             align-items: center;
         }
-.logo img {
-    height: 64px;
-    margin-right: 19rem;
-    margin-bottom: -200px;
+
+        .logo img {
+            height: 64px;
+            margin-right: 1rem;
         }
 
-        .logo span {
-            font-size: 1.5rem;
+        .logo h1 {
+            font-size: 2rem;
             font-weight: 700;
             color: var(--accent-color);
             text-transform: uppercase;
             letter-spacing: 2px;
+            margin: 0;
         }
 
-        h1 {
-            font-size: 4rem;
+        h1.page-title {
+            font-size: 3rem;
             color: var(--accent-color);
             text-align: center;
-            margin-top: 120px;
+            margin-top: 40px;
             margin-bottom: 40px;
             text-transform: uppercase;
             letter-spacing: -0.02em;
@@ -85,7 +84,7 @@
         #blogContent {
             margin-top: 30px;
             position: relative;
-            padding-bottom: 60px; /* Space for navigation buttons */
+            padding-bottom: 60px;
         }
 
         .blog-post {
@@ -190,9 +189,9 @@
                 padding: 10px;
             }
 
-            h1 {
-                font-size: 2.5rem;
-                margin-top: 100px;
+            h1.page-title {
+                font-size: 2rem;
+                margin-top: 20px;
             }
 
             .navigation {
@@ -200,23 +199,31 @@
                 align-items: center;
                 gap: 10px;
             }
+
+            .logo img {
+                height: 48px;
+            }
+
+            .logo h1 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
     <header>
         <div class="container">
-<div class="logo">
-    <a href="https://www.navaura.in" class="logo-link">
-        <img src="logo.png" alt="Navaura Logo">
-        <h1>Navaura™</h1>
-    </a>
-</div>
+            <div class="logo">
+                <a href="https://www.navaura.in" class="logo-link">
+                    <img src="logo.png" alt="Navaura Logo">
+                    <h1>Navaura™</h1>
+                </a>
+            </div>
         </div>
     </header>
 
     <div class="container">
-        <h1>AI-Blogs</h1>
+        <h1 class="page-title">AI-Blogs</h1>
         <div id="blogContent"></div>
         <div class="random-content">
             <h2>Explore More</h2>
@@ -233,7 +240,6 @@
             <p>© 2024 Navaura™. Sarveshyam Kruti Bhabishyam.</p>
         </div>
     </footer>
-
     <script>
         let currentBlogIndex = 0;
         let blogs = [];
