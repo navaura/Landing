@@ -1,73 +1,79 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>What You will Get? at Navaura™</title>
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #121212;
-        color: #e0e0e0;
-        height: 100vh;
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      .container {
-        background-color: #1e1e1e;
-        border-radius: 10px;
-        padding: 1.5rem;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-        text-align: center;
-        max-width: 100%;
-        width: 90%;
-      }
-      h1 {
-        color: #bb86fc;
-        margin-bottom: 1.5rem;
-        font-size: 1.5rem;
-      }
-      .options {
-        list-style-type: none;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-      .option {
-        margin: 0.25rem 0;
-        padding: 0.75rem;
-        background-color: #2e2e2e;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-      .option:hover, .option.active {
-        background-color: #3e3e3e;
-        transform: translateY(-2px);
-      }
-      .lists-container {
-        display: flex;
-        flex-direction: column;
-        margin-top: 1.5rem;
-      }
-      .list {
-        text-align: left;
-        padding: 0;
-        list-style-type: none;
-        margin-bottom: 1rem;
-      }
-      .list li {
-        margin-bottom: 0.5rem;
-        padding: 0.5rem;
-        background-color: #2e2e2e;
-        border-radius: 3px;
-      }
-      .hidden {
-        display: none;
-      }
-      .cause {
-        padding-left: 1rem;
-        font-size: 0.9rem;
-        color: #bb86fc;
-      }
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  .main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+  }
+  .container {
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 100%;
+    width: 90%;
+  }
+  h1 {
+    color: #bb86fc;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+  }
+  .options {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .option {
+    margin: 0.25rem 0;
+    padding: 0.75rem;
+    background-color: #2e2e2e;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .option:hover, .option.active {
+    background-color: #3e3e3e;
+    transform: translateY(-2px);
+  }
+  .lists-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.5rem;
+  }
+  .list {
+    text-align: left;
+    padding: 0;
+    list-style-type: none;
+    margin-bottom: 1rem;
+  }
+  .list li {
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    background-color: #2e2e2e;
+    border-radius: 3px;
+  }
+  .hidden {
+    display: none;
+  }
+  .cause {
+    padding-left: 1rem;
+    font-size: 0.9rem;
+    color: #bb86fc;
+  }
   footer {
     background-color: #1e1e1e;
     color: #bb86fc;
