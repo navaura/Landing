@@ -1,0 +1,169 @@
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>What You will Get? at Navaura™</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #121212;
+        color: #e0e0e0;
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .container {
+        background-color: #1e1e1e;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        max-width: 100%;
+        width: 90%;
+      }
+      h1 {
+        color: #bb86fc;
+        margin-bottom: 1.5rem;
+        font-size: 1.5rem;
+      }
+      .options {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .option {
+        margin: 0.25rem 0;
+        padding: 0.75rem;
+        background-color: #2e2e2e;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .option:hover, .option.active {
+        background-color: #3e3e3e;
+        transform: translateY(-2px);
+      }
+      .lists-container {
+        display: flex;
+        flex-direction: column;
+        margin-top: 1.5rem;
+      }
+      .list {
+        text-align: left;
+        padding: 0;
+        list-style-type: none;
+        margin-bottom: 1rem;
+      }
+      .list li {
+        margin-bottom: 0.5rem;
+        padding: 0.5rem;
+        background-color: #2e2e2e;
+        border-radius: 3px;
+      }
+      .hidden {
+        display: none;
+      }
+      .cause {
+        padding-left: 1rem;
+        font-size: 0.9rem;
+        color: #bb86fc;
+      }
+  footer {
+    background-color: #1e1e1e;
+    color: #bb86fc;
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+  .footer-links {
+    margin-top: 0.5rem;
+  }
+  .footer-links a {
+    color: #e0e0e0;
+    text-decoration: none;
+    margin: 0 0.5rem;
+    transition: color 0.3s ease;
+  }
+  .footer-links a:hover {
+    color: #bb86fc;
+  }
+    </style>
+    </head>
+    <body>
+      <div class="container">
+        <h1>Who Are You?</h1>
+        <ul class="options">
+          <li class="option" data-type="user">For Users</li>
+          <li class="option" data-type="business">For Business Need</li>
+          <li class="option" data-type="both">Both</li>
+        </ul>
+        <div class="lists-container">
+          <ul id="userList" class="list hidden">
+            <li>Users will receive our apps.</li>
+            <li>Any custom AI application build.</li>
+          </ul>
+          <ul id="businessList" class="list hidden">
+            <li>A clean, modernized website.</li>
+            <ul class="cause">
+              <li><strong>Cause:</strong> We build professional websites that give your business a strong online presence, improving your brand image and helping you attract more customers.</li>
+            </ul>
+      
+            <li>Custom AI chatbots with integrated business data.</li>
+            <ul class="cause">
+              <li><strong>Cause:</strong> These chatbots are tailored specifically for your business, handling customer queries, providing information, and automating support, saving time and reducing workload.</li>
+            </ul>
+      
+            <li>A complete app for internal business use or for customers.</li>
+            <ul class="cause">
+              <li><strong>Cause:</strong> We develop apps that streamline your business operations, helping your team or your customers engage more efficiently with your services.</li>
+            </ul>
+      
+            <li>Fully-fledged custom AI or non-AI applications to automate business workflows.</li>
+            <ul class="cause">
+              <li><strong>Cause:</strong> We create applications that automate repetitive tasks, improving productivity and saving time on tasks like data entry, reporting, or customer service.</li>
+            </ul>
+      
+            <li>Custom web apps for e-commerce businesses, no need for Flipkart, Amazon, or other platforms.</li>
+            <ul class="cause">
+              <li><strong>Cause:</strong> We build unique e-commerce solutions for your business, giving you full control over sales and customer engagement without relying on external platforms like Amazon or Flipkart.</li>
+            </ul>
+          </ul>
+        </div>
+      </div>
+  <footer>
+    <p>&copy; 2024 Navaura™. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="https://www.navaura.in/about">About Us</a>
+      <a href="https://www.navaura.in/contact">Contact</a>
+      <a href="https://www.navaura.in/privacy">Privacy Policy</a>
+      <a href="https://www.navaura.in/terms">Terms of Service</a>
+    </div>
+  </footer>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const options = document.querySelectorAll('.option');
+      const userList = document.getElementById('userList');
+      const businessList = document.getElementById('businessList');
+    
+      options.forEach(option => {
+        option.addEventListener('click', () => {
+          const type = option.getAttribute('data-type');
+          
+          options.forEach(opt => opt.classList.remove('active'));
+          option.classList.add('active');
+    
+          if (type === 'user') {
+            userList.classList.remove('hidden');
+            businessList.classList.add('hidden');
+          } else if (type === 'business') {
+            businessList.classList.remove('hidden');
+            userList.classList.add('hidden');
+          } else if (type === 'both') {
+            userList.classList.remove('hidden');
+            businessList.classList.remove('hidden');
+          }
+        });
+      });
+    });
+    </script>
+    </body></html>
