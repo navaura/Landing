@@ -1,5 +1,5 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>What You will Get? at Navaura™</title>
-    <style>
+<style>
   body {
     font-family: Arial, sans-serif;
     background-color: #121212;
@@ -93,49 +93,51 @@
   .footer-links a:hover {
     color: #bb86fc;
   }
-    </style>
-    </head>
-    <body>
-      <div class="container">
-        <h1>Who Are You?</h1>
-        <ul class="options">
-          <li class="option" data-type="user">For Users</li>
-          <li class="option" data-type="business">For Business Need</li>
-          <li class="option" data-type="both">Both</li>
+</style>
+</head>
+<body>
+  <div class="main-content">
+    <div class="container">
+      <h1>Who Are You?</h1>
+      <ul class="options">
+        <li class="option" data-type="user">For Users</li>
+        <li class="option" data-type="business">For Business Need</li>
+        <li class="option" data-type="both">Both</li>
+      </ul>
+      <div class="lists-container">
+        <ul id="userList" class="list hidden">
+          <li>Users will receive our apps.</li>
+          <li>Any custom AI application build.</li>
         </ul>
-        <div class="lists-container">
-          <ul id="userList" class="list hidden">
-            <li>Users will receive our apps.</li>
-            <li>Any custom AI application build.</li>
+        <ul id="businessList" class="list hidden">
+          <li>A clean, modernized website.</li>
+          <ul class="cause">
+            <li><strong>Cause:</strong> We build professional websites that give your business a strong online presence, improving your brand image and helping you attract more customers.</li>
           </ul>
-          <ul id="businessList" class="list hidden">
-            <li>A clean, modernized website.</li>
-            <ul class="cause">
-              <li><strong>Cause:</strong> We build professional websites that give your business a strong online presence, improving your brand image and helping you attract more customers.</li>
-            </ul>
-      
-            <li>Custom AI chatbots with integrated business data.</li>
-            <ul class="cause">
-              <li><strong>Cause:</strong> These chatbots are tailored specifically for your business, handling customer queries, providing information, and automating support, saving time and reducing workload.</li>
-            </ul>
-      
-            <li>A complete app for internal business use or for customers.</li>
-            <ul class="cause">
-              <li><strong>Cause:</strong> We develop apps that streamline your business operations, helping your team or your customers engage more efficiently with your services.</li>
-            </ul>
-      
-            <li>Fully-fledged custom AI or non-AI applications to automate business workflows.</li>
-            <ul class="cause">
-              <li><strong>Cause:</strong> We create applications that automate repetitive tasks, improving productivity and saving time on tasks like data entry, reporting, or customer service.</li>
-            </ul>
-      
-            <li>Custom web apps for e-commerce businesses, no need for Flipkart, Amazon, or other platforms.</li>
-            <ul class="cause">
-              <li><strong>Cause:</strong> We build unique e-commerce solutions for your business, giving you full control over sales and customer engagement without relying on external platforms like Amazon or Flipkart.</li>
-            </ul>
+    
+          <li>Custom AI chatbots with integrated business data.</li>
+          <ul class="cause">
+            <li><strong>Cause:</strong> These chatbots are tailored specifically for your business, handling customer queries, providing information, and automating support, saving time and reducing workload.</li>
           </ul>
-        </div>
+    
+          <li>A complete app for internal business use or for customers.</li>
+          <ul class="cause">
+            <li><strong>Cause:</strong> We develop apps that streamline your business operations, helping your team or your customers engage more efficiently with your services.</li>
+          </ul>
+    
+          <li>Fully-fledged custom AI or non-AI applications to automate business workflows.</li>
+          <ul class="cause">
+            <li><strong>Cause:</strong> We create applications that automate repetitive tasks, improving productivity and saving time on tasks like data entry, reporting, or customer service.</li>
+          </ul>
+    
+          <li>Custom web apps for e-commerce businesses, no need for Flipkart, Amazon, or other platforms.</li>
+          <ul class="cause">
+            <li><strong>Cause:</strong> We build unique e-commerce solutions for your business, giving you full control over sales and customer engagement without relying on external platforms like Amazon or Flipkart.</li>
+          </ul>
+        </ul>
       </div>
+    </div>
+  </div>
   <footer>
     <p>&copy; 2024 Navaura™. All rights reserved.</p>
     <div class="footer-links">
@@ -145,31 +147,32 @@
       <a href="https://www.navaura.in/terms">Terms of Service</a>
     </div>
   </footer>
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const options = document.querySelectorAll('.option');
-      const userList = document.getElementById('userList');
-      const businessList = document.getElementById('businessList');
-    
-      options.forEach(option => {
-        option.addEventListener('click', () => {
-          const type = option.getAttribute('data-type');
-          
-          options.forEach(opt => opt.classList.remove('active'));
-          option.classList.add('active');
-    
-          if (type === 'user') {
-            userList.classList.remove('hidden');
-            businessList.classList.add('hidden');
-          } else if (type === 'business') {
-            businessList.classList.remove('hidden');
-            userList.classList.add('hidden');
-          } else if (type === 'both') {
-            userList.classList.remove('hidden');
-            businessList.classList.remove('hidden');
-          }
-        });
-      });
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const options = document.querySelectorAll('.option');
+  const userList = document.getElementById('userList');
+  const businessList = document.getElementById('businessList');
+
+  options.forEach(option => {
+    option.addEventListener('click', () => {
+      const type = option.getAttribute('data-type');
+      
+      options.forEach(opt => opt.classList.remove('active'));
+      option.classList.add('active');
+
+      if (type === 'user') {
+        userList.classList.remove('hidden');
+        businessList.classList.add('hidden');
+      } else if (type === 'business') {
+        businessList.classList.remove('hidden');
+        userList.classList.add('hidden');
+      } else if (type === 'both') {
+        userList.classList.remove('hidden');
+        businessList.classList.remove('hidden');
+      }
     });
-    </script>
-    </body></html>
+  });
+});
+</script>
+</body></html>
