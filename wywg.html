@@ -1,143 +1,206 @@
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>What You will Get? at Navaura™</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What You Will Get at Navaura™</title>
 <style>
   body {
-    font-family: Arial, sans-serif;
-    background-color: #121212;
-    color: #00a2ff;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #0a0a1f, #1a1a3f);
+    color: #fff;
     margin: 0;
-    display: flex;
-    flex-direction: column;
     min-height: 100vh;
+    line-height: 1.6;
   }
-  .main-content {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px 0;
-  }
-  .container {
-    background-color: #1e1e1e;
-    border-radius: 10px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    text-align: center;
-    max-width: 100%;
-    width: 90%;
-  }
-  h1 {
-    color: #00a2ff;
-    margin-bottom: 1.5rem;
-    font-size: 1.5rem;
-  }
-  .options {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  .option {
-    margin: 0.25rem 0;
-    padding: 0.75rem;
-    background-color: #2e2e2e;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  .option:hover, .option.active {
-    background-color: #3e3e3e;
-    transform: translateY(-2px);
-  }
-  .lists-container {
-    display: flex;
-    flex-direction: column;
-    margin-top: 1.5rem;
-  }
-  .list {
-    text-align: left;
-    padding: 0;
-    list-style-type: none;
-    margin-bottom: 1rem;
-  }
-  .list li {
-    margin-bottom: 0.5rem;
-    padding: 0.5rem;
-    background-color: #2e2e2e;
-    border-radius: 3px;
-  }
-  .hidden {
-    display: none;
-  }
-  .cause {
-    padding-left: 1rem;
-    font-size: 0.9rem;
-    color: #bb86fc;
-  }
-  footer {
-    background-color: #1e1e1e;
-    color: #bb86fc;
-    text-align: center;
+
+  .header {
+    background: rgba(0,0,0,0.3);
     padding: 1rem;
-    font-size: 0.9rem;
+    text-align: center;
+    border-bottom: 2px solid #00a2ff;
   }
+
+  .header h1 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    margin: 0.5rem 0;
+  }
+
+  .header p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+  }
+
+  .main-content {
+    max-width: 1200px;
+    margin: 1rem auto;
+    padding: 0 1rem;
+  }
+
+  .service-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 15px;
+    padding: 1.2rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  }
+
+  .card h3 {
+    color: #00a2ff;
+    margin-top: 0;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    border-bottom: 2px solid #00a2ff;
+    padding-bottom: 0.5rem;
+  }
+
+  .benefit-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .benefit-list li {
+    margin: 0.8rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+  }
+
+  .benefit-list li:before {
+    content: "→";
+    color: #00a2ff;
+    position: absolute;
+    left: 0;
+  }
+
+  .highlight {
+    color: #00a2ff;
+    font-weight: bold;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background: linear-gradient(45deg, #00a2ff, #0077ff);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    text-decoration: none;
+    margin-top: 1rem;
+    transition: transform 0.3s;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    width: fit-content;
+  }
+
+  .cta-button:hover {
+    transform: scale(1.05);
+  }
+
+  footer {
+    background: rgba(0,0,0,0.3);
+    padding: 1rem;
+    text-align: center;
+    margin-top: 2rem;
+  }
+
   .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
     margin-top: 0.5rem;
   }
+
   .footer-links a {
-    color: #e0e0e0;
+    color: #00a2ff;
     text-decoration: none;
-    margin: 0 0.5rem;
-    transition: color 0.3s ease;
+    font-size: clamp(0.8rem, 2vw, 1rem);
   }
-  .footer-links a:hover {
-    color: #bb86fc;
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  @media (max-width: 480px) {
+    .card {
+      padding: 1rem;
+    }
+
+    .benefit-list li {
+      margin: 0.6rem 0;
+    }
+
+    .cta-button {
+      width: 100%;
+      text-align: center;
+      padding: 0.6rem 1rem;
+    }
+
+    .footer-links {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
   }
 </style>
 </head>
 <body>
+  <div class="header">
+    <h1>Welcome to Navaura™ - Your Technology Partner</h1>
+    <p>Discover how we can transform your digital presence</p>
+  </div>
+
   <div class="main-content">
-    <div class="container">
-      <h1>Who Are You?</h1>
-      <ul class="options">
-        <li class="option" data-type="user">For Users</li>
-        <li class="option" data-type="business">For Business Need</li>
-        <li class="option" data-type="both">Both</li>
-      </ul>
-      <div class="lists-container">
-        <ul id="userList" class="list hidden">
-          <li>Users will receive our apps.</li>
-          <li>Any custom AI application build.</li>
+    <div class="service-cards">
+      <div class="card">
+        <h3>For Businesses</h3>
+        <ul class="benefit-list">
+          <li><span class="highlight">Custom Web Solutions:</span> Modern, responsive websites that showcase your brand</li>
+          <li><span class="highlight">AI Integration:</span> Smart chatbots and automation tools tailored to your needs</li>
+          <li><span class="highlight">E-commerce Platform:</span> Your own branded online store with full control</li>
+          <li><span class="highlight">Business Apps:</span> Streamline operations with custom software solutions</li>
+          <li><span class="highlight">Data Analytics:</span> Make informed decisions with AI-powered insights</li>
         </ul>
-        <ul id="businessList" class="list hidden">
-          <li>A clean, modernized website.</li>
-          <ul class="cause">
-            <li><strong>Cause:</strong> We build professional websites that give your business a strong online presence, improving your brand image and helping you attract more customers.</li>
-          </ul>
-    
-          <li>Custom AI chatbots with integrated business data.</li>
-          <ul class="cause">
-            <li><strong>Cause:</strong> These chatbots are tailored specifically for your business, handling customer queries, providing information, and automating support, saving time and reducing workload.</li>
-          </ul>
-    
-          <li>A complete app for internal business use or for customers.</li>
-          <ul class="cause">
-            <li><strong>Cause:</strong> We develop apps that streamline your business operations, helping your team or your customers engage more efficiently with your services.</li>
-          </ul>
-    
-          <li>Fully-fledged custom AI or non-AI applications to automate business workflows.</li>
-          <ul class="cause">
-            <li><strong>Cause:</strong> We create applications that automate repetitive tasks, improving productivity and saving time on tasks like data entry, reporting, or customer service.</li>
-          </ul>
-    
-          <li>Custom web apps for e-commerce businesses, no need for Flipkart, Amazon, or other platforms.</li>
-          <ul class="cause">
-            <li><strong>Cause:</strong> We build unique e-commerce solutions for your business, giving you full control over sales and customer engagement without relying on external platforms like Amazon or Flipkart.</li>
-          </ul>
+        <a href="https://www.navaura.in/business" class="cta-button">Explore Business Solutions</a>
+      </div>
+
+      <div class="card">
+        <h3>For Individual Users</h3>
+        <ul class="benefit-list">
+          <li><span class="highlight">Personal Apps:</span> Custom applications built for your specific needs</li>
+          <li><span class="highlight">AI Assistants:</span> Personal AI tools to boost productivity</li>
+          <li><span class="highlight">Portfolio Websites:</span> Showcase your work with stunning web presence</li>
+          <li><span class="highlight">Digital Solutions:</span> Transform your ideas into reality</li>
+          <li><span class="highlight">Technical Support:</span> Ongoing assistance and maintenance</li>
         </ul>
+        <a href="https://www.navaura.in/individual" class="cta-button">Discover Personal Solutions</a>
+      </div>
+
+      <div class="card">
+        <h3>Why Choose Navaura™?</h3>
+        <ul class="benefit-list">
+          <li><span class="highlight">Expertise:</span> Cutting-edge technology and industry best practices</li>
+          <li><span class="highlight">Customization:</span> Solutions tailored to your specific requirements</li>
+          <li><span class="highlight">Support:</span> Dedicated team for ongoing assistance</li>
+          <li><span class="highlight">Innovation:</span> Latest AI and tech advancements</li>
+          <li><span class="highlight">Quality:</span> Robust, scalable, and secure solutions</li>
+        </ul>
+        <a href="https://www.navaura.in/contact" class="cta-button">Get Started Today</a>
       </div>
     </div>
   </div>
+
   <footer>
     <p>&copy; 2024 Navaura™. All rights reserved.</p>
     <div class="footer-links">
@@ -147,32 +210,4 @@
       <a href="https://www.navaura.in/terms">Terms of Service</a>
     </div>
   </footer>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const options = document.querySelectorAll('.option');
-  const userList = document.getElementById('userList');
-  const businessList = document.getElementById('businessList');
-
-  options.forEach(option => {
-    option.addEventListener('click', () => {
-      const type = option.getAttribute('data-type');
-      
-      options.forEach(opt => opt.classList.remove('active'));
-      option.classList.add('active');
-
-      if (type === 'user') {
-        userList.classList.remove('hidden');
-        businessList.classList.add('hidden');
-      } else if (type === 'business') {
-        businessList.classList.remove('hidden');
-        userList.classList.add('hidden');
-      } else if (type === 'both') {
-        userList.classList.remove('hidden');
-        businessList.classList.remove('hidden');
-      }
-    });
-  });
-});
-</script>
 </body></html>
