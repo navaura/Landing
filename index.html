@@ -1055,17 +1055,31 @@ window.addEventListener('resize', initTextReveal);
             });
         }
 
-        function displayRandomBlogSnippet() {
-  const randomIndex = Math.floor(Math.random() * blogs.length);
-  const selectedBlog = blogs[randomIndex];
-  
-  const contentWords = selectedBlog.content.split(' ');
-  const blogTitle = contentWords.slice(0, 5).join(' ') + '...';
-  const blogSnippet = contentWords.slice(0, 40).join(' ') + '...';
+function displayRandomBlogSnippet() {
+    if (!blogs || blogs.length === 0) {
+        console.error('No blogs available to display.');
+        document.getElementById('blogContent').textContent = 'No blogs available. Please check back later.';
+        return;
+    }
 
-  document.getElementById('blogTitle').textContent = blogTitle;
-  document.getElementById('blogContent').textContent = blogSnippet;
+    const randomIndex = Math.floor(Math.random() * blogs.length);
+    const selectedBlog = blogs[randomIndex];
+
+    // Handle cases where content is undefined or empty
+    if (!selectedBlog || !selectedBlog.content) {
+        console.error('Selected blog content is missing or invalid.');
+        document.getElementById('blogContent').textContent = 'Error displaying blog content.';
+        return;
+    }
+
+    const contentWords = selectedBlog.content.split(' ');
+    const blogTitle = contentWords.slice(0, 5).join(' ') + '...';
+    const blogSnippet = contentWords.slice(0, 40).join(' ') + '...';
+
+    document.getElementById('blogTitle').textContent = blogTitle;
+    document.getElementById('blogContent').textContent = blogSnippet;
 }
+
 
 document.getElementById('readMoreBtn').addEventListener('click', function() {
   window.location.href = '/getb.html';
