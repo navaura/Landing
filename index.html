@@ -973,64 +973,12 @@ document.addEventListener('DOMContentLoaded', initTextReveal);
 window.addEventListener('resize', initTextReveal);
 
     </script>
-    <script>
-      const modal = document.getElementById('userInfoModal');
-      const contentWrapper = document.getElementById('content-wrapper');
-      const closeBtn = document.querySelector('.close-btn');
 
-      document.getElementById('estimateBtn').addEventListener('click', function(event) {
-          event.preventDefault();
-          modal.style.display = 'block';
-          contentWrapper.classList.add('blur-effect');
-      });
-
-      function closeModal() {
-          modal.style.display = 'none';
-          contentWrapper.classList.remove('blur-effect');
-      }
-
-      closeBtn.addEventListener('click', closeModal);
-
-      window.onclick = function(event) {
-          if (event.target == modal) {
-              closeModal();
-          }
-      }
-
-      document.getElementById('contactForm').addEventListener('submit', function(event) {
-          event.preventDefault();
-
-          const name = document.getElementById('name').value;
-          const email = document.getElementById('email').value;
-          const contactNumber = document.getElementById('contactNumber').value;
-
-          // Send data to Flask backend
-          fetch('/submit_estimate', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                  name: name,
-                  email: email,
-                  contactNumber: contactNumber
-              })
-          })
-          .then(response => response.json())
-          .then(data => {
-              console.log('Success:', data);
-              closeModal();
-          })
-          .catch((error) => {
-              console.error('Error:', error);
-          });
-      });
-  </script>
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7059602797340547"
      crossorigin="anonymous"></script>
       <script>
-        let blogs = [];
+   let blogs = [];
 
         function fetchBlogs() {
             fetch('https://genuinely-ruling-donkey.ngrok-free.app/get_blogs', {
