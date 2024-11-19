@@ -772,6 +772,140 @@ button[type="submit"] {
 button[type="submit"]:hover {
     background-color: rgb(187, 36, 187);
 }
+            /* Ad styles */
+    .ad-popup {
+        position: fixed;
+        top: -200px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 400px;
+        background: linear-gradient(135deg, #ffffff2c, #04a3ffb9);
+        color: white;
+        padding: 30px;
+        border-radius: 10px;
+
+        animation: slideDown 0.5s forwards;
+        z-index: 1000;
+        backdrop-filter: blur(3px);
+    }
+    
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+    
+    .close-btn:hover {
+        transform: scale(1.1);
+    }
+    
+    @keyframes slideDown {
+        to {
+            top: 80px;
+        }
+    }
+    
+    .app-icon {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 20px;
+        display: block;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+    
+    .app-icon:hover .app-icon-svg {
+        opacity: 0;
+    }
+    
+    .app-icon:hover .youtube-icon {
+        opacity: 1;
+    }
+.youtube-icon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: white;
+        border-radius: 15px;
+
+        transition: opacity 0.3s ease;
+    }
+    /* Container for the icons */
+.app-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px; /* Space between the icons */
+}
+
+/* Styling for the external SVG image */
+.app-icon img {
+    width: 100px;
+    top: 0;
+  left: 0;
+    height: 100px;
+    object-fit: cover; /* Keeps aspect ratio and crops if necessary */
+    position: relative;
+    border-radius: 15px;
+}
+    .youtube-icon {
+        opacity: 0;
+    }
+    
+    /* Video modal styles */
+    .video-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.8);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+    }
+    
+    .video-container {
+        position: relative;
+        width: 80%;
+        max-width: 800px;
+        aspect-ratio: 16/9;
+    }
+    
+    .video-close-btn {
+        position: absolute;
+        top: -40px;
+        right: 0;
+        color: white;
+        background: none;
+        border: none;
+        font-size: 30px;
+        cursor: pointer;
+    }
+    
+    .know-more-btn {
+        background: white;
+        color: #4A6CF7;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-weight: bold;
+        margin-top: 15px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    .know-more-btn:hover {
+        background-color: #f0f0f0;
+    }
   </style>
 </head>
 <body>
@@ -819,7 +953,36 @@ button[type="submit"]:hover {
             </div>
         
         </section>
+    <div class="video-modal">
+        <div class="video-container">
+            <button class="video-close-btn">&times;</button>
+            <iframe width="100%" height="100%" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+    
+    <template id="ad-template">
+        <div class="ad-popup">
+            <button class="close-btn">&times;</button>
+            <div class="app-icon">
+                <!-- External SVG -->
+                <img src="nam2.svg" alt="Description">
+            
+                <!-- Inline SVG -->
+                <svg class="youtube-icon" viewBox="0 0 50 50" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="5" y="5" width="40" height="40" rx="10" fill="#FF0000"/>
+                    <path d="M20 17 L20 33 L35 25 L20 17" fill="white"/>
+                </svg>
 
+            </div>
+            <h3 style="text-align: center; margin: 15px 0;">Try Our Revolutionary App!</h3>
+            <p style="text-align: center; margin-bottom: 20px;">Experience the future of productivity with our innovative solution that transforms the way you work and collaborate.</p>
+            <div style="text-align: center;">
+                <a href="https://yourappstore.com/app" style="color: white; text-decoration: none;">
+                    <button class="know-more-btn">Download Now</button>
+                </a>
+            </div>
+        </div>
+    </template>
         <section id="features" class="features">
             <div class="container">
                 <h2 class="section-title">We're working on</h2>
@@ -905,7 +1068,46 @@ button[type="submit"]:hover {
         </form>
     </div>
   </div>
-  
+      <script>
+    function showAd() {
+        const template = document.getElementById('ad-template');
+        const ad = template.content.cloneNode(true);
+        document.body.appendChild(ad);
+    
+        const closeBtn = document.querySelector('.ad-popup .close-btn');
+        closeBtn.addEventListener('click', () => {
+            const adPopup = document.querySelector('.ad-popup');
+            adPopup.style.animation = 'slideDown 0.5s reverse';
+            setTimeout(() => {
+                adPopup.remove();
+                scheduleNextAd();
+            }, 500);
+        });
+    
+        const appIcon = document.querySelector('.app-icon');
+        appIcon.addEventListener('click', () => {
+            const videoModal = document.querySelector('.video-modal');
+            const iframe = videoModal.querySelector('iframe');
+            iframe.src = 'https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1';
+            videoModal.style.display = 'flex';
+        });
+    }
+    
+    const videoModal = document.querySelector('.video-modal');
+    const videoCloseBtn = document.querySelector('.video-close-btn');
+    videoCloseBtn.addEventListener('click', () => {
+        const iframe = videoModal.querySelector('iframe');
+        iframe.src = '';
+        videoModal.style.display = 'none';
+    });
+    
+    function scheduleNextAd() {
+        const delay = Math.floor(Math.random() * (45000 - 15000 + 1) + 15000);
+        setTimeout(showAd, delay);
+    }
+    
+    scheduleNextAd();
+    </script>
 <script>        document.addEventListener('DOMContentLoaded', function() {
     const burger = document.querySelector('.burger');
     const navLinks = document.querySelector('.nav-links');
