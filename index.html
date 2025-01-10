@@ -34,68 +34,146 @@
 </head>
     <style>
 .progress-section {
-  width: 90%;
-  max-width: 800px;
+  width: 95%;
+  max-width: 1200px;
   margin: 40px auto;
-  padding: 30px;
-  border-radius: 12px;
-  background: white;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  padding: 40px 30px;
+  background: linear-gradient(145deg, #ffffff, #f5f7ff);
+  border-radius: 20px;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.08),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.progress-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #2d2d5f;
+  text-align: center;
+  margin-bottom: 40px;
+  letter-spacing: -0.5px;
 }
 
 .progress-container {
   position: relative;
-  padding: 10px 0;
+  padding: 20px 0;
 }
 
 .progress-bar {
   position: relative;
-  height: 6px;
-  background: linear-gradient(to right, #f0f0f0, #e8e8e8);
-  border-radius: 3px;
-  margin: 30px 0;
-  overflow: visible;
+  height: 4px;
+  margin: 40px 0 60px;
+}
+
+.progress-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #e0e0ff 0%, #f0f0ff 100%);
+  border-radius: 2px;
 }
 
 .marker {
   position: absolute;
   top: 50%;
+  left: 30%;
   transform: translate(-50%, -50%);
-  height: 20px;
-  width: 20px;
-  background: linear-gradient(135deg, #4481eb, #04befe);
+  height: 16px;
+  width: 16px;
+  background: #5d5dff;
   border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(0, 123, 255, 0.3);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
-}
-
-.marker:hover {
-  transform: translate(-50%, -50%) scale(1.15);
-  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+  box-shadow: 
+    0 0 0 4px rgba(93, 93, 255, 0.2),
+    0 0 0 8px rgba(93, 93, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .progress-labels {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
-  font-size: 14px;
-  font-weight: 500;
-  color: #666;
-  letter-spacing: 0.3px;
+  padding: 0 10px;
 }
 
-.progress-labels span {
+.milestone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  text-align: center;
   position: relative;
-  padding: 8px 12px;
-  background: #f8f9fa;
-  border-radius: 6px;
-  transition: all 0.2s ease;
 }
 
-.progress-labels span:hover {
-  background: #e9ecef;
-  color: #4481eb;
+.step-marker {
+  width: 36px;
+  height: 36px;
+  background: #fff;
+  border: 2px solid #5d5dff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #5d5dff;
+  margin-bottom: 12px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.step-marker:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(93, 93, 255, 0.2);
+}
+
+.step-marker.start,
+.step-marker.final {
+  border: none;
+  padding: 0;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2d2d5f;
+  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+}
+
+.sublabel {
+  font-size: 12px;
+  color: #6b6b9f;
+  font-weight: 400;
+}
+
+/* Active state styles */
+.milestone.active .step-marker {
+  background: #5d5dff;
+  color: white;
+  box-shadow: 0 0 0 4px rgba(93, 93, 255, 0.2);
+}
+
+.milestone.active .label {
+  color: #5d5dff;
+}
+
+/* Completed state styles */
+.milestone.completed .step-marker {
+  background: #00ff88;
+  border-color: #00ff88;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .progress-labels {
+    overflow-x: auto;
+    padding-bottom: 20px;
+  }
+  
+  .milestone {
+    min-width: 120px;
+    margin: 0 10px;
+  }
 }
 </style>
 <body>
@@ -219,23 +297,67 @@
             </div>
         </section>
     </main>
-  <section id="onthegomark" class="progress-section">
-    <div class="progress-container">
-      <div class="progress-bar">
-        <div id="progress-marker" class="marker"></div>
+<section id="onthegomark" class="progress-section">
+  <h2 class="progress-title">Journey Progress</h2>
+  <div class="progress-container">
+    <div class="progress-bar">
+      <div class="progress-line"></div>
+      <div id="progress-marker" class="marker"></div>
+    </div>
+    <div class="progress-labels">
+      <div class="milestone">
+        <span class="step-marker start">
+          <svg viewBox="0 0 24 24" width="24" height="24">
+            <circle cx="12" cy="12" r="12" fill="#00ff88"/>
+            <path d="M8 12l3 3 6-6" stroke="white" fill="none" stroke-width="2"/>
+          </svg>
+        </span>
+        <span class="label">START</span>
+        <span class="sublabel">Begin Journey</span>
       </div>
-      <div class="progress-labels">
-        <span>START</span>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-        <span>4</span>
-        <span>...</span>
-        <span>...</span>
-        <span>FINAL</span>
+      <div class="milestone">
+        <span class="step-marker">1</span>
+        <span class="label">PLANNING</span>
+        <span class="sublabel">Strategy Phase</span>
+      </div>
+      <div class="milestone">
+        <span class="step-marker">2</span>
+        <span class="label">DESIGN</span>
+        <span class="sublabel">Creative Process</span>
+      </div>
+      <div class="milestone">
+        <span class="step-marker">3</span>
+        <span class="label">DEVELOP</span>
+        <span class="sublabel">Implementation</span>
+      </div>
+      <div class="milestone">
+        <span class="step-marker">4</span>
+        <span class="label">TESTING</span>
+        <span class="sublabel">Quality Check</span>
+      </div>
+      <div class="milestone">
+        <span class="step-marker">5</span>
+        <span class="label">REVIEW</span>
+        <span class="sublabel">Final Touches</span>
+      </div>
+      <div class="milestone">
+        <span class="step-marker">6</span>
+        <span class="label">DEPLOY</span>
+        <span class="sublabel">Go Live</span>
+      </div>
+      <div class="milestone">
+        <span class="step-marker final">
+          <svg viewBox="0 0 24 24" width="24" height="24">
+            <circle cx="12" cy="12" r="12" fill="#5d5dff"/>
+            <path d="M12 6l4 4-4 4-4-4z" fill="white"/>
+          </svg>
+        </span>
+        <span class="label">FINAL</span>
+        <span class="sublabel">Completion</span>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 </div>
 <footer style="background-color: #121212; color: #ffffff; padding: 40px 20px;">
   <div style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between;">
