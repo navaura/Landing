@@ -40,96 +40,299 @@
     --secondary-accent: #ff00cc;
 }
 
+/* Main Container Styles */
 .progress-section {
-  width: 95%;
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 40px 30px;
-  background: var(--bg-color);
-  border: 1px solid var(--accent-color);
-  border-radius: 20px;
-  box-shadow: 
-    0 0 20px rgba(0, 162, 255, 0.2),
-    0 0 40px rgba(0, 162, 255, 0.1);
+    width: 95%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 40px 30px;
+    background: var(--bg-color);
+    border: 1px solid var(--accent-color);
+    border-radius: 20px;
+    box-shadow: 
+        0 0 20px rgba(0, 162, 255, 0.2),
+        0 0 40px rgba(0, 162, 255, 0.1),
+        inset 0 0 15px rgba(0, 162, 255, 0.1);
+    position: relative;
+    overflow: hidden;
 }
 
+.progress-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 0%,
+        rgba(0, 162, 255, 0.1) 50%,
+        transparent 100%
+    );
+    animation: shine 8s infinite linear;
+    pointer-events: none;
+}
+
+/* Title Styles */
 .progress-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--text-color);
-  text-align: center;
-  margin-bottom: 40px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  text-shadow: 0 0 10px var(--accent-color);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 
+        0 0 10px var(--accent-color),
+        0 0 20px var(--accent-color);
 }
 
+/* Progress Bar Container */
 .progress-container {
-  position: relative;
-  padding: 20px 0;
+    position: relative;
+    padding: 20px 0;
+    z-index: 1;
 }
 
+/* Progress Bar */
 .progress-bar {
-  position: relative;
-  height: 4px;
-  margin: 40px 0 60px;
+    position: relative;
+    height: 4px;
+    margin: 40px 0 60px;
 }
 
 .progress-line {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background: linear-gradient(90deg, 
-    var(--accent-color) var(--progress-position, 0%),
-    rgba(0, 162, 255, 0.2) var(--progress-position, 0%)
-  );
-  border-radius: 2px;
-  transition: all 0.3s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, 
+        var(--accent-color) var(--progress-position, 0%),
+        rgba(0, 162, 255, 0.2) var(--progress-position, 0%)
+    );
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .progress-glow {
-  position: absolute;
-  top: 50%;
-  left: var(--progress-position, 0%);
-  transform: translateY(-50%);
-  width: 30px;
-  height: 30px;
-  background: radial-gradient(
-    circle at center,
-    var(--accent-color) 0%,
-    transparent 70%
-  );
-  opacity: 0.6;
-  transition: all 0.3s ease;
+    position: absolute;
+    top: 50%;
+    left: var(--progress-position, 0%);
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(
+        circle at center,
+        var(--accent-color) 0%,
+        transparent 70%
+    );
+    opacity: 0.4;
+    filter: blur(8px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Progress Marker */
 .marker {
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  height: 16px;
-  width: 16px;
-  background: var(--accent-color);
-  border-radius: 50%;
-  box-shadow: 
-    0 0 0 4px rgba(0, 162, 255, 0.2),
-    0 0 15px var(--accent-color);
-  transition: all 0.3s ease;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 16px;
+    width: 16px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    box-shadow: 
+        0 0 0 4px rgba(0, 162, 255, 0.2),
+        0 0 15px var(--accent-color),
+        0 0 30px var(--accent-color);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2;
 }
 
-/* Rest of the styles remain the same as previous version */
-/* ... */
-
-@keyframes pulse {
-  0% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(1.1); opacity: 1; }
-  100% { transform: scale(1); opacity: 0.8; }
+/* Progress Labels */
+.progress-labels {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+    position: relative;
 }
 
+/* Milestone Styles */
+.milestone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    text-align: center;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.step-marker {
+    width: 36px;
+    height: 36px;
+    background: var(--bg-color);
+    border: 2px solid var(--accent-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 12px;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.step-marker:hover {
+    transform: translateY(-2px) scale(1.1);
+    box-shadow: 
+        0 0 15px var(--accent-color),
+        0 0 30px var(--accent-color);
+    border-color: var(--secondary-accent);
+    color: var(--secondary-accent);
+}
+
+/* Label Styles */
+.label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.sublabel {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 400;
+    transition: all 0.3s ease;
+}
+
+/* Active State */
 .milestone.active .step-marker {
-  animation: pulse 2s infinite;
+    background: var(--accent-color);
+    color: var(--bg-color);
+    box-shadow: 
+        0 0 20px var(--accent-color),
+        0 0 40px var(--accent-color);
+    animation: pulse 2s infinite;
+}
+
+.milestone.active .label {
+    color: var(--accent-color);
+    text-shadow: 0 0 10px var(--accent-color);
+}
+
+.milestone.active .sublabel {
+    color: var(--text-color);
+}
+
+/* Completed State */
+.milestone.completed .step-marker {
+    background: var(--secondary-accent);
+    border-color: var(--secondary-accent);
+    color: var(--bg-color);
+    box-shadow: 0 0 20px var(--secondary-accent);
+}
+
+.milestone.completed .label {
+    color: var(--secondary-accent);
+}
+
+/* Animations */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes shine {
+    0% { transform: translateX(-50%) rotate(0deg); }
+    100% { transform: translateX(50%) rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .progress-labels {
+        overflow-x: auto;
+        padding-bottom: 20px;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+    }
+    
+    .milestone {
+        min-width: 120px;
+        margin: 0 10px;
+        scroll-snap-align: center;
+    }
+
+    .progress-section {
+        padding: 30px 15px;
+    }
+
+    .progress-title {
+        font-size: 20px;
+    }
+}
+
+/* Custom Scrollbar */
+.progress-labels::-webkit-scrollbar {
+    height: 4px;
+}
+
+.progress-labels::-webkit-scrollbar-track {
+    background: rgba(0, 162, 255, 0.1);
+    border-radius: 2px;
+}
+
+.progress-labels::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 2px;
+}
+
+/* Hover Effects */
+.milestone:hover .label {
+    color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+.milestone:hover .sublabel {
+    opacity: 1;
+}
+
+/* Focus States */
+.step-marker:focus {
+    outline: none;
+    box-shadow: 
+        0 0 0 2px var(--bg-color),
+        0 0 0 4px var(--accent-color);
+}
+
+/* Loading State */
+.progress-section.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 25%,
+        rgba(0, 162, 255, 0.1) 50%,
+        transparent 75%
+    );
+    animation: loading 1.5s infinite linear;
+}
+
+@keyframes loading {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
 }
 </style>
 <body>
@@ -375,7 +578,17 @@ class ProgressTracker {
         this.marker = document.getElementById('progress-marker');
         this.progressBar = document.querySelector('.progress-bar');
         this.milestones = document.querySelectorAll('.milestone');
-        this.updateProgressMarker(0); // Start at beginning
+        
+        // Set initial stage
+        this.updateProgressMarker(0);
+        
+        // Add click handlers for milestones if needed
+        this.milestones.forEach((milestone, index) => {
+            milestone.addEventListener('click', () => {
+                // Only for visual feedback, won't change stage
+                this.highlightMilestone(index);
+            });
+        });
     }
 
     updateProgressMarker(stage) {
@@ -401,14 +614,19 @@ class ProgressTracker {
             }
         });
 
-        // Add glowing effect to current stage
-        this.updateGlowEffect(positionPercentage);
+        // Update glow effect
+        this.progressBar.style.setProperty('--progress-position', `${positionPercentage}%`);
         
         this.currentStage = stage;
     }
 
-    updateGlowEffect(position) {
-        this.progressBar.style.setProperty('--progress-position', `${position}%`);
+    // Visual feedback only - doesn't change stage
+    highlightMilestone(index) {
+        const milestone = this.milestones[index];
+        milestone.style.transform = 'scale(1.05)';
+        setTimeout(() => {
+            milestone.style.transform = 'scale(1)';
+        }, 200);
     }
 
     // Method to get current stage
@@ -421,17 +639,10 @@ class ProgressTracker {
 document.addEventListener('DOMContentLoaded', () => {
     const progressTracker = new ProgressTracker();
     
-    // Export for global access
+    // Export for global access - only way to change stage
     window.updateProgressMarker = (stage) => {
         progressTracker.updateProgressMarker(stage);
     };
-    
-    // Example: Update progress every few seconds (for demo)
-    let demoStage = 0;
-    setInterval(() => {
-        demoStage = (demoStage + 1) % 8;
-        progressTracker.updateProgressMarker(demoStage);
-    }, 3000);
 });
     </script>
 <script>        document.addEventListener('DOMContentLoaded', function() {
