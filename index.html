@@ -33,25 +33,36 @@
 <link rel="stylesheet" href="styles.css"> <!-- Link your CSS -->
 </head>
     <style>
+:root {
+    --bg-color: #000000;
+    --text-color: #ffffff;
+    --accent-color: #00a2ff;
+    --secondary-accent: #ff00cc;
+}
+
 .progress-section {
   width: 95%;
   max-width: 1200px;
   margin: 40px auto;
   padding: 40px 30px;
-  background: linear-gradient(145deg, #ffffff, #f5f7ff);
+  background: var(--bg-color);
+  border: 1px solid var(--accent-color);
   border-radius: 20px;
   box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.08),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.9);
+    0 0 20px rgba(0, 162, 255, 0.2),
+    0 0 40px rgba(0, 162, 255, 0.1),
+    inset 0 0 15px rgba(0, 162, 255, 0.1);
 }
 
 .progress-title {
   font-size: 24px;
   font-weight: 700;
-  color: #2d2d5f;
+  color: var(--text-color);
   text-align: center;
   margin-bottom: 40px;
-  letter-spacing: -0.5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px var(--accent-color);
 }
 
 .progress-container {
@@ -71,7 +82,10 @@
   left: 0;
   height: 100%;
   width: 100%;
-  background: linear-gradient(90deg, #e0e0ff 0%, #f0f0ff 100%);
+  background: linear-gradient(90deg, 
+    rgba(0, 162, 255, 0.2),
+    rgba(255, 0, 204, 0.2)
+  );
   border-radius: 2px;
 }
 
@@ -82,11 +96,11 @@
   transform: translate(-50%, -50%);
   height: 16px;
   width: 16px;
-  background: #5d5dff;
+  background: var(--accent-color);
   border-radius: 50%;
   box-shadow: 
-    0 0 0 4px rgba(93, 93, 255, 0.2),
-    0 0 0 8px rgba(93, 93, 255, 0.1);
+    0 0 0 4px rgba(0, 162, 255, 0.2),
+    0 0 15px var(--accent-color);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -108,14 +122,14 @@
 .step-marker {
   width: 36px;
   height: 36px;
-  background: #fff;
-  border: 2px solid #5d5dff;
+  background: var(--bg-color);
+  border: 2px solid var(--accent-color);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 600;
-  color: #5d5dff;
+  color: var(--accent-color);
   margin-bottom: 12px;
   position: relative;
   transition: all 0.3s ease;
@@ -123,45 +137,52 @@
 
 .step-marker:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(93, 93, 255, 0.2);
+  box-shadow: 0 0 15px var(--accent-color);
+  border-color: var(--secondary-accent);
+  color: var(--secondary-accent);
 }
 
-.step-marker.start,
-.step-marker.final {
-  border: none;
-  padding: 0;
+.step-marker.start svg circle {
+  fill: var(--accent-color);
+}
+
+.step-marker.final svg circle {
+  fill: var(--secondary-accent);
 }
 
 .label {
   font-size: 14px;
   font-weight: 600;
-  color: #2d2d5f;
+  color: var(--text-color);
   margin-bottom: 4px;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .sublabel {
   font-size: 12px;
-  color: #6b6b9f;
+  color: rgba(255, 255, 255, 0.7);
   font-weight: 400;
 }
 
 /* Active state styles */
 .milestone.active .step-marker {
-  background: #5d5dff;
-  color: white;
-  box-shadow: 0 0 0 4px rgba(93, 93, 255, 0.2);
+  background: var(--accent-color);
+  color: var(--bg-color);
+  box-shadow: 0 0 20px var(--accent-color);
 }
 
 .milestone.active .label {
-  color: #5d5dff;
+  color: var(--accent-color);
+  text-shadow: 0 0 10px var(--accent-color);
 }
 
 /* Completed state styles */
 .milestone.completed .step-marker {
-  background: #00ff88;
-  border-color: #00ff88;
-  color: white;
+  background: var(--secondary-accent);
+  border-color: var(--secondary-accent);
+  color: var(--bg-color);
+  box-shadow: 0 0 20px var(--secondary-accent);
 }
 
 @media (max-width: 768px) {
