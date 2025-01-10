@@ -874,37 +874,3 @@ button[type="submit"]:hover {
     }
 
 
-.progress-section {
-  width: 80%;
-  max-width: 800px;
-  text-align: center;
-}
-
-.progress-container {
-  position: relative;
-}
-
-.progress-bar {
-  position: relative;
-  height: 4px;
-  background-color: #ddd;
-  margin: 20px 0;
-}
-
-.marker {
-  position: absolute;
-  top: -6px;
-  height: 16px;
-  width: 16px;
-  background-color: #007BFF;
-  border-radius: 50%;
-  transition: left 0.3s ease;
-}
-
-.progress-labels {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-  font-size: 14px;
-  color: #555;
-}
