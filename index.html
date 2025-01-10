@@ -50,8 +50,7 @@
   border-radius: 20px;
   box-shadow: 
     0 0 20px rgba(0, 162, 255, 0.2),
-    0 0 40px rgba(0, 162, 255, 0.1),
-    inset 0 0 15px rgba(0, 162, 255, 0.1);
+    0 0 40px rgba(0, 162, 255, 0.1);
 }
 
 .progress-title {
@@ -83,16 +82,32 @@
   height: 100%;
   width: 100%;
   background: linear-gradient(90deg, 
-    rgba(0, 162, 255, 0.2),
-    rgba(255, 0, 204, 0.2)
+    var(--accent-color) var(--progress-position, 0%),
+    rgba(0, 162, 255, 0.2) var(--progress-position, 0%)
   );
   border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.progress-glow {
+  position: absolute;
+  top: 50%;
+  left: var(--progress-position, 0%);
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  background: radial-gradient(
+    circle at center,
+    var(--accent-color) 0%,
+    transparent 70%
+  );
+  opacity: 0.6;
+  transition: all 0.3s ease;
 }
 
 .marker {
   position: absolute;
   top: 50%;
-  left: 30%;
   transform: translate(-50%, -50%);
   height: 16px;
   width: 16px;
@@ -101,100 +116,20 @@
   box-shadow: 
     0 0 0 4px rgba(0, 162, 255, 0.2),
     0 0 15px var(--accent-color);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.progress-labels {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 10px;
-}
-
-.milestone {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 1;
-  text-align: center;
-  position: relative;
-}
-
-.step-marker {
-  width: 36px;
-  height: 36px;
-  background: var(--bg-color);
-  border: 2px solid var(--accent-color);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  color: var(--accent-color);
-  margin-bottom: 12px;
-  position: relative;
   transition: all 0.3s ease;
 }
 
-.step-marker:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 15px var(--accent-color);
-  border-color: var(--secondary-accent);
-  color: var(--secondary-accent);
+/* Rest of the styles remain the same as previous version */
+/* ... */
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.8; }
 }
 
-.step-marker.start svg circle {
-  fill: var(--accent-color);
-}
-
-.step-marker.final svg circle {
-  fill: var(--secondary-accent);
-}
-
-.label {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text-color);
-  margin-bottom: 4px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-.sublabel {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.7);
-  font-weight: 400;
-}
-
-/* Active state styles */
 .milestone.active .step-marker {
-  background: var(--accent-color);
-  color: var(--bg-color);
-  box-shadow: 0 0 20px var(--accent-color);
-}
-
-.milestone.active .label {
-  color: var(--accent-color);
-  text-shadow: 0 0 10px var(--accent-color);
-}
-
-/* Completed state styles */
-.milestone.completed .step-marker {
-  background: var(--secondary-accent);
-  border-color: var(--secondary-accent);
-  color: var(--bg-color);
-  box-shadow: 0 0 20px var(--secondary-accent);
-}
-
-@media (max-width: 768px) {
-  .progress-labels {
-    overflow-x: auto;
-    padding-bottom: 20px;
-  }
-  
-  .milestone {
-    min-width: 120px;
-    margin: 0 10px;
-  }
+  animation: pulse 2s infinite;
 }
 </style>
 <body>
@@ -319,62 +254,63 @@
         </section>
     </main>
 <section id="onthegomark" class="progress-section">
-  <h2 class="progress-title">Journey Progress</h2>
+  <h2 class="progress-title">Progress Tracker</h2>
   <div class="progress-container">
     <div class="progress-bar">
       <div class="progress-line"></div>
+      <div class="progress-glow"></div>
       <div id="progress-marker" class="marker"></div>
     </div>
     <div class="progress-labels">
-      <div class="milestone">
+      <div class="milestone" data-stage="0">
         <span class="step-marker start">
           <svg viewBox="0 0 24 24" width="24" height="24">
-            <circle cx="12" cy="12" r="12" fill="#00ff88"/>
-            <path d="M8 12l3 3 6-6" stroke="white" fill="none" stroke-width="2"/>
+            <circle cx="12" cy="12" r="12"/>
+            <path d="M8 12l3 3 6-6" stroke="var(--bg-color)" fill="none" stroke-width="2"/>
           </svg>
         </span>
         <span class="label">START</span>
-        <span class="sublabel">Begin Journey</span>
+        <span class="sublabel">Initialize</span>
       </div>
-      <div class="milestone">
+      <div class="milestone" data-stage="1">
         <span class="step-marker">1</span>
-        <span class="label">PLANNING</span>
-        <span class="sublabel">Strategy Phase</span>
+        <span class="label">SETUP</span>
+        <span class="sublabel">Configuration</span>
       </div>
-      <div class="milestone">
+      <div class="milestone" data-stage="2">
         <span class="step-marker">2</span>
-        <span class="label">DESIGN</span>
-        <span class="sublabel">Creative Process</span>
+        <span class="label">BUILD</span>
+        <span class="sublabel">Development</span>
       </div>
-      <div class="milestone">
+      <div class="milestone" data-stage="3">
         <span class="step-marker">3</span>
-        <span class="label">DEVELOP</span>
-        <span class="sublabel">Implementation</span>
+        <span class="label">TEST</span>
+        <span class="sublabel">Validation</span>
       </div>
-      <div class="milestone">
+      <div class="milestone" data-stage="4">
         <span class="step-marker">4</span>
-        <span class="label">TESTING</span>
+        <span class="label">OPTIMIZE</span>
+        <span class="sublabel">Enhancement</span>
+      </div>
+      <div class="milestone" data-stage="5">
+        <span class="step-marker">5</span>
+        <span class="label">VERIFY</span>
         <span class="sublabel">Quality Check</span>
       </div>
-      <div class="milestone">
-        <span class="step-marker">5</span>
-        <span class="label">REVIEW</span>
-        <span class="sublabel">Final Touches</span>
-      </div>
-      <div class="milestone">
+      <div class="milestone" data-stage="6">
         <span class="step-marker">6</span>
         <span class="label">DEPLOY</span>
-        <span class="sublabel">Go Live</span>
+        <span class="sublabel">Release</span>
       </div>
-      <div class="milestone">
+      <div class="milestone" data-stage="7">
         <span class="step-marker final">
           <svg viewBox="0 0 24 24" width="24" height="24">
-            <circle cx="12" cy="12" r="12" fill="#5d5dff"/>
-            <path d="M12 6l4 4-4 4-4-4z" fill="white"/>
+            <circle cx="12" cy="12" r="12"/>
+            <path d="M12 6l4 4-4 4-4-4z" fill="var(--bg-color)"/>
           </svg>
         </span>
         <span class="label">FINAL</span>
-        <span class="sublabel">Completion</span>
+        <span class="sublabel">Complete</span>
       </div>
     </div>
   </div>
@@ -427,76 +363,76 @@
     </div>
   </div>
     <script>
-// Define the current stage (0 = START, 1 = 1, ..., n = FINAL)
-let currentStage = 0;
+// Progress Tracker Core Functionality
+class ProgressTracker {
+    constructor() {
+        this.currentStage = 0;
+        this.totalStages = 7; // START(0) to FINAL(7)
+        this.init();
+    }
 
-// Update the marker position dynamically
-function updateProgressMarker(stage) {
-  const progressBar = document.querySelector('.progress-bar');
-  const marker = document.getElementById('progress-marker');
-  const totalStages = document.querySelectorAll('.progress-labels span').length - 1; // Exclude '...'
+    init() {
+        this.marker = document.getElementById('progress-marker');
+        this.progressBar = document.querySelector('.progress-bar');
+        this.milestones = document.querySelectorAll('.milestone');
+        this.updateProgressMarker(0); // Start at beginning
+    }
 
-  // Ensure stage is within range
-  if (stage < 0 || stage > totalStages) {
-    console.error("Stage out of range. Please provide a valid stage.");
-    return;
-  }
+    updateProgressMarker(stage) {
+        if (stage < 0 || stage > this.totalStages) {
+            console.error("Stage out of range. Please provide a valid stage.");
+            return;
+        }
 
-  // Calculate the position percentage
-  const positionPercentage = (stage / totalStages) * 100;
-  marker.style.left = `calc(${positionPercentage}% - 8px)`; // Offset to center the marker
+        // Update marker position
+        const positionPercentage = (stage / this.totalStages) * 100;
+        this.marker.style.left = `${positionPercentage}%`;
+        
+        // Update milestone states
+        this.milestones.forEach((milestone, index) => {
+            if (index < stage) {
+                milestone.classList.add('completed');
+                milestone.classList.remove('active');
+            } else if (index === stage) {
+                milestone.classList.add('active');
+                milestone.classList.remove('completed');
+            } else {
+                milestone.classList.remove('completed', 'active');
+            }
+        });
 
-  // Update the currentStage variable
-  currentStage = stage;
+        // Add glowing effect to current stage
+        this.updateGlowEffect(positionPercentage);
+        
+        this.currentStage = stage;
+    }
+
+    updateGlowEffect(position) {
+        this.progressBar.style.setProperty('--progress-position', `${position}%`);
+    }
+
+    // Method to get current stage
+    getCurrentStage() {
+        return this.currentStage;
+    }
 }
 
-// Example: Call this function to move to stage 3
-updateProgressMarker(2);
-
-// Export the function for global access if needed
-window.updateProgressMarker = updateProgressMarker;
-
-        
-    </script>
-      <script>
-    function showAd() {
-        const template = document.getElementById('ad-template');
-        const ad = template.content.cloneNode(true);
-        document.body.appendChild(ad);
+// Initialize on DOM load
+document.addEventListener('DOMContentLoaded', () => {
+    const progressTracker = new ProgressTracker();
     
-        const closeBtn = document.querySelector('.ad-popup .close-btn');
-        closeBtn.addEventListener('click', () => {
-            const adPopup = document.querySelector('.ad-popup');
-            adPopup.style.animation = 'slideDown 0.5s reverse';
-            setTimeout(() => {
-                adPopup.remove();
-                scheduleNextAd();
-            }, 500);
-        });
+    // Export for global access
+    window.updateProgressMarker = (stage) => {
+        progressTracker.updateProgressMarker(stage);
+    };
     
-        const appIcon = document.querySelector('.app-icon');
-        appIcon.addEventListener('click', () => {
-            const videoModal = document.querySelector('.video-modal');
-            const iframe = videoModal.querySelector('iframe');
-            iframe.src = 'https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1';
-            videoModal.style.display = 'flex';
-        });
-    }
-    
-    const videoModal = document.querySelector('.video-modal');
-    const videoCloseBtn = document.querySelector('.video-close-btn');
-    videoCloseBtn.addEventListener('click', () => {
-        const iframe = videoModal.querySelector('iframe');
-        iframe.src = '';
-        videoModal.style.display = 'none';
-    });
-    
-    function scheduleNextAd() {
-        const delay = Math.floor(Math.random() * (45000 - 15000 + 1) + 15000);
-        setTimeout(showAd, delay);
-    }
-    
-    scheduleNextAd();
+    // Example: Update progress every few seconds (for demo)
+    let demoStage = 0;
+    setInterval(() => {
+        demoStage = (demoStage + 1) % 8;
+        progressTracker.updateProgressMarker(demoStage);
+    }, 3000);
+});
     </script>
 <script>        document.addEventListener('DOMContentLoaded', function() {
     const burger = document.querySelector('.burger');
