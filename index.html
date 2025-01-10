@@ -153,7 +153,23 @@
             </div>
         </section>
     </main>
-
+  <section id="onthegomark" class="progress-section">
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div id="progress-marker" class="marker"></div>
+      </div>
+      <div class="progress-labels">
+        <span>START</span>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+        <span>...</span>
+        <span>...</span>
+        <span>FINAL</span>
+      </div>
+    </div>
+  </section>
 </div>
 <footer style="background-color: #121212; color: #ffffff; padding: 40px 20px;">
   <div style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between;">
@@ -171,11 +187,11 @@
     <!-- Social Media Links -->
     <div style="flex: 1; min-width: 250px; margin-bottom: 20px;">
       <h3 style="margin-bottom: 10px;">Follow Us</h3>
-      <div>
-        <a href="www.facebook.com/Navaura" style="margin-right: 10px; color: #ffffff; font-size: 20px;">&#x1F4F6;Facebook</a>
-        <a href="#" style="margin-right: 10px; color: #ffffff; font-size: 20px;">&#x1F4F7; Instagram</a>
-        <a href="#" style="margin-right: 10px; color: #ffffff; font-size: 20px;">&#x1F426; Twitter</a>
-      </div>
+     <div>
+     <a href="https://www.facebook.com/Navaura" style="margin-right: 10px; color: #ffffff; font-size: 20px;">📱 Facebook</a>
+     <a href="https://www.instagram.com/Navaura" style="margin-right: 10px; color: #ffffff; font-size: 20px;">📷 Instagram</a>
+     <a href="https://twitter.com/Navaura" style="margin-right: 10px; color: #ffffff; font-size: 20px;">🐦 Twitter</a>
+     </div>
     </div>
   </div>
   <hr style="border-color: #444; margin: 20px 0;">
@@ -201,6 +217,38 @@
         </form>
     </div>
   </div>
+    <script>
+// Define the current stage (0 = START, 1 = 1, ..., n = FINAL)
+let currentStage = 0;
+
+// Update the marker position dynamically
+function updateProgressMarker(stage) {
+  const progressBar = document.querySelector('.progress-bar');
+  const marker = document.getElementById('progress-marker');
+  const totalStages = document.querySelectorAll('.progress-labels span').length - 1; // Exclude '...'
+
+  // Ensure stage is within range
+  if (stage < 0 || stage > totalStages) {
+    console.error("Stage out of range. Please provide a valid stage.");
+    return;
+  }
+
+  // Calculate the position percentage
+  const positionPercentage = (stage / totalStages) * 100;
+  marker.style.left = `calc(${positionPercentage}% - 8px)`; // Offset to center the marker
+
+  // Update the currentStage variable
+  currentStage = stage;
+}
+
+// Example: Call this function to move to stage 3
+updateProgressMarker(2);
+
+// Export the function for global access if needed
+window.updateProgressMarker = updateProgressMarker;
+
+        
+    </script>
       <script>
     function showAd() {
         const template = document.getElementById('ad-template');
