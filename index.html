@@ -557,10 +557,9 @@
     </div>
   </div>
     <script>
-// Progress Tracker Core Functionality
 class ProgressTracker {
     constructor() {
-        this.currentStage = 3;
+        this.currentStage = 2;
         this.totalStages = 7; // START(0) to FINAL(7)
         this.init();
     }
@@ -569,10 +568,18 @@ class ProgressTracker {
         this.marker = document.getElementById('progress-marker');
         this.progressBar = document.querySelector('.progress-bar');
         this.milestones = document.querySelectorAll('.milestone');
-        
+
+        if (!this.marker || !this.progressBar || this.milestones.length === 0) {
+            console.error("Initialization failed: Missing required elements in the DOM.");
+            return;
+        }
+
+        // Log initialization
+        console.log("ProgressTracker initialized with total stages:", this.totalStages);
+
         // Set initial stage
         this.updateProgressMarker(0);
-        
+
         // Add click handlers for milestones if needed
         this.milestones.forEach((milestone, index) => {
             milestone.addEventListener('click', () => {
@@ -588,10 +595,13 @@ class ProgressTracker {
             return;
         }
 
-        // Update marker position
+        // Calculate position
         const positionPercentage = (stage / this.totalStages) * 100;
+        console.log(`Updating stage to: ${stage}, Marker position: ${positionPercentage}%`);
+
+        // Update marker position
         this.marker.style.left = `${positionPercentage}%`;
-        
+
         // Update milestone states
         this.milestones.forEach((milestone, index) => {
             if (index < stage) {
@@ -607,52 +617,36 @@ class ProgressTracker {
 
         // Update glow effect
         this.progressBar.style.setProperty('--progress-position', `${positionPercentage}%`);
-        
+
         this.currentStage = stage;
     }
 
-    // Visual feedback only - doesn't change stage
     highlightMilestone(index) {
         const milestone = this.milestones[index];
-        milestone.style.transform = 'scale(1.05)';
-        setTimeout(() => {
-            milestone.style.transform = 'scale(1)';
-        }, 200);
+        if (milestone) {
+            milestone.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                milestone.style.transform = 'scale(1)';
+            }, 200);
+        } else {
+            console.error("Milestone not found for index:", index);
+        }
     }
 
-    // Method to get current stage
     getCurrentStage() {
         return this.currentStage;
     }
 }
 
-// Initialize on DOM load
 document.addEventListener('DOMContentLoaded', () => {
     const progressTracker = new ProgressTracker();
-    
-    // Export for global access - only way to change stage
+
+    // Export global method to test stage changes
     window.updateProgressMarker = (stage) => {
         progressTracker.updateProgressMarker(stage);
     };
 });
-    </script>
-<script>        document.addEventListener('DOMContentLoaded', function() {
-    const burger = document.querySelector('.burger');
-    const navLinks = document.querySelector('.nav-links');
-
-    burger.addEventListener('click', function() {
-        navLinks.classList.toggle('active');
-        burger.classList.toggle('active');
-    });
-
-    // Close menu when a link is clicked
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-            burger.classList.remove('active');
-        });
-    });
-});</script>
+</script>
 
     <script>
         // Smooth scrolling for anchor links
