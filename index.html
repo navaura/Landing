@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="google-adsense-account" content="ca-pub-7059602797340547">
+
     <!-- Standard Favicon -->
 <link rel="icon" href="favicon.ico" type="image/x-icon">
 <meta name="facebook-domain-verification" content="p1a0qgznukjbaxtq909cz0tptkbcpw" />
@@ -13,8 +13,8 @@
 
 <!-- Apple Touch Icon for iOS -->
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta property="og:title" content="Navaura | Innovative Tech Solutions from India">
-<meta property="og:description" content="Navaura, a tech company in India, specializes in AI, automation, and software solutions to drive innovation and business growth.">
+<meta property="og:title" content="Navaura | Sarvesham Krute Bhavishyam">
+<meta property="og:description" content="Navaura Arctiq, a tech company in India, specializes in AI, automation, and software solutions to drive innovation and business growth.">
 <meta property="og:image" content="https://www.navaura.in/logo.png">
 <meta property="og:url" content="https://www.navaura.in">
 <meta property="og:type" content="website">
@@ -28,731 +28,921 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Navaura™ | SARVESHAM KRUTE BHABISHYAM | An Indian Technology Company</title>
 <meta name="description" content="Navaura is an innovative tech company in India, offering cutting-edge solutions in AI, automation, and software development for global businesses. Empowering growth with advanced technology services.">
-<meta name="keywords" content="Navaura, tech company India, AI solutions, automation, software development, Indian technology startup, innovative tech solutions, AI startups India, technology services, software innovation, IT solutions, Indian tech companies">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<link rel="stylesheet" href="styles.css"> <!-- Link your CSS -->
-</head>
-    <style>
-:root {
-    --bg-color: #000000;
-    --text-color: #ffffff;
-    --accent-color: #00a2ff;
-    --secondary-accent: #ff00cc;
+<meta name="keywords" content="Navaura, NAVAURA_ARCTIQ (OPC) Private Limited, tech company India, AI solutions, automation, software development, Indian technology startup, innovative tech solutions, AI startups India, technology services, software innovation, IT solutions, Indian tech companies">
+
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-store">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navaura Arctiq</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <style>
+            body, a, button, input, textarea {
+    cursor: none !important;
 }
 
-/* Main Container Styles */
-.progress-section {
-    width: 95%;
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 40px 30px;
-    background: var(--bg-color);
-    border: 1px solid var(--accent-color);
-    border-radius: 20px;
-    box-shadow: 
-        0 0 20px rgba(0, 162, 255, 0.2),
-        0 0 40px rgba(0, 162, 255, 0.1),
-        inset 0 0 15px rgba(0, 162, 255, 0.1);
-    position: relative;
-    overflow: hidden;
-}
-
-.progress-section::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
-        45deg,
-        transparent 0%,
-        rgba(0, 162, 255, 0.1) 50%,
-        transparent 100%
-    );
-    animation: shine 8s infinite linear;
+            /* Primary cursor */
+.cursor {
+    width: 12px;
+    height: 12px;
+    background: rgba(59, 130, 246, 0.8);
+    border-radius: 50%;
+    position: fixed;
     pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease;
+    mix-blend-mode: difference;
 }
 
-/* Title Styles */
-.progress-title {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--text-color);
-    text-align: center;
-    margin-bottom: 40px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-shadow: 
-        0 0 10px var(--accent-color),
-        0 0 20px var(--accent-color);
+/* Secondary cursor (outer ring) */
+.cursor-follower {
+    width: 40px;
+    height: 40px;
+    background: rgba(59, 130, 246, 0.1);
+    border: 2px solid rgba(59, 130, 246, 0.4);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease;
+    transform: translate(-50%, -50%);
 }
 
-/* Progress Bar Container */
-.progress-container {
-    position: relative;
-    padding: 20px 0;
-    z-index: 1;
+/* Hover effects for interactive elements */
+a:hover ~ .cursor,
+button:hover ~ .cursor {
+    width: 20px;
+    height: 20px;
+    background: rgba(59, 130, 246, 1);
 }
 
-/* Progress Bar */
-.progress-bar {
-    position: relative;
-    height: 4px;
-    margin: 40px 0 60px;
-}
-
-.progress-line {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(90deg, 
-        var(--accent-color) var(--progress-position, 0%),
-        rgba(0, 162, 255, 0.2) var(--progress-position, 0%)
-    );
-    border-radius: 2px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.progress-glow {
-    position: absolute;
-    top: 50%;
-    left: var(--progress-position, 0%);
-    transform: translateY(-50%);
+a:hover ~ .cursor-follower,
+button:hover ~ .cursor-follower {
     width: 60px;
     height: 60px;
-    background: radial-gradient(
-        circle at center,
-        var(--accent-color) 0%,
-        transparent 70%
-    );
-    opacity: 0.4;
-    filter: blur(8px);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-color: rgba(59, 130, 246, 0.6);
 }
 
-/* Progress Marker */
-.marker {
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    height: 16px;
-    width: 16px;
-    background: var(--accent-color);
-    border-radius: 50%;
-    box-shadow: 
-        0 0 0 4px rgba(0, 162, 255, 0.2),
-        0 0 15px var(--accent-color),
-        0 0 30px var(--accent-color);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 2;
+/* Text input effects */
+input:focus ~ .cursor,
+textarea:focus ~ .cursor {
+    width: 4px;
+    height: 24px;
+    background: rgba(59, 130, 246, 1);
 }
 
-/* Progress Labels */
-.progress-labels {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 10px;
-    position: relative;
-}
+#products {
+            overflow: hidden; /* Add this to prevent scrolling */
+        }
 
-/* Milestone Styles */
-.milestone {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex: 1;
-    text-align: center;
-    position: relative;
-    transition: all 0.3s ease;
-}
 
-.step-marker {
-    width: 36px;
-    height: 36px;
-    background: var(--bg-color);
-    border: 2px solid var(--accent-color);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
-    color: var(--accent-color);
-    margin-bottom: 12px;
-    position: relative;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
+input:focus ~ .cursor-follower,
+textarea:focus ~ .cursor-follower {
+    opacity: 0;
 }
-
-.step-marker:hover {
-    transform: translateY(-2px) scale(1.1);
-    box-shadow: 
-        0 0 15px var(--accent-color),
-        0 0 30px var(--accent-color);
-    border-color: var(--secondary-accent);
-    color: var(--secondary-accent);
-}
-
-/* Label Styles */
-.label {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-color);
-    margin-bottom: 4px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-}
-
-.sublabel {
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.7);
-    font-weight: 400;
-    transition: all 0.3s ease;
-}
-
-/* Active State */
-.milestone.active .step-marker {
-    background: var(--accent-color);
-    color: var(--bg-color);
-    box-shadow: 
-        0 0 20px var(--accent-color),
-        0 0 40px var(--accent-color);
-    animation: pulse 2s infinite;
-}
-
-.milestone.active .label {
-    color: var(--accent-color);
-    text-shadow: 0 0 10px var(--accent-color);
-}
-
-.milestone.active .sublabel {
-    color: var(--text-color);
-}
-
-/* Completed State */
-.milestone.completed .step-marker {
-    background: var(--secondary-accent);
-    border-color: var(--secondary-accent);
-    color: var(--bg-color);
-    box-shadow: 0 0 20px var(--secondary-accent);
-}
-
-.milestone.completed .label {
-    color: var(--secondary-accent);
-}
-
-/* Animations */
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-}
-
-@keyframes shine {
-    0% { transform: translateX(-50%) rotate(0deg); }
-    100% { transform: translateX(50%) rotate(360deg); }
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .progress-labels {
-        overflow-x: auto;
-        padding-bottom: 20px;
-        -webkit-overflow-scrolling: touch;
-        scroll-snap-type: x mandatory;
-    }
+            /* Hide scrollbar for all elements */
+            * {
+                -ms-overflow-style: none;  /* IE and Edge */
+                scrollbar-width: none;     /* Firefox */
+            }
     
-    .milestone {
-        min-width: 120px;
-        margin: 0 10px;
-        scroll-snap-align: center;
-    }
+            /* Hide scrollbar for Chrome, Safari and Opera */
+            *::-webkit-scrollbar {
+                display: none;
+            }
+    
+            html {
+                scroll-behavior: smooth;
+                overflow-x: hidden;
+            }
+            
+            body {
+                overflow-x: hidden;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                -ms-overflow-style: none;  /* IE and Edge */
+                scrollbar-width: none;     /* Firefox */
+            }
+    
+            /* Hide body scrollbar for Chrome, Safari and Opera */
+            body::-webkit-scrollbar {
+                display: none;
+            }
+    
+            .text-gradient {
+                background: linear-gradient(45deg, #3B82F6, #10B981);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            .loader {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: #1a1a1a;
+                z-index: 9999;
+                transition: opacity 0.5s;
+            }
+            .loader.fade-out {
+                opacity: 0;
+                pointer-events: none;
+            }
+            .parallax {
+                transform: translateZ(0);
+                will-change: transform;
+            }
+            body, a, button, input, textarea {
+    cursor: none !important;
+}
+            .cursor-glow {
+                width: 20px;
+                height: 20px;
+                background: rgba(59, 130, 246, 0.5);
+                border-radius: 50%;
+                position: fixed;
+                pointer-events: none;
+                z-index: 9999;
+                transition: transform 0.1s;
+            }
+            #logo{
+                height: 5rem;
+            }
+            .container {
+                width: 100%;
+                max-width: 100vw;
+                overflow-x: hidden;
+                -ms-overflow-style: none;  /* IE and Edge */
+                scrollbar-width: none;     /* Firefox */
+            }
+    
+            /* Hide container scrollbar for Chrome, Safari and Opera */
+            .container::-webkit-scrollbar {
+                display: none;
+            }
 
-    .progress-section {
-        padding: 30px 15px;
-    }
-
-    .progress-title {
-        font-size: 20px;
-    }
+            * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* Custom Scrollbar */
-.progress-labels::-webkit-scrollbar {
-    height: 4px;
-}
-
-.progress-labels::-webkit-scrollbar-track {
-    background: rgba(0, 162, 255, 0.1);
-    border-radius: 2px;
-}
-
-.progress-labels::-webkit-scrollbar-thumb {
-    background: var(--accent-color);
-    border-radius: 2px;
-}
-
-/* Hover Effects */
-.milestone:hover .label {
-    color: var(--accent-color);
-    transform: translateY(-2px);
-}
-
-.milestone:hover .sublabel {
-    opacity: 1;
-}
-
-/* Focus States */
-.step-marker:focus {
-    outline: none;
-    box-shadow: 
-        0 0 0 2px var(--bg-color),
-        0 0 0 4px var(--accent-color);
-}
-
-/* Loading State */
-.progress-section.loading::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+/* Enable smooth scrolling on the html element */
+html {
+    scroll-behavior: smooth;
     height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent 25%,
-        rgba(0, 162, 255, 0.1) 50%,
-        transparent 75%
-    );
-    animation: loading 1.5s infinite linear;
 }
 
-@keyframes loading {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
+/* Main body scrolling */
+body {
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
-</style>
-<body>
-  <div id="content-wrapper">
-    <header >
-<div class="logo">
-    <a href="https://www.navaura.in" class="logo-link">
-        <img src="logo.png" alt="Navaura Logo">
-        <h1>Navaura™</h1>
-    </a>
-</div>
 
-        <nav>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="getb.html">AI-Blogs</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="wywg.html">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="burger">
-                <i class="fas fa-bars"></i>
-            </div>
-        </nav>
-    </header>
+/* Section styles */
+section {
+    width: 100%;
+    position: relative;
+}
 
-    <main>
-        <section id="home" class="hero">
-            <div class="hero-bg"></div>
-            <div class="container hero-content">
-                <h1>
-                    <span class="reveal-text">"SARVESHAM</span><br>
-                    <span class="reveal-text">KRUTE</span><br>
-                    <span class="reveal-text">BHABISHYAM"</span>
-                </h1>
-                <p>Navaura: Future For all</p>
-                <a href="#contact" class="cta-btn"><span>INITIATE CONTACT</span></a>
+/* Container styles */
+.container {
+    width: 100%;
+    max-width: 100vw;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Hide scrollbars but keep functionality */
+::-webkit-scrollbar {
+    display: none;
+}
+
+* {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+/* Prevent horizontal scroll */
+.overflow-x-hidden {
+    overflow-x: hidden;
+}
+
+        </style>
+</head>
+<body class="bg-gray-900 text-gray-100">
+    <!-- Preloader -->
+    <div class="loader">
+        <div class="text-4xl font-bold text-gradient">Loading...</div>
+    </div>
+
+<!-- Add cursor elements -->
+<div class="cursor"></div>
+<div class="cursor-follower"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-gray-900 bg-opacity-90 z-50 border-b border-gray-800" id="navbar">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <img id="logo"src="https://www.navaura.in/logo.png" alt="Navaura Logo" class="h-10">
+                </div>
+                
+                <div class="hidden md:flex space-x-8">
+                    <button class="navbar-chat-toggle hover:text-blue-500 transition">
+                        Chat AI 
+                    </button>
+                    <a href="#services" class="hover:text-blue-500 transition nav-link">Services</a>
+                    <a href="#about" class="hover:text-blue-500 transition nav-link">About</a>
+                    <a href="#founder" class="hover:text-blue-500 transition nav-link">Founder</a>
+                    <a href="#products" class="hover:text-blue-500 transition nav-link">Products</a>
+                    <a href="#contact" class="hover:text-blue-500 transition nav-link">Contact Us</a>
+
+                </div>
+                <button class="md:hidden menu-toggle">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-16 6h16"></path>
+                    </svg>
+                </button>
             </div>
-            <div class="blog-snippet" id="blogSnippet">
-                <h2>BLOG OF THE DAY</h2>
-                <div class="blog-title" id="blogTitle">Loading...</div>
-                <div class="blog-content" id="blogContent">Fetching content...</div>
-                <button class="read-more" id="readMoreBtn">Read More</button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="fixed inset-0 bg-gray-900 bg-opacity-95 z-40 transform translate-x-full transition-transform duration-300" id="mobile-menu">
+        <div class="container mx-auto px-6 py-8">
+            <div class="flex justify-end">
+                <button class="mobile-close">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
             </div>
-        
-        </section>
-    <div class="video-modal">
-        <div class="video-container">
-            <button class="video-close-btn">&times;</button>
-            <iframe width="100%" height="100%" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="flex flex-col space-y-6 mt-8">
+                <button class="navbar-chat-toggle hover:text-blue-500 transition">
+                    Chat AI
+                </button>
+                <a href="#services" class="text-2xl hover:text-blue-500 transition mobile-link">Services</a>
+                <a href="#about" class="text-2xl hover:text-blue-500 transition mobile-link">About</a>
+                <a href="#founder" class="text-2xl hover:text-blue-500 transition mobile-link">Founder</a>
+                <a href="#products" class="text-2xl hover:text-blue-500 transition mobile-link">Products</a>
+                <a href="#contact" class="text-2xl hover:text-blue-500 transition mobile-link">Contact Us</a>
+            </div>
         </div>
     </div>
-    
-    <template id="ad-template">
-        <div class="ad-popup">
-            <button class="close-btn">&times;</button>
-            <div class="app-icon">
-                <!-- External SVG -->
-                <img src="nam2.svg" alt="Description">
-            
-                <!-- Inline SVG -->
-                <svg class="youtube-icon" viewBox="0 0 50 50" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="5" y="5" width="40" height="40" rx="10" fill="#FF0000"/>
-                    <path d="M20 17 L20 33 L35 25 L20 17" fill="white"/>
-                </svg>
 
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden" id="hero">
+        <img src="NAVAURA_ARCTIQ.png" alt="Hero Background" class="absolute inset-0 w-full h-full object-cover opacity-50 parallax" style="filter: blur(5px);">
+        <div class="relative z-10 text-center" data-aos="fade-up">
+            
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 text-white">SARVESHAM KRUTE BHABISHYAM</h1>
+            <p class="text-xl md:text-2xl mb-8">Transform your business and personal life with robust and AI powered solutions.</p>
+            <a href="#contact" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full text-lg transition animate-pulse">
+                Get connected
+            </a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16 text-gradient" data-aos="fade-down">Our Work at a Glance.</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div class="bg-gray-900 p-8 rounded-lg transform hover:scale-105 transition-transform duration-300" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-2xl font-bold mb-4">Custom AI Chatbots</h3>
+                    <p class="text-gray-400">Custom LLM powered AI chatbots for AI Customer Service, AI Content Creator, tailored to your business needs.</p>
+                </div>
+                <div class="bg-gray-900 p-8 rounded-lg transform hover:scale-105 transition-transform duration-300" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-2xl font-bold mb-4">Brand Development</h3>
+                    <p class="text-gray-400">Create a powerful brand identity that resonates with your audience.</p>
+                </div>
+                <div class="bg-gray-900 p-8 rounded-lg transform hover:scale-105 transition-transform duration-300" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="text-2xl font-bold mb-4">Tech Solutions</h3>
+                    <p class="text-gray-400">Cutting-edge technology implementation for modern businesses.</p>
+                </div>
             </div>
-            <h3 style="text-align: center; margin: 15px 0;">Try Our Revolutionary App!</h3>
-            <p style="text-align: center; margin-bottom: 20px;">Experience the future of productivity with our innovative solution that transforms the way you work and collaborate.</p>
-            <div style="text-align: center;">
-                <a href="https://vedi.navaura.in" style="color: white; text-decoration: none;">
-                    <button class="know-more-btn">Try Now</button>
+        </div>
+    </section>
+
+
+    
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2" data-aos="fade-right">
+                    <img src="Background.svg" alt="About Us" class="rounded-lg shadow-xl">
+                </div>
+                <div class="md:w-1/2" data-aos="fade-left">
+                    <h2 class="text-4xl font-bold mb-6 text-gradient">About Us</h2>
+                    <p class="text-gray-400 mb-6 typing-text">We are going to Deploy AI and Automation Tech in every possible industries.</p>
+                    <p class="text-gray-400">We Trust only Us... and that's why we do not use any Outside API!! all is our In House Servers.
+                        In this AI era which full of surprises in technologies but there is a HUGE drawback in Privacy.. cause your chats not only yours. its in a different country's System.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<!-- About Founder Section -->
+<section id="founder" class="py-20 bg-gray-900">
+    <div class="container mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center mb-16 text-gradient" data-aos="fade-down">About the Founder & Director</h2>
+        <div class="flex flex-col md:flex-row items-center gap-12">
+            <div class="md:w-1/2" data-aos="fade-right">
+                <img src="diref.png" alt="Founder Image" class="rounded-lg shadow-xl"style="
+                max-width: 55%; margin-left:10vw
+            ">
+            </div>
+            <div class="md:w-1/2" data-aos="fade-left">
+                <h3 class="text-3xl font-bold mb-6">Shubham Mukherjee</h3>
+                <p class="text-gray-400 mb-4 typing-text" >
+                    Shubham is the visionary Founder and Director of Navaura™ Arctiq OPC Private Limited. With a mission to bring 'Sarvesham Krute Bhavishyam'(Future for all) he focuses on automating untapped industries and modernizing infrastructures through innovative AI solutions.
+                </p>
+                <p class="text-gray-400 mb-4">
+                    As a leader, Shubham is committed to delivering cutting-edge technologies tailored to transform businesses. His dedication and expertise have laid the foundation for the company's success.
+                </p>
+                <p class="text-gray-400">
+                    Shubham oversees all aspects of the business, ensuring seamless execution of projects and maintaining the company's vision of revolutionizing the AI landscape in India.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Products Section -->
+<section id="products" class="py-20 bg-gray-800">
+    <div class="container mx-auto px-12">
+        <h2 class="text-4xl font-bold text-center mb-16 text-gradient" data-aos="fade-down">Our Products and Services</h2>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+
+            <!-- Product 1: Vedi AI -->
+            <div class="bg-gray-900 rounded-lg overflow-hidden product-card" data-aos="flip-left" data-aos-delay="100">
+                <img src="vedi.png" alt="Product 1" class="w-full">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Vedi AI</h3>
+                    <p class="text-gray-400">
+                        Deep Dive to know your topic with our powerful AI Researcher Tool. 
+                        Ideal for businesses and professionals to streamline research workflows.
+                    </p>
+                    <p class="text-gray-400 mt-4"><strong>Price:</strong> ₹8,000/month or ₹80,000/year</p>
+                    <a href="https://vedi.navaura.in" target="_blank">
+                        <button class="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full">
+                            TRY NOW
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Product 2: Custom AI Bots -->
+            <div class="bg-gray-900 rounded-lg overflow-hidden product-card" data-aos="flip-left" data-aos-delay="200">
+                <img src="llm.webp" alt="Product 2" class="w-full">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Custom AI Bots</h3>
+                    <p class="text-gray-400">
+                        We provide Custom AI Bots tailored for your business. Use them as customer support, content generation, or automation tools. 
+                        Empower your workflows with AI to enhance efficiency and reduce costs.
+                    </p>
+                    <p class="text-gray-400 mt-4">
+                        <strong>Pricing:</strong> <br>
+                        - Basic Bots: ₹4,00,000 – ₹8,00,000/year<br>
+                        - Medium Bots: ₹8,00,000 – ₹16,00,000/year<br>
+                        - Advanced Bots: ₹20,00,000+/year
+                    </p>
+                    <a href="#contact" target="_blank">
+                        <button class="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full">
+                            Contact and Get
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Product 3: Custom Software Development -->
+            <div class="bg-gray-900 rounded-lg overflow-hidden product-card" data-aos="flip-left" data-aos-delay="300">
+                <img src="cusoft.png" alt="Product 3" class="w-full">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Custom Software Development</h3>
+                    <p class="text-gray-400">
+                        Streamline your operations with fully customized software solutions designed for your specific business needs. 
+                        Whether you need workflow automation or new application development, we deliver on time and on budget.
+                    </p>
+                    <p class="text-gray-400 mt-4">
+                        <strong>Pricing:</strong> <br>
+                        - Small Programs: ₹2,00,000 – ₹5,00,000<br>
+                        - Medium Programs: ₹5,00,000 – ₹15,00,000<br>
+                        - Enterprise Programs: ₹15,00,000+<br>
+                        - Maintenance: ₹50,000 – ₹3,00,000/year
+                    </p>
+                    <a href="https://navaura.github.io/sooner/" target="_blank">
+                        <button class="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full">
+                            Order Us
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Product 4: AI Content Moderation -->
+            <div class="bg-gray-900 rounded-lg overflow-hidden product-card" data-aos="flip-left" data-aos-delay="400">
+                <img src="manGsoft.png" alt="Product 4" class="w-full">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">AI Content Moderation</h3>
+                    <p class="text-gray-400">
+                        Ensure safe and high-quality user-generated content on your platforms with our AI moderation tools.
+                        Handle text, images, and videos seamlessly, ensuring compliance with your guidelines.
+                    </p>
+                    <p class="text-gray-400 mt-4">
+                        <strong>Pricing:</strong> ₹6,00,000 – ₹12,00,000/year<br>
+                        Additional API calls: ₹2,000/10,000 requests
+                    </p>
+                    <a href="#contact" target="_blank">
+                        <button class="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full">
+                            Get Moderation
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</section>
+
+
+
+    <!-- Contact Form -->
+    <section id="contact" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-6">
+          <h2 class="text-4xl font-bold text-center mb-16 text-gradient" data-aos="fade-down">Contact Us</h2>
+          <div class="max-w-2xl mx-auto">
+            <!-- Form Container div that we'll use to swap content -->
+            <div id="form-container">
+              <form id="contact-form" class="space-y-6" data-aos="fade-up">
+                <div>
+                  <label class="block text-sm font-medium mb-2">Name</label>
+                  <input type="text" name="name" required class="w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500">
+                </div>
+                <div>
+                  <label class="block text-sm font-medium mb-2">Email</label>
+                  <input type="email" name="email" required class="w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500">
+                </div>
+                <div>
+                  <label class="block text-sm font-medium mb-2">Message</label>
+                  <textarea name="message" required rows="4" class="w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition">
+                  Send Message
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <!-- Brand Name -->
+                <div class="text-2xl font-bold mb-6 md:mb-0">
+                    <img id="logo"src="https://www.navaura.in/logo.png" alt="Navaura Logo" class="h-8 inline-block">
+                    Navaura™ Arctiq
+                </div>
+                
+                
+                <!-- Navigation Links -->
+                <div class="flex space-x-6 text-gray-400 text-sm">
+                    <a href="#services" class="hover:text-blue-500 transition">Services</a>
+                    <a href="#about" class="hover:text-blue-500 transition">About</a>
+                    <a href="#blogs" class="hover:text-blue-500 transition">Blogs</a>
+                    <a href="#products" class="hover:text-blue-500 transition">Products</a>
+                    <a href="#founder" class="hover:text-blue-500 transition">Founder</a>
+                    <a href="#contact" class="hover:text-blue-500 transition">Contact</a>
+                </div>
+            </div>
+            
+            <!-- Social Media Icons -->
+            <div class="mt-6 flex justify-center space-x-6">
+                <a href="https://facebook.com" target="_blank" class="text-gray-400 hover:text-blue-500 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M22.675 0H1.325C.595 0 0 .6 0 1.325v21.351C0 23.4.595 24 1.325 24H12.82v-9.294H9.692V10.42h3.128V7.812c0-3.1 1.894-4.788 4.661-4.788 1.325 0 2.463.098 2.794.143v3.24h-1.918c-1.505 0-1.795.717-1.795 1.765v2.314h3.587l-.467 3.285h-3.12V24h6.116c.73 0 1.325-.6 1.325-1.325V1.325C24 .595 23.405 0 22.675 0z"/>
+                    </svg>
+                </a>
+                <a href="https://twitter.com" target="_blank" class="text-gray-400 hover:text-blue-500 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M24 4.557a9.833 9.833 0 0 1-2.828.775 4.93 4.93 0 0 0 2.165-2.724 9.864 9.864 0 0 1-3.127 1.195 4.916 4.916 0 0 0-8.384 4.482A13.94 13.94 0 0 1 1.671 3.15a4.916 4.916 0 0 0 1.523 6.557 4.897 4.897 0 0 1-2.229-.616v.061a4.916 4.916 0 0 0 3.946 4.827 4.897 4.897 0 0 1-2.224.084 4.917 4.917 0 0 0 4.593 3.417 9.867 9.867 0 0 1-6.102 2.103c-.396 0-.788-.023-1.176-.067a13.905 13.905 0 0 0 7.557 2.212c9.054 0 14.002-7.496 14.002-13.986 0-.213-.005-.425-.014-.636A9.935 9.935 0 0 0 24 4.557z"/>
+                    </svg>
+                </a>
+                <a href="https://linkedin.com" target="_blank" class="text-gray-400 hover:text-blue-500 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.226.792 24 1.771 24h20.451c.98 0 1.774-.774 1.774-1.729V1.729C24 .774 23.206 0 22.225 0zM7.052 20.452H3.599V9.029h3.453v11.423zM5.326 7.643c-1.11 0-2.008-.91-2.008-2.031 0-1.12.897-2.032 2.008-2.032s2.008.91 2.008 2.032c0 1.12-.898 2.031-2.008 2.031zM20.452 20.452h-3.453v-5.603c0-1.337-.025-3.059-1.86-3.059-1.862 0-2.146 1.454-2.146 2.957v5.705H9.541V9.029h3.315v1.561h.048c.462-.873 1.588-1.793 3.27-1.793 3.497 0 4.14 2.302 4.14 5.296v6.359z"/>
+                    </svg>
                 </a>
             </div>
+            
+            <!-- Copyright -->
+            <div class="mt-6 text-center text-gray-500 text-sm">
+                &copy; 2025 Navaura™ Arctiq (opc) Private Limited. All rights reserved.
+            </div>
         </div>
-    </template>
-        <section id="features" class="features">
-            <div class="container">
-                <h2 class="section-title">We're working on</h2>
-                <div class="features-grid">
-                    <a href="https://cv.navaura.in" class="feature-card">
-                        <div class="feature-icon">&#9883;</div>
-                        <h3>Chakra View</h3>
-                        <p>An AI Resume Friendly tool, will help you to get your desirable Jobs.</p>
-                    </a>
-                    <a href="https://lap.navaura.in" class="feature-card">
-                        <div class="feature-icon">&#9731;</div>
-                        <h3>LAP -- Local Advance Paraphraser</h3>
-                        <p>Seamless brain-computer interfaces for direct thought-to-digital translation.</p>
-                    </a>
-                    <a href="https://navaura.github.io/sooner/" class="feature-card">
-                        <div class="feature-icon">&#9762;</div>
-                        <h3>ELEV</h3>
-                        <p>a True Meaning of Automative AI agents</p>
-                        <h3>under development</h3>
-                    </a>
-                    <a href="https://navaura.github.io/sooner/" class="feature-card">
-                        <div class="feature-icon">&#9784;</div>
-                        <h3>B O B</h3>
-                        <p>Build own custom fine tuned AI bots and deploy for your businesses, classes, entertainment anything!!</p>
-                        <h3>under development</h3>
-                    </a>
-                </div>
-            </div>
-        </section>
-        
-        
-
-        <section id="about" class="about">
-            <div class="container about-content">
-                <div class="about-text">
-                    <h2 class="section-title">OUR VISION</h2>
-                    <p>At Navaura, we aren't simply inflating boundaries—we redefine them. Our forward-thinking Founder is dedicated to producing a future where India's human potential and technical progression align seamlessly with global advancements.</p>
-                    <p>From cutting-edge neural networks to innovative user interfaces, we aren't just preparing for the future—we're constructing it, with a special focus on empowering India's growing tech landscape.</p>
-                    <p>We work AI into every industry, making it approachable and empowering for businesses and individuals across India and beyond.</p>
-                </div>
-                <div class="about-image">
-                    <img src="profile3.png" alt="Navaura's Founder Mr.Subham Mukherjee">
-                </div>
-            </div>
-        </section>
-    </main>
-<section id="onthegomark" class="progress-section">
-  <h2 class="progress-title">Progress Tracker</h2>
-  <div class="progress-container">
-    <div class="progress-bar">
-      <div class="progress-line"></div>
-      <div class="progress-glow"></div>
-      <div id="progress-marker" class="marker"></div>
-    </div>
-    <div class="progress-labels">
-      <div class="milestone" data-stage="0">
-        <span class="step-marker start">
-          <svg viewBox="0 0 24 24" width="24" height="24">
-            <circle cx="12" cy="12" r="12"/>
-            <path d="M8 12l3 3 6-6" stroke="var(--bg-color)" fill="none" stroke-width="2"/>
-          </svg>
-        </span>
-        <span class="label">START</span>
-        <span class="sublabel">Initialize</span>
-      </div>
-      <div class="milestone" data-stage="1">
-        <span class="step-marker">1</span>
-        <span class="label">Rnd Software</span>
-        <span class="sublabel">Research and Dev</span>
-      </div>
-      <div class="milestone" data-stage="2">
-        <span class="step-marker">2</span>
-        <span class="label">Paper Work</span>
-        <span class="sublabel">Paperwork, All Legal documents</span>
-      </div>
-      <div class="milestone" data-stage="3">
-        <span class="step-marker">3</span>
-        <span class="label">GO to Market</span>
-        <span class="sublabel">providing Cheap Fast Safe software with or without AI</span>
-      </div>
-      <div class="milestone" data-stage="4">
-        <span class="step-marker">4</span>
-        <span class="label">RnD HardWare</span>
-        <span class="sublabel">designing own Prototype own Hardware</span>
-      </div>
-      <div class="milestone" data-stage="5">
-        <span class="step-marker">5</span>
-        <span class="label">SPREAED OVER ALL POSSIBLE INDUSTRIES!!</span>
-        <span class="sublabel">provide software solutions to business, Sell own Saas, and Own Hardware too.</span>
-      </div>
-      <div class="milestone" data-stage="6">
-        <span class="step-marker">6</span>
-        <span class="label">MAINTAIN</span>
-        <span class="sublabel">Maintain all with a Valid Quality Team</span>
-      </div>
-      <div class="milestone" data-stage="7">
-        <span class="step-marker final">
-          <svg viewBox="0 0 24 24" width="24" height="24">
-            <circle cx="12" cy="12" r="12"/>
-            <path d="M12 6l4 4-4 4-4-4z" fill="var(--bg-color)"/>
-          </svg>
-        </span>
-        <span class="label">IPO</span>
-        <span class="sublabel">get in list in IPO</span>
-      </div>
-    </div>
-  </div>
-</section>
-</div>
-<footer style="background-color: #121212; color: #ffffff; padding: 40px 20px;">
-  <div style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between;">
-    <!-- Company Info -->
-    <div style="flex: 1; min-width: 250px; margin-bottom: 20px;">
-      <h3 style="margin-bottom: 10px;">Navaura™</h3>
-      <p>Kolkata, West Bengal, India</p>
-      <p>Email: founder@navaura.in</p>
-      <p>Email: namaskar@navaura.in</p>
-      <p>Phone/Whatsapp: +91 9073888611</p>
-    </div>
-
-
-
-    <!-- Social Media Links -->
-    <div style="flex: 1; min-width: 250px; margin-bottom: 20px;">
-      <h3 style="margin-bottom: 10px;">Follow Us</h3>
-     <div>
-     <a href="https://www.facebook.com/Navaura" style="margin-right: 10px; color: #ffffff; font-size: 20px;">📱 Facebook</a>
-     <a href="https://www.instagram.com/Navaura" style="margin-right: 10px; color: #ffffff; font-size: 20px;">📷 Instagram</a>
-     <a href="https://twitter.com/Navaura" style="margin-right: 10px; color: #ffffff; font-size: 20px;">🐦 Twitter</a>
-     </div>
-    </div>
-  </div>
-  <hr style="border-color: #444; margin: 20px 0;">
-  <div style="text-align: center;">
-    <p>&copy; 2025 Navaura™. All Rights Reserved.</p>
-  </div>
-</footer>
-</div>
-  <!-- Modal for User Information -->
-  <div id="userInfoModal" class="modal" style="display:none;">
-    <div class="modal-content">
-        <span class="close-btn">&times;</span>
-        <h2>Contact Information</h2>
-        <p>Please provide real contact information so we can connect with you.</p>
-        <form id="contactForm">
-            <label for="name">Name:</label>
-            <input type="text" id="name" required>
-            <label for="email">Email:</label>
-            <input type="email" id="email" required>
-            <label for="contactNumber">Contact Number:</label>
-            <input type="tel" id="contactNumber" required>
-            <button type="submit">Submit</button>
-        </form>
-    </div>
-  </div>
+    </footer>
     <script>
-class ProgressTracker {
-    constructor() {
-        this.currentStage = 2;
-        this.totalStages = 7; // START(0) to FINAL(7)
-        this.init();
-    }
-
-    init() {
-        this.marker = document.getElementById('progress-marker');
-        this.progressBar = document.querySelector('.progress-bar');
-        this.milestones = document.querySelectorAll('.milestone');
-
-        if (!this.marker || !this.progressBar || this.milestones.length === 0) {
-            console.error("Initialization failed: Missing required elements in the DOM.");
-            return;
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+        let mouseX = 0;
+        let mouseY = 0;
+        let followerX = 0;
+        let followerY = 0;
+        
+        // Smooth cursor movement
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            // Update primary cursor immediately
+            cursor.style.transform = `translate(${mouseX - 6}px, ${mouseY - 6}px)`;
+        });
+        
+        // Animate follower cursor with lag effect
+        function animate() {
+            // Smooth following effect
+            followerX += (mouseX - followerX - 20) * 0.1;
+            followerY += (mouseY - followerY - 20) * 0.1;
+            
+            cursorFollower.style.transform = `translate(${followerX}px, ${followerY}px)`;
+            
+            requestAnimationFrame(animate);
         }
-
-        // Log initialization
-        console.log("ProgressTracker initialized with total stages:", this.totalStages);
-
-        // Set initial stage
-        this.updateProgressMarker(0);
-
-        // Add click handlers for milestones if needed
-        this.milestones.forEach((milestone, index) => {
-            milestone.addEventListener('click', () => {
-                // Only for visual feedback, won't change stage
-                this.highlightMilestone(index);
+        animate();
+        
+        // Add cursor hiding when leaving window
+        document.addEventListener('mouseout', () => {
+            cursor.style.opacity = '0';
+            cursorFollower.style.opacity = '0';
+        });
+        
+        document.addEventListener('mouseover', () => {
+            cursor.style.opacity = '1';
+            cursorFollower.style.opacity = '1';
+        });
+        
+        // Add subtle magnetic effect for interactive elements
+        const buttons = document.querySelectorAll('button, a');
+        buttons.forEach(button => {
+            button.addEventListener('mousemove', (e) => {
+                const rect = button.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                const distanceX = e.clientX - centerX;
+                const distanceY = e.clientY - centerY;
+                
+                cursor.style.transform = `translate(${e.clientX - 10 - distanceX * 0.1}px, ${e.clientY - 10 - distanceY * 0.1}px)`;
+                cursorFollower.style.transform = `translate(${e.clientX - 20 - distanceX * 0.05}px, ${e.clientY - 20 - distanceY * 0.05}px)`;
             });
         });
-    }
-
-    updateProgressMarker(stage) {
-        if (stage < 0 || stage > this.totalStages) {
-            console.error("Stage out of range. Please provide a valid stage.");
-            return;
-        }
-
-        // Calculate position
-        const positionPercentage = (stage / this.totalStages) * 100;
-        console.log(`Updating stage to: ${stage}, Marker position: ${positionPercentage}%`);
-
-        // Update marker position
-        this.marker.style.left = `${positionPercentage}%`;
-
-        // Update milestone states
-        this.milestones.forEach((milestone, index) => {
-            if (index < stage) {
-                milestone.classList.add('completed');
-                milestone.classList.remove('active');
-            } else if (index === stage) {
-                milestone.classList.add('active');
-                milestone.classList.remove('completed');
-            } else {
-                milestone.classList.remove('completed', 'active');
-            }
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Smooth scroll for navigation links
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        
+                        const targetId = this.getAttribute('href');
+                        const targetElement = document.querySelector(targetId);
+                        
+                        if (!targetElement) return;
+                        
+                        // Get header height for offset
+                        const headerHeight = document.querySelector('nav')?.offsetHeight || 0;
+                        
+                        window.scrollTo({
+                            top: targetElement.offsetTop - headerHeight,
+                            behavior: 'smooth'
+                        });
+                    });
+                });
+            
+                // Optional: Improve mobile touch handling
+                let touchStartY = 0;
+                
+                document.addEventListener('touchstart', (e) => {
+                    touchStartY = e.touches[0].clientY;
+                }, { passive: true });
+            
+                // Reset scroll position on refresh
+                if ('scrollRestoration' in history) {
+                    history.scrollRestoration = 'manual';
+                }
+            
+                // Handle scroll-based animations
+                let scrollTimeout;
+                window.addEventListener('scroll', () => {
+                    if (scrollTimeout) {
+                        window.cancelAnimationFrame(scrollTimeout);
+                    }
+            
+                    scrollTimeout = window.requestAnimationFrame(() => {
+                        // Add any scroll-based animations here
+                        // For example, navbar hide/show on scroll
+                        const currentScroll = window.pageYOffset;
+                        const navbar = document.getElementById('navbar');
+                        
+                        if (navbar) {
+                            if (currentScroll > 100) {
+                                navbar.classList.add('bg-opacity-90');
+                            } else {
+                                navbar.classList.remove('bg-opacity-90');
+                            }
+                        }
+                    });
+                }, { passive: true });
+            
+                // Initialize page position
+                window.scrollTo(0, 0);
+            });
+            </script>
+<script>
+    document.getElementById("contact-form").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const formData = {
+        name: this.name.value,
+        email: this.email.value,
+        message: this.message.value
+      };
+  
+      try {
+        const response = await fetch('https://server1001.navaura.in/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+        await response.json();
+        
+        // Replace form with thank you message
+        document.getElementById("form-container").innerHTML = `
+          <div class="text-center py-16" data-aos="fade-up">
+            <h3 class="text-3xl font-bold mb-4">Thank You!</h3>
+            <p class="text-lg text-gray-300">We appreciate you contacting us. We'll get back to you soon!</p>
+          </div>
+        `;
+        
+      } catch (error) {
+        // Still show thank you message even if there's an error
+        document.getElementById("form-container").innerHTML = `
+          <div class="text-center py-16" data-aos="fade-up">
+            <h3 class="text-3xl font-bold mb-4">Thank You!</h3>
+            <p class="text-lg text-gray-300">We appreciate you contacting us. We'll get back to you soon!</p>
+          </div>
+        `;
+      }
+    });
+  </script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true
         });
 
-        // Update glow effect
-        this.progressBar.style.setProperty('--progress-position', `${positionPercentage}%`);
+        // Preloader
+        window.addEventListener('load', () => {
+            const loader = document.querySelector('.loader');
+            loader.classList.add('fade-out');
+            setTimeout(() => loader.remove(), 500);
+        });
 
-        this.currentStage = stage;
-    }
 
-    highlightMilestone(index) {
-        const milestone = this.milestones[index];
-        if (milestone) {
-            milestone.style.transform = 'scale(1.05)';
-            setTimeout(() => {
-                milestone.style.transform = 'scale(1)';
-            }, 200);
-        } else {
-            console.error("Milestone not found for index:", index);
+
+        // Mobile menu
+        const menuToggle = document.querySelector('.menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileClose = document.querySelector('.mobile-close');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-full');
+        });
+
+        mobileClose.addEventListener('click', () => {
+            mobileMenu.classList.add('translate-x-full');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('translate-x-full');
+            });
+        });
+
+        // Parallax effect
+        window.addEventListener('scroll', () => {
+            const parallaxElements = document.querySelectorAll('.parallax');
+            parallaxElements.forEach(element => {
+                const scrolled = window.pageYOffset;
+                element.style.transform = `translateY(${scrolled * 0.5}px)`;
+            });
+        });
+
+        // Form validation and submission
+        const form = document.getElementById('contact-form');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Basic form validation
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(data.email)) {
+                alert('Please enter a valid email address');
+                return;
+            }
+
+        });
+
+
+
+        // Typing effect
+        const typingText = document.querySelector('.typing-text');
+        const text = typingText.textContent;
+        typingText.textContent = '';
+        let i = 0;
+
+        function typeWriter() {
+            if (i < text.length) {
+                typingText.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
+            }
         }
-    }
 
-    getCurrentStage() {
-        return this.currentStage;
-    }
-}
+        // Start typing effect when section is in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    typeWriter();
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+        observer.observe(typingText);
 
-document.addEventListener('DOMContentLoaded', () => {
-    const progressTracker = new ProgressTracker();
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
 
-    // Export global method to test stage changes
-    window.updateProgressMarker = (stage) => {
-        progressTracker.updateProgressMarker(stage);
-    };
-});
-</script>
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll <= 0) {
+                navbar.classList.remove('shadow-lg');
+                return;
+            }
+            
+            if (currentScroll > lastScroll) {
+                // Scrolling down
+                navbar.classList.add('-translate-y-full', 'transform', 'transition-transform', 'duration-300');
+            } else {
+                // Scrolling up
+                navbar.classList.remove('-translate-y-full');
+                navbar.classList.add('shadow-lg');
+            }
+            
+            lastScroll = currentScroll;
+        });
 
-    <script>
-        // Smooth scrolling for anchor links
+        // Product card hover effect
+        const productCards = document.querySelectorAll('.product-card');
+        productCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                card.style.setProperty('--x', `${x}px`);
+                card.style.setProperty('--y', `${y}px`);
+            });
+        });
+
+        // Lazy loading for images
+        const images = document.querySelectorAll('img[data-src]');
+        const imageOptions = {
+            threshold: 0,
+            rootMargin: '0px 0px 50px 0px'
+        };
+
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.classList.add('fade-in');
+                observer.unobserve(img);
+            });
+        }, imageOptions);
+
+        images.forEach(img => imageObserver.observe(img));
+
+        // Smooth scroll implementation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
                 });
             });
         });
 
-        // Parallax effect for hero background
-        window.addEventListener('scroll', () => {
-            const scrollPosition = window.pageYOffset;
-            document.querySelector('.hero-bg').style.transform = `translateY(${scrollPosition * 0.5}px)`;
+        // Performance monitoring
+        let perfData = {
+            loadTime: 0,
+            resourcesLoaded: 0
+        };
+
+        window.addEventListener('load', () => {
+            perfData.loadTime = performance.now();
+            perfData.resourcesLoaded = performance.getEntriesByType('resource').length;
+            
+            // Log performance data (replace with your analytics service)
+            console.log('Performance metrics:', perfData);
         });
 
-// Function to split text into spans
-function splitTextIntoSpans(element) {
-    const text = element.textContent;
-    element.innerHTML = text.split('').map(char => 
-        `<span class="reveal-char">${char}</span>`
-    ).join('');
-}
-
-// Function to animate the text reveal
-function animateTextReveal(element, delay = 0) {
-    const chars = element.querySelectorAll('.reveal-char');
-    chars.forEach((char, index) => {
-        char.style.animationDelay = `${delay + (index * 0.05)}s`;
-    });
-}
-
-// Apply the effect to all elements with class 'reveal-text'
-function initTextReveal() {
-    const revealElements = document.querySelectorAll('.reveal-text');
-    revealElements.forEach((element, index) => {
-        splitTextIntoSpans(element);
-        animateTextReveal(element, index * 0.5);
-    });
-}
-
-// Initialize the effect when the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', initTextReveal);
-
-// Recalculate on window resize for responsiveness
-window.addEventListener('resize', initTextReveal);
-
-    </script>
-
-    
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7059602797340547"
-     crossorigin="anonymous"></script>
-      <script>
-   let blogs = [];
-
-        function fetchBlogs() {
-            fetch('https://genuinely-ruling-donkey.ngrok-free.app/get_blogs', {
-                method: 'GET',
-                headers: {
-                    'ngrok-skip-browser-warning': 'true'
-                }
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                blogs = data.reverse();
-                displayRandomBlogSnippet();
-            })
-            .catch(error => {
-                console.error('Error fetching blogs:', error);
-                document.getElementById('blogContent').textContent = 'Error loading blog. Please try again later.';
+        // Error handling
+        window.addEventListener('error', function(e) {
+            // Log errors (replace with your error tracking service)
+            console.error('Runtime error:', {
+                message: e.message,
+                source: e.source,
+                lineno: e.lineno,
+                colno: e.colno,
+                error: e.error
             });
+        });
+
+        // Security measures
+        // XSS protection for form inputs
+        function sanitizeInput(input) {
+            return input.replace(/[<>]/g, '');
         }
 
-        function displayRandomBlogSnippet() {
-  const randomIndex = Math.floor(Math.random() * blogs.length);
-  const selectedBlog = blogs[randomIndex];
-  
-  const contentWords = selectedBlog.content.split(' ');
-  const blogTitle = contentWords.slice(0, 5).join(' ') + '...';
-  const blogSnippet = contentWords.slice(0, 40).join(' ') + '...';
+        // Apply to all form inputs
+        const formInputs = document.querySelectorAll('form input, form textarea');
+        formInputs.forEach(input => {
+            input.addEventListener('input', (e) => {
+                e.target.value = sanitizeInput(e.target.value);
+            });
+        });
+        window.onload = function() {
+            window.scrollTo(0, 0);
+        }
 
-  document.getElementById('blogTitle').textContent = blogTitle;
-  document.getElementById('blogContent').textContent = blogSnippet;
-}
+        // Force scroll to top on page refresh
+        window.onbeforeunload = function() {
+            window.scrollTo(0, 0);
+        }
 
-document.getElementById('readMoreBtn').addEventListener('click', function() {
-  window.location.href = '/getb.html';
-});
+        // Force scroll to top when navigating through history
+        window.onpageshow = function(event) {
+            if (event.persisted) {
+                window.scrollTo(0, 0);
+            }
+        }
 
-        window.onload = fetchBlogs;
+        // Prevent scroll restoration
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+
+        // Scroll to top before unload
+        document.addEventListener('DOMContentLoaded', function() {
+            window.scrollTo(0, 0);
+        });
+
+        // The rest of your previous script content remains the same
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
     </script>
+
+<script src="chatz.js"></script>
 </body>
 </html>
