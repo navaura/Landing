@@ -151,33 +151,95 @@
         }
     `;
     
-    const styleSheet = document.createElement("style");
-    styleSheet.type = "text/css";
-    styleSheet.innerText = styles;
-    document.head.appendChild(styleSheet);
-
     const chatWrapper = document.createElement('div');
     chatWrapper.id = `${CHAT_ID}-chat-wrapper`;
+    chatWrapper.setAttribute('role', 'dialog');
+    chatWrapper.setAttribute('aria-label', 'Chat window');
 
     const chatHeader = document.createElement('div');
     chatHeader.id = `${CHAT_ID}-chat-header`;
     chatHeader.innerHTML = `
         <span>AI Chatbot</span>
-        <button onclick="closeChatWindow()" style="background: transparent; border: none; color: white; font-size: 20px;">&times;</button>
+        <button onclick="closeChatWindow()" style="background: transparent; border: none; color: white; font-size: 20px;" aria-label="Close chat">&times;</button>
     `;
 
     const chatBox = document.createElement('div');
     chatBox.id = `${CHAT_ID}-chat-box`;
+    chatBox.setAttribute('role', 'log');
+    chatBox.setAttribute('aria-live', 'polite');
+
+    // Create a form wrapper for the input
+    const chatForm = document.createElement('form');
+    chatForm.id = `${CHAT_ID}-chat-form`;
+    chatForm.setAttribute('role', 'form');
+    chatForm.onsubmit = (e) => {
+        e.preventDefault();
+        const input = document.getElementById(`${CHAT_ID}-user-input`);
+        if (input.value.trim()) {
+            handleInput({ key: 'Enter', target: input });
+        }
+        return false;
+    };
+
+    // Create label for input
+    const inputLabel = document.createElement('label');
+    inputLabel.htmlFor = `${CHAT_ID}-user-input`;
+    inputLabel.className = 'sr-only'; // Visually hidden but accessible to screen readers
+    inputLabel.textContent = 'Type your message';
 
     const userInput = document.createElement('input');
     userInput.id = `${CHAT_ID}-user-input`;
+    userInput.name = 'chat-message';  // Add name attribute
+    userInput.type = 'text';          // Explicitly set input type
+    userInput.autocomplete = 'off';   // Add autocomplete attribute
     userInput.placeholder = 'Type your message...';
+    userInput.setAttribute('aria-label', 'Type your message');
     userInput.addEventListener('keydown', handleInput);
 
+    // Add the label and input to the form
+    chatForm.appendChild(inputLabel);
+    chatForm.appendChild(userInput);
+
+    // Append all elements
     chatWrapper.appendChild(chatHeader);
     chatWrapper.appendChild(chatBox);
-    chatWrapper.appendChild(userInput);
+    chatWrapper.appendChild(chatForm);
     document.body.appendChild(chatWrapper);
+
+    // Add the sr-only class to styles
+    const additionalStyles = `
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        #${CHAT_ID}-chat-form {
+            position: absolute;
+            bottom: 5px;
+            left: 15px;
+            width: calc(100% - 30px);
+        }
+
+        @media (max-width: 768px) {
+            #${CHAT_ID}-chat-form {
+                position: fixed;
+                bottom: 10px;
+                z-index: 1002;
+            }
+        }
+    `;
+
+    const styleSheet = document.createElement("style");
+    styleSheet.type = "text/css";
+    styleSheet.innerText = styles + additionalStyles;
+    document.head.appendChild(styleSheet);
 
     // Add global function for closing chat
     window.closeChatWindow = function() {
