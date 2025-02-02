@@ -1275,6 +1275,36 @@ section {
             }
         }
     }
+function formatResult(result) {
+    let formattedText = result;
+
+    // Format headings
+    formattedText = formattedText.replace(/##\s*(.+?)(\n|$)/g, '<h2>$1</h2>\n');
+    formattedText = formattedText.replace(/#\s*(.+?)(\n|$)/g, '<h1>$1</h1>\n');
+
+    // Bold and italic formatting
+    formattedText = formattedText.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    formattedText = formattedText.replace(/\*(.+?)\*/g, '<em>$1</em>');
+
+    // Key insights emphasis
+    formattedText = formattedText.replace(/(Key Insights:)/g, '<strong>$1</strong>');
+
+    // Format unordered lists (* item)
+    formattedText = formattedText.replace(/\n\*\s*(.+?)(?=\n|$)/g, '<li>$1</li>');
+    formattedText = formattedText.replace(/(<li>[\s\S]*?<\/li>)/g, '<ul>$1</ul>');
+
+    // Format ordered lists (1. item)
+    formattedText = formattedText.replace(/\n\d+\.\s*(.+?)(?=\n|$)/g, '<li>$1</li>');
+    formattedText = formattedText.replace(/(<li>[\s\S]*?<\/li>)/g, '<ol>$1</ol>');
+
+    // Horizontal rules (--- or ***)
+    formattedText = formattedText.replace(/\n(-{3}|\*{3})\n/g, '<hr/>');
+
+    // Preserve line breaks (but not inside lists)
+    formattedText = formattedText.replace(/(?<!<\/li>)\n/g, '<br>');
+
+    return formattedText;
+}
 
     function displayMessage(sender, message) {
         const chatBox = document.getElementById(`${CHAT_ID}-chat-box`);
