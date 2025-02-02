@@ -1,7 +1,6 @@
 (function () {
-    const CHAT_ID = 'navaura-ai-chatbot'; 
+    const CHAT_ID = 'navaura-ai-chatbot';
 
-    
     const aiingStyles = `
         .${CHAT_ID}-ai-loading {
             color: #f1f1f1;
@@ -33,7 +32,7 @@
             flex-direction: column;
             transform: translateX(100%);
             transition: transform 0.3s ease-in-out;
-            z-index: 1000;
+            z-index: 1001; /* Increased z-index to appear above mobile menu */
         }
 
         #${CHAT_ID}-chat-header {
@@ -107,10 +106,47 @@
                 height: 100%;
                 transform: translateX(100%);
                 border-radius: 0;
+                top: 0; /* Ensure it covers the full screen */
+                bottom: 0;
+                right: 0;
+                left: 0;
+            }
+
+            #${CHAT_ID}-chat-header {
+                border-radius: 0;
+                position: sticky;
+                top: 0;
             }
 
             #${CHAT_ID}-user-input {
+                position: fixed;
                 bottom: 10px;
+                left: 15px;
+                width: calc(100% - 30px);
+                z-index: 1002;
+            }
+
+            #${CHAT_ID}-chat-box {
+                margin-bottom: 80px;
+                height: calc(100vh - 140px);
+                overflow-y: auto;
+            }
+        }
+
+        /* Ensure chat toggle is visible in mobile menu */
+        .navbar-chat-toggle {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 0.5rem 0;
+            color: white;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-chat-toggle {
+                font-size: 1.5rem;
+                padding: 1rem 0;
             }
         }
     `;
@@ -127,7 +163,7 @@
     chatHeader.id = `${CHAT_ID}-chat-header`;
     chatHeader.innerHTML = `
         <span>AI Chatbot</span>
-        <button onclick="document.getElementById('${CHAT_ID}-chat-wrapper').style.transform = 'translateX(100%)'" style="background: transparent; border: none; color: white; font-size: 20px;">&times;</button>
+        <button onclick="closeChatWindow()" style="background: transparent; border: none; color: white; font-size: 20px;">&times;</button>
     `;
 
     const chatBox = document.createElement('div');
@@ -143,10 +179,20 @@
     chatWrapper.appendChild(userInput);
     document.body.appendChild(chatWrapper);
 
-    let sessionId = null;  // Variable to store session ID
-    let isSessionInitialized = false;  // Flag to ensure we only initialize the session once
+    // Add global function for closing chat
+    window.closeChatWindow = function() {
+        const chatWrapper = document.getElementById(`${CHAT_ID}-chat-wrapper`);
+        chatWrapper.style.transform = 'translateX(100%)';
+        // Close mobile menu if open
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenu) {
+            mobileMenu.classList.add('translate-x-full');
+        }
+    };
 
-    // Initialize the chat session ID from backend
+    let sessionId = null;
+    let isSessionInitialized = false;
+
     async function initializeSession() {
         if (isSessionInitialized) return;
         try {
@@ -156,8 +202,8 @@
                 body: JSON.stringify({ message: 'Hi!' })
             });
             const data = await response.json();
-            sessionId = data.session_id;  // Store session ID from backend
-            isSessionInitialized = true;  // Mark session as initialized
+            sessionId = data.session_id;
+            isSessionInitialized = true;
         } catch (error) {
             console.error('Error initializing session:', error);
         }
@@ -169,7 +215,6 @@
             displayMessage('user', message);
             event.target.value = '';
 
-            // Show AI-ing indicator
             const chatBox = document.getElementById(`${CHAT_ID}-chat-box`);
             const aiingIndicator = document.createElement('div');
             aiingIndicator.textContent = 'AI-ing...';
@@ -178,45 +223,35 @@
             chatBox.appendChild(aiingIndicator);
             chatBox.scrollTop = chatBox.scrollHeight;
 
-            // Disable input while processing
             const userInput = document.getElementById(`${CHAT_ID}-user-input`);
             userInput.disabled = true;
 
-            // Ensure session is initialized
             if (!sessionId) {
-                await initializeSession();  // Wait until the session is initialized
+                await initializeSession();
             }
 
             try {
                 const response = await fetch('https://server1001.navaura.in/chat', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message, session_id: sessionId })  // Include session_id
+                    body: JSON.stringify({ message, session_id: sessionId })
                 });
                 const data = await response.json();
                 
-                // Remove AI-ing indicator
                 const loadingIndicator = document.getElementById(`${CHAT_ID}-loading-indicator`);
                 if (loadingIndicator) {
                     loadingIndicator.remove();
                 }
 
-                // Display AI response
                 displayMessage('bot', data.response);
-
-                // Re-enable input
                 userInput.disabled = false;
                 userInput.focus();
             } catch (error) {
-                // Remove AI-ing indicator in case of error
                 const loadingIndicator = document.getElementById(`${CHAT_ID}-loading-indicator`);
                 if (loadingIndicator) {
                     loadingIndicator.remove();
                 }
-
                 displayMessage('bot', 'Sorry, there was an error processing your message.');
-                
-                // Re-enable input
                 userInput.disabled = false;
             }
         }
@@ -231,20 +266,26 @@
         chatBox.scrollTop = chatBox.scrollHeight;
     }
 
-    // Add event listener to navbar chat toggle
-    document.addEventListener('DOMContentLoaded', () => {
-        const navbarChatToggle = document.querySelector('.navbar-chat-toggle');
-        if (navbarChatToggle) {
-            navbarChatToggle.addEventListener('click', toggleChat);
-        }
-    });
+    // Initialize all chat toggles
+    function initializeChatToggles() {
+        const chatToggles = document.querySelectorAll('.navbar-chat-toggle');
+        chatToggles.forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                const chatWrapper = document.getElementById(`${CHAT_ID}-chat-wrapper`);
+                chatWrapper.style.transform = 'translateX(0%)';
+                // Close mobile menu when opening chat
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (mobileMenu) {
+                    mobileMenu.classList.add('translate-x-full');
+                }
+            });
+        });
+    }
 
-    function toggleChat() {
-        const chatWrapper = document.getElementById(`${CHAT_ID}-chat-wrapper`);
-        if (chatWrapper.style.transform === 'translateX(0%)') {
-            chatWrapper.style.transform = 'translateX(100%)';
-        } else {
-            chatWrapper.style.transform = 'translateX(0%)';
-        }
+    // Initialize on DOMContentLoaded
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeChatToggles);
+    } else {
+        initializeChatToggles();
     }
 })();
