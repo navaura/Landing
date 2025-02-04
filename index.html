@@ -1312,14 +1312,14 @@ function formatResult(result) {
     return formattedText;
 }
 
-    function displayMessage(sender, message) {
-        const chatBox = document.getElementById(`${CHAT_ID}-chat-box`);
-        const messageDiv = document.createElement('div');
-        messageDiv.textContent = message;
-        messageDiv.className = `${CHAT_ID}-message ` + (sender === 'user' ? `${CHAT_ID}-user-message` : `${CHAT_ID}-bot-message`);
-        chatBox.appendChild(messageDiv);
-        chatBox.scrollTop = chatBox.scrollHeight;
-    }
+function displayMessage(sender, message) {
+    const chatBox = document.getElementById(`${CHAT_ID}-chat-box`);
+    const messageDiv = document.createElement('div');
+    messageDiv.innerHTML = formatResult(message);
+    messageDiv.className = `${CHAT_ID}-message ` + (sender === 'user' ? `${CHAT_ID}-user-message` : `${CHAT_ID}-bot-message`);
+    chatBox.appendChild(messageDiv);
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
 
     // Initialize all chat toggles
     function initializeChatToggles() {
