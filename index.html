@@ -1276,32 +1276,38 @@ section {
         }
     }
 function formatResult(result) {
-    let formattedText = result;
+    // Ensure input is a string
+    if (typeof result !== 'string') {
+        return result;
+    }
 
-    // Format headings
-    formattedText = formattedText.replace(/##\s*(.+?)(\n|$)/g, '<h2>$1</h2>\n');
-    formattedText = formattedText.replace(/#\s*(.+?)(\n|$)/g, '<h1>$1</h1>\n');
+    // Escape HTML to prevent XSS
+    let formattedText = result.replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-    // Bold and italic formatting
-    formattedText = formattedText.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-    formattedText = formattedText.replace(/\*(.+?)\*/g, '<em>$1</em>');
+    // Format headings (keep this order to prevent nested heading issues)
+    formattedText = formattedText.replace(/^##\s*(.+?)$/gm, '<h2>$1</h2>');
+    formattedText = formattedText.replace(/^#\s*(.+?)$/gm, '<h1>$1</h1>');
 
-    // Key insights emphasis
-    formattedText = formattedText.replace(/(Key Insights:)/g, '<strong>$1</strong>');
+    // Bold and italic formatting (use lookahead/lookbehind to prevent over-matching)
+    formattedText = formattedText.replace(/(?<!\*)\*\*(.*?)\*\*(?!\*)/g, '<strong>$1</strong>');
+    formattedText = formattedText.replace(/(?<!\*)\*(.*?)\*(?!\*)/g, '<em>$1</em>');
 
-    // Format unordered lists (* item)
-    formattedText = formattedText.replace(/\n\*\s*(.+?)(?=\n|$)/g, '<li>$1</li>');
-    formattedText = formattedText.replace(/(<li>[\s\S]*?<\/li>)/g, '<ul>$1</ul>');
+    // Lists (use multiline regex with ^ to match start of line)
+    // Unordered lists
+    formattedText = formattedText.replace(/^(\*\s+.+)$/gm, '<li>$1</li>');
+    formattedText = formattedText.replace(/(<li>\*\s+(.+)<\/li>\n?)+/g, '<ul>$&</ul>');
+    formattedText = formattedText.replace(/<li>\*\s+/g, '<li>');
 
-    // Format ordered lists (1. item)
-    formattedText = formattedText.replace(/\n\d+\.\s*(.+?)(?=\n|$)/g, '<li>$1</li>');
-    formattedText = formattedText.replace(/(<li>[\s\S]*?<\/li>)/g, '<ol>$1</ol>');
+    // Ordered lists
+    formattedText = formattedText.replace(/^(\d+\.\s+.+)$/gm, '<li>$1</li>');
+    formattedText = formattedText.replace(/(<li>\d+\.\s+(.+)<\/li>\n?)+/g, '<ol>$&</ol>');
+    formattedText = formattedText.replace(/<li>\d+\.\s+/g, '<li>');
 
-    // Horizontal rules (--- or ***)
-    formattedText = formattedText.replace(/\n(-{3}|\*{3})\n/g, '<hr/>');
+    // Horizontal rules
+    formattedText = formattedText.replace(/^(-{3,}|\*{3,})$/gm, '<hr/>');
 
-    // Preserve line breaks (but not inside lists)
-    formattedText = formattedText.replace(/(?<!<\/li>)\n/g, '<br>');
+    // Preserve line breaks, but carefully
+    formattedText = formattedText.replace(/(?<!<\/?(?:ul|ol|li|h1|h2|hr))(?:\r\n|\r|\n)/g, '<br>');
 
     return formattedText;
 }
