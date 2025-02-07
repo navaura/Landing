@@ -271,9 +271,7 @@ section {
                 </div>
                 
                 <div class="hidden md:flex space-x-8">
-                    <button class="navbar-chat-toggle hover:text-blue-500 transition">
-                        Chat AI 
-                    </button>
+
                     <a href="#services" class="hover:text-blue-500 transition nav-link">Services</a>
                     <a href="#about" class="hover:text-blue-500 transition nav-link">About</a>
                     <a href="#founder" class="hover:text-blue-500 transition nav-link">Founder</a>
@@ -301,9 +299,7 @@ section {
                 </button>
             </div>
             <div class="flex flex-col space-y-6 mt-8">
-                <button class="navbar-chat-toggle hover:text-blue-500 transition">
-                    Chat AI
-                </button>
+
                 <a href="#services" class="text-2xl hover:text-blue-500 transition mobile-link">Services</a>
                 <a href="#about" class="text-2xl hover:text-blue-500 transition mobile-link">About</a>
                 <a href="#founder" class="text-2xl hover:text-blue-500 transition mobile-link">Founder</a>
@@ -313,18 +309,32 @@ section {
         </div>
     </div>
 
-    <!-- Hero Section -->
-    <section class="relative h-screen flex items-center justify-center overflow-hidden" id="hero">
-        <img src="NAVAURA_ARCTIQ.png" alt="Hero Background" class="absolute inset-0 w-full h-full object-cover opacity-50 parallax" style="filter: blur(5px);">
-        <div class="relative z-10 text-center" data-aos="fade-up">
-            
-            <h1 class="text-5xl md:text-7xl font-bold mb-6 text-white">SARVESHAM KRUTE BHABISHYAM</h1>
-            <p class="text-xl md:text-2xl mb-8">Transform your business and personal life with robust and AI powered solutions.</p>
-            <a href="#contact" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full text-lg transition animate-pulse">
-                Get connected
+<!-- Hero Section -->
+<section class="relative h-screen flex items-center justify-center overflow-hidden" id="hero">
+    <img src="NAVAURA_ARCTIQ.png" alt="Hero Background" 
+        class="absolute inset-0 w-full h-full object-cover opacity-50 parallax" 
+        style="filter: blur(5px);">
+    
+    <div class="relative z-10 text-center max-w-3xl px-6" data-aos="fade-up">
+        <h1 class="text-5xl md:text-7xl font-extrabold text-white drop-shadow-lg">
+            SARVESHAM KRUTE BHABISHYAM
+        </h1>
+        <p class="text-lg md:text-2xl text-gray-200 mt-4 mb-8">
+            Transform your business and personal life with robust and AI-powered solutions.
+        </p>
+        
+        <div class="flex flex-col md:flex-row justify-center gap-4">
+            <a href="#contact" 
+               class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full text-lg transition shadow-lg">
+                Get Connected
             </a>
+            <button class="chatus bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full text-lg transition shadow-lg">
+                Chat Us 24x7
+            </button>
         </div>
-    </section>
+    </div>
+</section>
+
 
     <!-- Services Section -->
     <section id="services" class="py-20 bg-gray-800">
@@ -573,58 +583,74 @@ section {
     <script>
         const cursor = document.querySelector('.cursor');
         const cursorFollower = document.querySelector('.cursor-follower');
-        let mouseX = 0;
-        let mouseY = 0;
-        let followerX = 0;
-        let followerY = 0;
-        
+    
+        let mouseX = 0, mouseY = 0;
+        let followerX = 0, followerY = 0;
+    
+        function isMobile() {
+            return window.innerWidth <= 768; // Adjust breakpoint if needed
+        }
+    
+        function updateCursorVisibility() {
+            if (isMobile()) {
+                cursor.style.display = 'none';
+                cursorFollower.style.display = 'none';
+            } else {
+                cursor.style.display = 'block';
+                cursorFollower.style.display = 'block';
+            }
+        }
+    
+        // Hide cursor on mobile load
+        updateCursorVisibility();
+    
+        // Update visibility on resize
+        window.addEventListener('resize', updateCursorVisibility);
+    
         // Smooth cursor movement
         document.addEventListener('mousemove', (e) => {
+            if (isMobile()) return;
             mouseX = e.clientX;
             mouseY = e.clientY;
-            
-            // Update primary cursor immediately
             cursor.style.transform = `translate(${mouseX - 6}px, ${mouseY - 6}px)`;
         });
-        
-        // Animate follower cursor with lag effect
+    
         function animate() {
-            // Smooth following effect
+            if (isMobile()) return;
             followerX += (mouseX - followerX - 20) * 0.1;
             followerY += (mouseY - followerY - 20) * 0.1;
-            
             cursorFollower.style.transform = `translate(${followerX}px, ${followerY}px)`;
-            
             requestAnimationFrame(animate);
         }
         animate();
-        
-        // Add cursor hiding when leaving window
+    
         document.addEventListener('mouseout', () => {
+            if (isMobile()) return;
             cursor.style.opacity = '0';
             cursorFollower.style.opacity = '0';
         });
-        
+    
         document.addEventListener('mouseover', () => {
+            if (isMobile()) return;
             cursor.style.opacity = '1';
             cursorFollower.style.opacity = '1';
         });
-        
-        // Add subtle magnetic effect for interactive elements
+    
         const buttons = document.querySelectorAll('button, a');
         buttons.forEach(button => {
             button.addEventListener('mousemove', (e) => {
+                if (isMobile()) return;
                 const rect = button.getBoundingClientRect();
                 const centerX = rect.left + rect.width / 2;
                 const centerY = rect.top + rect.height / 2;
                 const distanceX = e.clientX - centerX;
                 const distanceY = e.clientY - centerY;
-                
                 cursor.style.transform = `translate(${e.clientX - 10 - distanceX * 0.1}px, ${e.clientY - 10 - distanceY * 0.1}px)`;
                 cursorFollower.style.transform = `translate(${e.clientX - 20 - distanceX * 0.05}px, ${e.clientY - 20 - distanceY * 0.05}px)`;
             });
         });
-        </script>
+    </script>
+    
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 // Smooth scroll for navigation links
@@ -956,7 +982,7 @@ section {
 
 <script>
 (function () {
-    const CHAT_ID = 'navaura-ai-chatbot';
+    const CHAT_ID = 'navaura-krittim-chatbot';
 
     const aiingStyles = `
         .${CHAT_ID}-ai-loading {
@@ -1116,7 +1142,7 @@ section {
     const chatHeader = document.createElement('div');
     chatHeader.id = `${CHAT_ID}-chat-header`;
     chatHeader.innerHTML = `
-        <span>AI Chatbot</span>
+        <span>Krittim Ai</span>
         <button onclick="closeChatWindow()" style="background: transparent; border: none; color: white; font-size: 20px;" aria-label="Close chat">&times;</button>
     `;
 
@@ -1323,7 +1349,7 @@ function displayMessage(sender, message) {
 
     // Initialize all chat toggles
     function initializeChatToggles() {
-        const chatToggles = document.querySelectorAll('.navbar-chat-toggle');
+        const chatToggles = document.querySelectorAll('.chatus');
         chatToggles.forEach(toggle => {
             toggle.addEventListener('click', function() {
                 const chatWrapper = document.getElementById(`${CHAT_ID}-chat-wrapper`);
