@@ -1516,45 +1516,64 @@ function displayMessage(sender, message) {
 
 </script>
     <script>
-  // Immediately-invoked Function Expression (IIFE) to avoid global namespace pollution
-  (function() {
-    // Generate a random delay between 5-7 seconds
-    var randomDelay = Math.floor(Math.random() * (7000 - 5000 + 1)) + 5000;
+// Immediately-invoked Function Expression (IIFE) to avoid global namespace pollution
+(function() {
+  // Generate a random delay between 5-7 seconds for initial popup
+  var randomDelay = Math.floor(Math.random() * (7000 - 5000 + 1)) + 5000;
+  var popupInterval = 30000; // 30 seconds between popups after first close
+  var popupTimer;
+  var intervalTimer;
+  
+  // Function to show the popup
+  function showPopup() {
+    var popup = document.getElementById('navaura_special_popup');
+    if (popup) {
+      popup.classList.add('active');
+    }
+  }
+  
+  // Function to handle the popup
+  function handlePopup() {
+    var popup = document.getElementById('navaura_special_popup');
+    var closeBtn = document.getElementById('navaura_closePopup');
     
-    // Function to handle the popup
-    function handlePopup() {
-      var popup = document.getElementById('navaura_special_popup');
-      var closeBtn = document.getElementById('navaura_closePopup');
+    if (!popup || !closeBtn) return;
+    
+    // Show popup after the random delay initially
+    popupTimer = setTimeout(function() {
+      showPopup();
       
-      if (!popup || !closeBtn) return;
-      
-      // Show popup after the random delay
-      var popupTimer = setTimeout(function() {
-        popup.classList.add('active');
-      }, randomDelay);
-      
-      // Close popup when close button is clicked
-      closeBtn.addEventListener('click', function(e) {
-        popup.classList.remove('active');
-        e.stopPropagation();
-      });
-      
-      // Close popup when clicking outside the content
-      popup.addEventListener('click', function(e) {
-        if (e.target === this) {
-          this.classList.remove('active');
+      // Set interval to show popup every 30 seconds after it's closed
+      intervalTimer = setInterval(function() {
+        if (!popup.classList.contains('active')) {
+          showPopup();
         }
-      });
-    }
+      }, popupInterval);
+      
+    }, randomDelay);
     
-    // Check if the DOM is already loaded
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', handlePopup);
-    } else {
-      // DOM is already loaded
-      handlePopup();
-    }
-  })();
+    // Close popup when close button is clicked
+    closeBtn.addEventListener('click', function(e) {
+      popup.classList.remove('active');
+      e.stopPropagation();
+    });
+    
+    // Close popup when clicking outside the content
+    popup.addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.classList.remove('active');
+      }
+    });
+  }
+  
+  // Check if the DOM is already loaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', handlePopup);
+  } else {
+    // DOM is already loaded
+    handlePopup();
+  }
+})();
 </script>
     
 <style>
