@@ -1468,19 +1468,6 @@ function formatResult(result) {
         '<a href="$1" target="_blank" rel="noopener noreferrer" style="color: #4d9aff; text-decoration: underline;">$1</a>'
     );
 
-    // Make email addresses clickable
-    formattedText = formattedText.replace(
-        /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi,
-        '<a href="mailto:$1" style="color: #4d9aff; text-decoration: underline;">$1</a>'
-    );
-
-    // Make mobile numbers clickable
-    // This regex matches various phone number formats with optional country codes
-    formattedText = formattedText.replace(
-        /(\+\d{1,3}[\s.-]?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}/g,
-        '<a href="tel:$&" style="color: #4d9aff; text-decoration: underline;">$&</a>'
-    );
-
     // Lists (use multiline regex with ^ to match start of line)
     // Unordered lists
     formattedText = formattedText.replace(/^(\*\s+.+)$/gm, '<li>$1</li>');
@@ -1500,7 +1487,6 @@ function formatResult(result) {
 
     return formattedText;
 }
-
 function displayMessage(sender, message) {
     const chatBox = document.getElementById(`${CHAT_ID}-chat-box`);
     const messageDiv = document.createElement('div');
