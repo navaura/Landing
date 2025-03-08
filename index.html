@@ -1125,8 +1125,200 @@ section {
     </script>
 
 <script>
-(function () {
+(function() {
     const CHAT_ID = 'navaura-krittim-chatbot';
+    
+    // List of possible suggestion messages
+    const allSuggestions = [
+        "What services do you offer?",
+        "Tell me about your company",
+        "How can I contact support?",
+        "What are your business hours?",
+        "Do you have any discounts?",
+        "Tell me about your pricing",
+        "How does your product work?",
+        "What makes you different?",
+        "Can I schedule a demo?",
+        "Do you have case studies?",
+        "What industries do you serve?",
+        "How long have you been in business?",
+        "What's your refund policy?",
+        "Do you offer customization?",
+        "Tell me about your team",
+        "How secure is your solution?",
+        "What technologies do you use?",
+        "Do you have a mobile app?",
+        "Can you help with integration?",
+        "What's new in your latest update?"
+    ];
+    
+    // Current set of suggestions (will hold 10)
+    let currentSuggestions = [];
+    
+    // Function to get random items from an array
+    function getRandomItems(array, count) {
+        const shuffled = [...array].sort(() => 0.5 - Math.random());
+        return shuffled.slice(0, count);
+    }
+    
+    // Initialize with 10 random suggestions
+    function initializeSuggestions() {
+        currentSuggestions = getRandomItems(allSuggestions, 10);
+        renderSuggestionChips();
+    }
+    
+    // Replace 4 random suggestions with new ones
+    function refreshSuggestions() {
+        // Get indices of 4 random items to replace
+        const indicesToReplace = getRandomItems([0,1,2,3,4,5,6,7,8,9], 4);
+        
+        // Get 4 random new suggestions that aren't already in use
+        const unusedSuggestions = allSuggestions.filter(
+            suggestion => !currentSuggestions.includes(suggestion)
+        );
+        const newSuggestions = getRandomItems(unusedSuggestions, 4);
+        
+        // Replace the selected suggestions
+        for (let i = 0; i < indicesToReplace.length; i++) {
+            if (newSuggestions[i]) {
+                currentSuggestions[indicesToReplace[i]] = newSuggestions[i];
+            }
+        }
+        
+        renderSuggestionChips();
+    }
+    
+    // Render the suggestion chips UI
+    function renderSuggestionChips() {
+        let chipContainer = document.getElementById(`${CHAT_ID}-suggestion-chips`);
+        
+        // Create container if it doesn't exist
+        if (!chipContainer) {
+            chipContainer = document.createElement('div');
+            chipContainer.id = `${CHAT_ID}-suggestion-chips`;
+            chipContainer.className = 'suggestion-chips-container';
+            
+            // Style for the container
+            chipContainer.style.position = 'absolute';
+            chipContainer.style.bottom = '60px';
+            chipContainer.style.left = '0';
+            chipContainer.style.width = '100%';
+            chipContainer.style.padding = '10px 15px';
+            chipContainer.style.display = 'flex';
+            chipContainer.style.flexWrap = 'wrap';
+            chipContainer.style.gap = '8px';
+            chipContainer.style.justifyContent = 'center';
+            chipContainer.style.overflowY = 'auto';
+            chipContainer.style.maxHeight = '120px';
+            
+            const chatForm = document.getElementById(`${CHAT_ID}-chat-form`);
+            chatForm.parentNode.insertBefore(chipContainer, chatForm);
+            
+            // Adjust chat box to make room for suggestions
+            const chatBox = document.getElementById(`${CHAT_ID}-chat-box`);
+            chatBox.style.marginBottom = '180px';
+        }
+        
+        // Clear existing chips
+        chipContainer.innerHTML = '';
+        
+        // Add new chips
+        currentSuggestions.forEach(suggestion => {
+            const chip = document.createElement('button');
+            chip.type = 'button';
+            chip.className = 'suggestion-chip';
+            chip.textContent = suggestion;
+            
+            // Style for individual chips
+            chip.style.backgroundColor = 'rgb(31, 41, 55)';
+            chip.style.color = 'white';
+            chip.style.border = '1px solid rgb(55, 65, 81)';
+            chip.style.borderRadius = '16px';
+            chip.style.padding = '6px 12px';
+            chip.style.margin = '3px';
+            chip.style.fontSize = '12px';
+            chip.style.cursor = 'pointer';
+            chip.style.transition = 'background-color 0.2s';
+            
+            // Hover effect
+            chip.onmouseover = function() {
+                this.style.backgroundColor = 'rgb(55, 65, 81)';
+            };
+            chip.onmouseout = function() {
+                this.style.backgroundColor = 'rgb(31, 41, 55)';
+            };
+            
+            // Click handler
+            chip.onclick = function() {
+                const userInput = document.getElementById(`${CHAT_ID}-user-input`);
+                userInput.value = suggestion;
+                userInput.focus();
+                
+                // Simulate Enter key press to submit the message
+                const enterEvent = new KeyboardEvent('keydown', {
+                    key: 'Enter',
+                    code: 'Enter',
+                    keyCode: 13,
+                    bubbles: true
+                });
+                userInput.dispatchEvent(enterEvent);
+                
+                // After using a suggestion, refresh 4 random ones
+                setTimeout(refreshSuggestions, 500);
+            };
+            
+            chipContainer.appendChild(chip);
+        });
+        
+        // Apply media queries for responsive design
+        const style = document.createElement('style');
+        style.textContent = `
+            @media (max-width: 768px) {
+                #${CHAT_ID}-suggestion-chips {
+                    bottom: 70px;
+                    padding: 8px;
+                }
+                #${CHAT_ID}-chat-box {
+                    margin-bottom: 190px !important;
+                }
+                .suggestion-chip {
+                    padding: 5px 10px;
+                    font-size: 11px;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    // Update the handleInput function to refresh suggestions after user input
+    const originalHandleInput = window.handleInput;
+    if (typeof originalHandleInput === 'function') {
+        window.handleInput = function(event) {
+            if (event.key === 'Enter' && event.target.value.trim() !== '') {
+                const result = originalHandleInput.call(this, event);
+                setTimeout(refreshSuggestions, 500);
+                return result;
+            }
+            return originalHandleInput.call(this, event);
+        };
+    }
+    
+    // Initialize suggestions once the chat is loaded
+    function initWhenChatLoaded() {
+        if (document.getElementById(`${CHAT_ID}-chat-form`)) {
+            initializeSuggestions();
+        } else {
+            setTimeout(initWhenChatLoaded, 500);
+        }
+    }
+    
+    // Start the initialization process
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initWhenChatLoaded);
+    } else {
+        initWhenChatLoaded();
+    }
+})();
 
     const aiingStyles = `
         .${CHAT_ID}-ai-loading {
