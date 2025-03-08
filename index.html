@@ -1127,50 +1127,6 @@ section {
 <script>
 (function () {
     const CHAT_ID = 'navaura-krittim-chatbot';
-    
-    const inputOptions = [
-        "Hello!", "How are you?", "Tell me a joke", "What's the weather?", 
-        "Give me a fun fact", "Who made you?", "What's your name?", 
-        "Tell me a story", "What can you do?", "Surprise me!"
-    ];
-    
-    let displayedOptions = [];
-    function getRandomOptions() {
-        let availableOptions = inputOptions.filter(opt => !displayedOptions.includes(opt));
-        while (displayedOptions.length < 4) {
-            let newOption = availableOptions.splice(Math.floor(Math.random() * availableOptions.length), 1)[0];
-            displayedOptions.push(newOption);
-        }
-    }
-    
-    function updateOptions() {
-        let buttonsContainer = document.getElementById(`${CHAT_ID}-quick-options`);
-        buttonsContainer.innerHTML = "";
-        displayedOptions.forEach((option, index) => {
-            let button = document.createElement("button");
-            button.textContent = option;
-            button.className = `${CHAT_ID}-option-btn`;
-            button.onclick = function () {
-                document.getElementById(`${CHAT_ID}-user-input`).value = option;
-                handleInput({ key: 'Enter', target: { value: option } });
-                displayedOptions.splice(index, 1);
-                getRandomOptions();
-                updateOptions();
-            };
-            buttonsContainer.appendChild(button);
-        });
-    }
-    
-    document.addEventListener("DOMContentLoaded", function () {
-        let optionsWrapper = document.createElement("div");
-        optionsWrapper.id = `${CHAT_ID}-quick-options`;
-        document.getElementById(`${CHAT_ID}-chat-wrapper`).appendChild(optionsWrapper);
-        getRandomOptions();
-        updateOptions();
-    });
-})();
-
-
     const aiingStyles = `
         .${CHAT_ID}-ai-loading {
             color: #f1f1f1;
