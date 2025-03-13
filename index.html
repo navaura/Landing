@@ -1125,8 +1125,7 @@ section {
         });
     </script>
 
-<script>
-(function () {
+<script>(function () {
     let chatbot = document.getElementById("chatbot");
 
     // Inject Styles
@@ -1197,13 +1196,14 @@ section {
             padding: 10px;
             border: none;
             border-radius: 5px;
+            color: black;
         }
 
         .input-box button {
             padding: 10px;
             background: #007BFF;
             border: none;
-            color: white;
+            color: black;
             border-radius: 5px;
             margin-top: 5px;
             cursor: pointer;
@@ -1256,13 +1256,54 @@ section {
         </div>
     `;
 
-    let socket = new WebSocket("https://server1001.navaura.in/chat");
+    // Initialize session ID
+    let sessionId = null;
 
-    socket.onmessage = function (event) {
-        let chatBox = document.getElementById("chatBox");
-        chatBox.innerHTML += `<div>Bot: ${formatResult(event.data)}</div>`;
-        chatBox.scrollTop = chatBox.scrollHeight;
-    };
+    // Define API endpoint
+    const chatApiUrl = "http://localhost:5407/chat";
+
+    // Function to send messages to the API
+    async function sendToApi(message) {
+        try {
+            // Create request payload based on your FastAPI model requirements
+            const requestBody = {
+                message: message
+            };
+            
+            // Only include session_id if we have one
+            if (sessionId) {
+                requestBody.session_id = sessionId;
+            }
+
+            const response = await fetch(chatApiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestBody)
+            });
+
+            if (!response.ok) {
+                // Log detailed error for debugging
+                const errorText = await response.text();
+                console.error("API Error:", response.status, errorText);
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            
+            // Save the session ID for future requests
+            if (data.session_id) {
+                sessionId = data.session_id;
+                console.log("Session established:", sessionId);
+            }
+            
+            return data.response;
+        } catch (error) {
+            console.error("Error sending message:", error);
+            return "Sorry, there was an error processing your request.";
+        }
+    }
 
     function formatResult(result) {
         let formattedText = result;
@@ -1281,7 +1322,7 @@ section {
     }
 
     const topics = [
-    "NEW APPS", "SAYVA", "VEDI", "Web APP services",
+        "NEW APPS", "SAYVA", "VEDI", "Web APP services",
         "Contact to Navaura", "Contact Number", "APP URLS", "What is Navaura?",
         "What is the Mission?"
     ];
@@ -1311,15 +1352,54 @@ section {
         }
     }
 
-    window.sendMessage = function () {
+    window.sendMessage = async function () {
         let input = document.getElementById("userInput");
+        let chatBox = document.getElementById("chatBox");
+        
         if (input.value.trim() !== "") {
-            document.getElementById("chatBox").innerHTML += `<div>User: ${input.value}</div>`;
-            socket.send(input.value);
+            // Add user message to chat
+            chatBox.innerHTML += `<div>User: ${input.value}</div>`;
+            
+            // Show loading indicator
+            let loadingId = "loading-" + Date.now();
+            chatBox.innerHTML += `<div id="${loadingId}">Bot: Typing...</div>`;
+            chatBox.scrollTop = chatBox.scrollHeight;
+            
+            // Send message to API
+            const userMessage = input.value;
             input.value = "";
-            document.getElementById("chatBox").scrollTop = document.getElementById("chatBox").scrollHeight;
+            
+            try {
+                // Get response from API
+                const response = await sendToApi(userMessage);
+                
+                // Remove loading indicator and add bot response
+                const loadingElement = document.getElementById(loadingId);
+                if (loadingElement) {
+                    loadingElement.remove();
+                }
+                
+                chatBox.innerHTML += `<div>Bot: ${formatResult(response)}</div>`;
+            } catch (error) {
+                // Handle error
+                const loadingElement = document.getElementById(loadingId);
+                if (loadingElement) {
+                    loadingElement.innerHTML = "Bot: Sorry, there was an error. Please try again.";
+                }
+                console.error("Message sending error:", error);
+            }
+            
+            chatBox.scrollTop = chatBox.scrollHeight;
         }
     };
+
+    // Add event listener for Enter key
+    document.getElementById("userInput").addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            window.sendMessage();
+        }
+    });
 
     window.toggleChat = function () {
         let chatbotPanel = document.getElementById("chatbotPanel");
@@ -1335,12 +1415,14 @@ section {
         }
     };
 
-    document.querySelector(".chatus").addEventListener("click", toggleChat);
+    // If there's a .chatus element, add click event listener
+    const chatusButton = document.querySelector(".chatus");
+    if (chatusButton) {
+        chatusButton.addEventListener("click", toggleChat);
+    }
 
     document.getElementById("chatOverlay").addEventListener("click", toggleChat);
-})();
-
-</script>
+})();</script>
     <script>
 // Immediately-invoked Function Expression (IIFE) to avoid global namespace pollution
 (function() {
