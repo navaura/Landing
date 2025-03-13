@@ -1256,7 +1256,7 @@ section {
         </div>
     `;
 
-    let socket = new WebSocket("wss://server1001.navaura.in/chat");
+    let socket = new WebSocket("ws://server1001.navaura.in/chat");
 
     socket.onmessage = function (event) {
         let chatBox = document.getElementById("chatBox");
