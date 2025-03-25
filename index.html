@@ -810,33 +810,50 @@ section {
   </div>
 </div>
      <!-- Contact Form -->
-    <section id="contact" class="py-20 bg-black">
-        <div class="container mx-auto px-6">
-          <h2 class="text-4xl font-bold text-center mb-16 text-gradient" data-aos="fade-down">Contact Us</h2>
-          <div class="max-w-2xl mx-auto">
+<section id="contact" class="py-20 bg-black">
+    <div class="container mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center mb-16 text-gradient" data-aos="fade-down">Contact Us</h2>
+        <div class="max-w-2xl mx-auto">
             <!-- Form Container div that we'll use to swap content -->
             <div id="form-container">
-              <form id="contact-form" class="space-y-6" data-aos="fade-up">
-                <div>
-                  <label class="block text-sm font-medium mb-2">Name</label>
-                  <input type="text" name="name" required class="w-full px-4 py-2 bg-black border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500">
-                </div>
-                <div>
-                  <label class="block text-sm font-medium mb-2">Email</label>
-                  <input type="email" name="email" required class="w-full px-4 py-2 bg-black border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500">
-                </div>
-                <div>
-                  <label class="block text-sm font-medium mb-2">Message</label>
-                  <textarea name="message" required rows="4" class="w-full px-4 py-2 bg-black border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500"></textarea>
-                </div>
-                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition">
-                  Send Message
-                </button>
-              </form>
+                <form id="contact-form" class="space-y-6" data-aos="fade-up">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Name</label>
+                        <input type="text" name="name" required class="w-full px-4 py-2 bg-black border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Email</label>
+                        <input type="email" name="email" required class="w-full px-4 py-2 bg-black border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Mobile Number</label>
+                        <input type="tel" name="mobile" required class="w-full px-4 py-2 bg-black border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500" 
+                               pattern="[0-9]{10}" placeholder="10 digit mobile number">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Reason for Contact</label>
+                        <select name="reason" required class="w-full px-4 py-2 bg-black border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500">
+                            <option value="">Select a reason</option>
+                            <option value="General Inquiry">General Inquiry</option>
+                            <option value="Product Support">Product Support</option>
+                            <option value="Sales Consultation">Sales Consultation</option>
+                            <option value="Technical Support">Technical Support</option>
+                            <option value="Partnership">Partnership</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Message</label>
+                        <textarea name="message" required rows="4" class="w-full px-4 py-2 bg-black border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition">
+                        Send Message
+                    </button>
+                </form>
             </div>
-          </div>
         </div>
-      </section>
+    </div>
+</section>
 
     <!-- Footer -->
     <footer class="bg-black py-12 border-t border-gray-800">
@@ -1032,41 +1049,55 @@ section {
             });
             </script>
 <script>
-    document.getElementById("contact-form").addEventListener("submit", async function(e) {
-      e.preventDefault();
-      const formData = {
+document.getElementById("contact-form").addEventListener("submit", async function(e) {
+    e.preventDefault();
+    
+    // Validate mobile number (10 digits)
+    const mobileInput = this.mobile;
+    if (!/^\d{10}$/.test(mobileInput.value)) {
+        alert('Please enter a valid 10-digit mobile number');
+        mobileInput.focus();
+        return;
+    }
+
+    const formData = {
         name: this.name.value,
         email: this.email.value,
+        mobile: this.mobile.value,
+        reason: this.reason.value,
         message: this.message.value
-      };
-  
-      try {
+    };
+
+    try {
         const response = await fetch('https://server1001.navaura.in/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData)
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
         });
+        
         await response.json();
         
         // Replace form with thank you message
         document.getElementById("form-container").innerHTML = `
-          <div class="text-center py-16" data-aos="fade-up">
-            <h3 class="text-3xl font-bold mb-4">Thank You!</h3>
-            <p class="text-lg text-gray-300">We appreciate you contacting us. We'll get back to you soon!</p>
-          </div>
+            <div class="text-center py-16" data-aos="fade-up">
+                <h3 class="text-3xl font-bold mb-4">Thank You!</h3>
+                <p class="text-lg text-gray-300">We appreciate you contacting us. We'll get back to you soon!</p>
+                <p class="text-sm text-gray-400 mt-4">Your inquiry about "${formData.reason}" has been received.</p>
+            </div>
         `;
         
-      } catch (error) {
+    } catch (error) {
         // Still show thank you message even if there's an error
         document.getElementById("form-container").innerHTML = `
-          <div class="text-center py-16" data-aos="fade-up">
-            <h3 class="text-3xl font-bold mb-4">Thank You!</h3>
-            <p class="text-lg text-gray-300">We appreciate you contacting us. We'll get back to you soon!</p>
-          </div>
+            <div class="text-center py-16" data-aos="fade-up">
+                <h3 class="text-3xl font-bold mb-4">Thank You!</h3>
+                <p class="text-lg text-gray-300">We appreciate you contacting us. We'll get back to you soon!</p>
+                <p class="text-sm text-gray-400 mt-4">Your inquiry has been received.</p>
+            </div>
         `;
-      }
-    });
-  </script>
+    }
+});
+</script>
     <script>
         // Initialize AOS
         AOS.init({
