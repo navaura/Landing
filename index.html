@@ -51,32 +51,43 @@
     cursor: none !important;
 }
 
-            /* Primary cursor */
-.cursor {
-    width: 12px;
-    height: 12px;
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 99999;
-    transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease;
-    mix-blend-mode: difference;
-}
+    /* Primary cursor */
+    .cursor {
+        width: 12px;
+        height: 12px;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 99999;
+        transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease;
+        mix-blend-mode: difference;
+        opacity: 1;
+        will-change: transform, width, height;
+    }
 
-/* Secondary cursor (outer ring) */
-.cursor-follower {
-    width: 40px;
-    height: 40px;
-    background: rgba(252, 248, 248, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.4);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 99998;
-    transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease;
-    transform: translate(-50%, -50%);
-}
+    /* Secondary cursor (outer ring) */
+    .cursor-follower {
+        width: 40px;
+        height: 40px;
+        background: rgba(252, 248, 248, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 99998;
+        transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease;
+        transform: translate(-50%, -50%);
+        opacity: 1;
+        will-change: transform, width, height;
+    }
+
+    @media (max-width: 768px) {
+        .cursor, .cursor-follower {
+            display: none !important;
+            pointer-events: none;
+        }
+    }
 
 /* Hover effects for interactive elements */
 a:hover ~ .cursor,
@@ -151,12 +162,14 @@ textarea:focus ~ .cursor-follower {
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: #000000d5;
+        background-color: #000000f3;
         display: flex;
         align-items: center;
         justify-content: center;
         z-index: 9999;
         animation: fadeOut 1s ease 1.2s forwards;
+        backdrop-filter: blur(5px) grayscale(100%);
+        
     }
 
     @keyframes fadeOut {
@@ -187,6 +200,7 @@ textarea:focus ~ .cursor-follower {
             display: flex;
             width: max-content;
             animation: scroll 15s linear infinite;
+            
         }
 
         @keyframes scroll {
@@ -205,7 +219,7 @@ textarea:focus ~ .cursor-follower {
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: #333;
+            color: white!important;
             font-size: 1.1rem;
             font-weight: bold;
         }
@@ -226,16 +240,7 @@ textarea:focus ~ .cursor-follower {
             body, a, button, input, textarea {
     cursor: none !important;
 }
-            .cursor-glow {
-                width: 20px;
-                height: 20px;
-                background: rgba(59, 130, 246, 0.5);
-                border-radius: 50%;
-                position: fixed;
-                pointer-events: none;
-                z-index: 9999;
-                transition: transform 0.1s;
-            }
+
             #logo{
                 height: 5rem;
             }
@@ -257,6 +262,7 @@ textarea:focus ~ .cursor-follower {
     padding: 0;
     box-sizing: border-box;
 }
+
 #navbar {
   position: sticky !important;
   top: 0;
@@ -399,7 +405,7 @@ section {
 <!-- Hero Section -->
 <section class="relative h-screen flex items-center justify-center overflow-hidden" id="hero">
     
-    <img src="NAVAURA_ARCTIQ2.webp" alt="Kolkata's Best Software and AI company"
+    <img src="https://www.navaura.in/NAVAURA_ARCTIQ2.webp" alt="Kolkata's Best Software and AI company"
         class="absolute inset-0 w-full h-full object-cover opacity-50 parallax" 
         style="filter: blur(5px);">
     
@@ -480,7 +486,7 @@ section {
         <div class="container mx-auto px-6">
             <div class="flex flex-col md:flex-row items-center gap-12">
                 <div class="md:w-1/2" data-aos="fade-right">
-                    <img src="Background.svg" alt="About Us" class="rounded-lg shadow-xl">
+                    <img src="https://www.navaura.in/Background.svg" alt="About Us" class="rounded-lg shadow-xl">
                 </div>
                 <div class="md:w-1/2" data-aos="fade-left">
 <h2 class="text-4xl font-bold mb-6 text-gradient">About Us</h2>
@@ -525,46 +531,45 @@ section {
                 <div class="relative group" data-aos="fade-right">
                     <div class="absolute -inset-1 bg-gradient-to-r from-blue-500 to-blue-700 rounded-xl blur opacity-30 group-hover:opacity-50 transition-all duration-700"></div>
                     <div class="relative bg-black p-2 rounded-xl">
-                        <img src="diref2.webp" alt="Founder Image" 
+                        <img src="https://www.navaura.in/diref2.webp" alt="Founder Image" 
                              class="rounded-lg shadow-2xl transform transition-all duration-500 group-hover:scale-[0.05] w-[40%] ml-[10vw]">
                         <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-40 rounded-xl"></div>
                     </div>
                 </div>
     
                 <!-- Content Section -->
-<div class="space-y-19" data-aos="fade-left">
-    <div class="space-y-8">
-        <h3 class="text-4xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-            Subham Mukherjee
-        </h3>
-        <p class="text-sm text-blue-400 uppercase tracking-wider">Founder & Director</p>
-    </div>
-
-    <div class="space-y-6">
-        <div class="relative">
-            <div class="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-blue-500 to-blue-700"></div>
-            <p class="text-gray-300 leading-relaxed pl-6 text-lg">
-                Subham Mukherjee is the visionary Founder and Director of Navaura™ Arctiq OPC Private Limited. Driven by the mission of "Sarvesham Krute Bhavishyam" (Future for All), he focuses on automating untapped industries and modernizing infrastructures through innovative AI solutions.
-            </p>
-        </div>
-
-        <div class="bg-black/50 rounded-lg p-6 backdrop-blur-sm">
-            <p class="text-gray-300 mb-4">
-                As a leader, Subham is dedicated to delivering state-of-the-art technologies that transform businesses. His commitment and expertise serve as the foundation for the company's growth and success.
-            </p>
-            <p class="text-gray-300">
-                He oversees every aspect of the business, ensuring seamless project execution while maintaining the company's vision of revolutionizing the AI landscape in India.
-            </p>
-        </div>
-    </div>
-</div>
-
+                <div class="space-y-19" data-aos="fade-left">
+                    <div class="space-y-8">
+                        <h3 class="text-4xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                            Subham Mukherjee
+                        </h3>
+                        <p class="text-sm text-blue-400 uppercase tracking-wider">Founder & Director</p>
+                    </div>
+    
+                    <div class="space-y-6">
+                        <div class="relative">
+                            <div class="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-blue-500 to-blue-700"></div>
+                            <p class="text-gray-300 leading-relaxed pl-6 text-lg">
+                                As the Founder and Director of Navaura™ Arctiq OPC Private Limited, I am committed to automating untapped industries and modernizing infrastructures through innovative AI solutions. At Navaura, we develop cutting-edge AI and automation software that empowers businesses of all sizes—not just financial giants. 
+                            </p>
+                        </div>
+    
+                        <div class="bg-black/50 rounded-lg p-6 backdrop-blur-sm">
+                            <p class="text-gray-300 mb-4">
+                                My dedication to delivering state-of-the-art technologies has been instrumental in transforming businesses. By ensuring seamless project execution, I uphold our vision of revolutionizing the AI landscape in India, making tech truly for everyone.
+                            </p>
+                            <p class="text-gray-300">
+                                At Navaura, we believe in creating AI-driven solutions that are accessible, scalable, and impactful. Our mission is simple—technology for all, not just financial giants.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
     <div class="carousel">
         <h2 class="carousel-heading">Technologies We Work With</h2>
-        <div class="slides">
+        <div class="slides" >
             <!-- First Loop -->
             <div class="slide">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
@@ -687,7 +692,7 @@ section {
               <!-- Vedi AI -->
               <div class="product-card">
                 <div class="product-image">
-                  <img src="vedi.webp" alt="Vedi AI" class="rounded-xl shadow-lg">
+                  <img src="https://www.navaura.in/vedi.webp" alt="Vedi AI" class="rounded-xl shadow-lg">
                 </div>
                 <div class="p-6">
                   <h3 class="product-title">Vedi AI</h3>
@@ -700,7 +705,7 @@ section {
               <!-- SAYVA -->
               <div class="product-card">
                 <div class="product-image">
-                  <img src="sayva.webp" alt="SAYVA" class="rounded-xl shadow-lg">
+                  <img src="https://www.navaura.in/sayva.webp" alt="SAYVA" class="rounded-xl shadow-lg">
                 </div>
                 <div class="p-6">
                   <h3 class="product-title">SAYVA (No Code AI Chatbot Builder)</h3>
@@ -723,7 +728,7 @@ section {
             <!-- Custom AI Bots -->
             <div class="product-card">
               <div class="product-image">
-                <img src="bot.webp" alt="Custom AI Bots" class="rounded-xl shadow-lg">
+                <img src="https://www.navaura.in/bot.webp" alt="Custom AI Bots" class="rounded-xl shadow-lg">
               </div>
               <div class="p-6">
                 <h3 class="product-title">Custom AI Bots</h3>
@@ -735,7 +740,7 @@ section {
             <!-- Custom Software Development -->
             <div class="product-card">
               <div class="product-image">
-                <img src="app.webp" alt="Custom Software" class="rounded-xl shadow-lg">
+                <img src="https://www.navaura.in/app.webp" alt="Custom Software" class="rounded-xl shadow-lg">
               </div>
               <div class="p-6">
                 <h3 class="product-title">Custom Software Development</h3>
@@ -747,7 +752,7 @@ section {
             <!-- Data Science & Analytics -->
             <div class="product-card">
               <div class="product-image">
-                <img src="data.webp" alt="Data Science & Analytics" class="rounded-xl shadow-lg">
+                <img src="https://www.navaura.in/data.webp" alt="Data Science & Analytics" class="rounded-xl shadow-lg">
               </div>
               <div class="p-6">
                 <h3 class="product-title">Data Science & Analytics</h3>
@@ -759,7 +764,7 @@ section {
             <!-- AI Integration Services -->
             <div class="product-card">
               <div class="product-image">
-                <img src="job.webp" alt="AI Integration Services" class="rounded-xl shadow-lg">
+                <img src="https://www.navaura.in/job.webp" alt="AI Integration Services" class="rounded-xl shadow-lg">
               </div>
               <div class="p-6">
                 <h3 class="product-title">AI Integration Services</h3>
@@ -804,17 +809,21 @@ section {
     </section>
     
     <div id="navaura_special_popup" class="popup-overlay">
-  <div class="popup-container">
-    <button id="navaura_closePopup" class="popup-close">✕</button>
-    <img src="popimg.webp" alt="Special Offer" class="popup-image">
-    <h2 class="popup-title">Special Beta Launch Offer!</h2>
-    <div class="popup-content">
-      <p>Get FREE OWN CUSTOM CREATED AI CHATBOT for a limited time. Perfect for businesses looking to streamline customer interactions and enhance efficiency.</p>
-      <p>This exclusive offer ends soon. TRY SAYVA NOW!</p>
-    </div>
-    <a href="https://sayva.navaura.in" class="popup-button">TRY SAYVA</a>
-  </div>
-</div>
+        <div class="popup-container">
+          <button id="navaura_closePopup" class="popup-close">✕</button>
+          <div class="popup-image-wrapper">
+            <img src="https://www.navaura.in/popimg.webp" alt="Special Offer" class="popup-image">
+            <span class="popup-tag">NEW</span> <!-- New tag added here -->
+          </div>
+          <h2 class="popup-title">Special Beta Launch Offer!</h2>
+          <div class="popup-content">
+            <p>Get FREE OWN CUSTOM CREATED AI CHATBOT for a limited time. Perfect for businesses looking to streamline customer interactions and enhance efficiency.</p>
+            <p>This exclusive offer ends soon. TRY SAYVA NOW!</p>
+          </div>
+          <a href="https://sayva.navaura.in" class="popup-button">TRY SAYVA</a>
+        </div>
+      </div>
+      
      <!-- Contact Form -->
 <section id="contact" class="py-20 bg-black">
     <div class="container mx-auto px-6">
@@ -922,76 +931,99 @@ section {
             });
         });
         </script>
-    <script>
-        const cursor = document.querySelector('.cursor');
-        const cursorFollower = document.querySelector('.cursor-follower');
-    
-        let mouseX = 0, mouseY = 0;
-        let followerX = 0, followerY = 0;
-    
-        function isMobile() {
-            return window.innerWidth <= 768; // Adjust breakpoint if needed
+
+<script>
+    const cursor = document.querySelector('.cursor');
+    const cursorFollower = document.querySelector('.cursor-follower');
+
+    let mouseX = 0, mouseY = 0;
+    let followerX = 0, followerY = 0;
+    let isCursorVisible = !isMobile();
+    let animationRunning = false;
+
+    function isMobile() {
+        return window.innerWidth <= 768;
+    }
+
+    function updateCursorVisibility() {
+        const isNowMobile = isMobile();
+        
+        if (isNowMobile && isCursorVisible) {
+            isCursorVisible = false;
+            cursor.style.display = 'none';
+            cursorFollower.style.display = 'none';
+            removeCursorEvents();
+        } else if (!isNowMobile && !isCursorVisible) {
+            isCursorVisible = true;
+            cursor.style.display = 'block';
+            cursorFollower.style.display = 'block';
+            addCursorEvents();
+            restartAnimation();
         }
-    
-        function updateCursorVisibility() {
-            if (isMobile()) {
-                cursor.style.display = 'none';
-                cursorFollower.style.display = 'none';
-            } else {
-                cursor.style.display = 'block';
-                cursorFollower.style.display = 'block';
-            }
+    }
+
+    function restartAnimation() {
+        if (!animationRunning) {
+            animationRunning = true;
+            animate();
         }
-    
-        // Hide cursor on mobile load
-        updateCursorVisibility();
-    
-        // Update visibility on resize
-        window.addEventListener('resize', updateCursorVisibility);
-    
-        // Smooth cursor movement
-        document.addEventListener('mousemove', (e) => {
-            if (isMobile()) return;
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            cursor.style.transform = `translate(${mouseX - 6}px, ${mouseY - 6}px)`;
-        });
-    
-        function animate() {
-            if (isMobile()) return;
-            followerX += (mouseX - followerX - 20) * 0.1;
-            followerY += (mouseY - followerY - 20) * 0.1;
-            cursorFollower.style.transform = `translate(${followerX}px, ${followerY}px)`;
-            requestAnimationFrame(animate);
+    }
+
+    function removeCursorEvents() {
+        document.removeEventListener('mousemove', trackMouse);
+        document.removeEventListener('mouseout', hideCursor);
+        document.removeEventListener('mouseover', showCursor);
+    }
+
+    function addCursorEvents() {
+        document.addEventListener('mousemove', trackMouse);
+        document.addEventListener('mouseout', hideCursor);
+        document.addEventListener('mouseover', showCursor);
+    }
+
+    function trackMouse(e) {
+        if (!isCursorVisible) return;
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    }
+
+    function hideCursor() {
+        if (!isCursorVisible) return;
+        cursor.style.opacity = '0';
+        cursorFollower.style.opacity = '0';
+    }
+
+    function showCursor() {
+        if (!isCursorVisible) return;
+        cursor.style.opacity = '1';
+        cursorFollower.style.opacity = '1';
+    }
+
+    function animate() {
+        if (!isCursorVisible) {
+            animationRunning = false;
+            return;
         }
+
+        followerX += (mouseX - followerX - 10) * 0.15;
+        followerY += (mouseY - followerY - 10) * 0.15;
+
+        cursor.style.transform = `translate3d(${mouseX - 6}px, ${mouseY - 6}px, 0)`;
+        cursorFollower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0)`;
+
+        requestAnimationFrame(animate);
+    }
+
+    updateCursorVisibility();
+    window.addEventListener('resize', updateCursorVisibility);
+
+    if (!isMobile()) {
+        addCursorEvents();
         animate();
-    
-        document.addEventListener('mouseout', () => {
-            if (isMobile()) return;
-            cursor.style.opacity = '0';
-            cursorFollower.style.opacity = '0';
-        });
-    
-        document.addEventListener('mouseover', () => {
-            if (isMobile()) return;
-            cursor.style.opacity = '1';
-            cursorFollower.style.opacity = '1';
-        });
-    
-        const buttons = document.querySelectorAll('button, a');
-        buttons.forEach(button => {
-            button.addEventListener('mousemove', (e) => {
-                if (isMobile()) return;
-                const rect = button.getBoundingClientRect();
-                const centerX = rect.left + rect.width / 2;
-                const centerY = rect.top + rect.height / 2;
-                const distanceX = e.clientX - centerX;
-                const distanceY = e.clientY - centerY;
-                cursor.style.transform = `translate(${e.clientX - 10 - distanceX * 0.1}px, ${e.clientY - 10 - distanceY * 0.1}px)`;
-                cursorFollower.style.transform = `translate(${e.clientX - 20 - distanceX * 0.05}px, ${e.clientY - 20 - distanceY * 0.05}px)`;
-            });
-        });
-    </script>
+    }
+</script>
+
+
     
         <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -1970,12 +2002,12 @@ document.getElementById("contact-form").addEventListener("submit", async functio
 .popup-container {
   position: relative;
   background: linear-gradient(135deg, #00000063 0%, #0a0a0a 100%);
-  border-radius: 12px;
+  border-radius: 28px;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  width: 90%;
+  width: 85%;
   max-width: 550px;
-  padding: 30px;
+  padding: 40px;
   color: #e0e0e0;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
   transform: scale(0.9);
@@ -1989,9 +2021,9 @@ document.getElementById("contact-form").addEventListener("submit", async functio
 }
 
 .popup-image {
-  width: 100%;
+  width: 99%;
   height: auto;
-  border-radius: 8px;
+  border-radius: 1x;
   margin-bottom: 20px;
   border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
@@ -2054,7 +2086,34 @@ document.getElementById("contact-form").addEventListener("submit", async functio
   background: rgba(255, 255, 255, 0.12);
   color: white;
 }
-</style>
+.popup-image-wrapper {
+  position: relative;
+  display: inline-block;
+}
 
+.popup-tag {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: red;
+  color: white;
+  padding: 5px 10px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: transform 0.3s ease-in-out;
+}
+
+</style>
+<script>
+    document.querySelector(".popup-button").addEventListener("mouseenter", function() {
+      document.querySelector(".popup-tag").style.transform = "scale(1.2)";
+    });
+  
+    document.querySelector(".popup-button").addEventListener("mouseleave", function() {
+      document.querySelector(".popup-tag").style.transform = "scale(1)";
+    });
+  </script>
+  
 </body>
 </html>
