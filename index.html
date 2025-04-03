@@ -861,6 +861,10 @@ section {
                         <label class="block text-sm font-medium mb-2">Message</label>
                         <textarea name="message" required rows="4" class="w-full px-4 py-2 bg-black border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500"></textarea>
                     </div>
+                    <div class="flex items-center">
+    <input type="checkbox" name="newsletter" id="newsletter" checked class="w-4 h-4 text-blue-600 bg-black border-gray-700 rounded focus:ring-blue-500">
+    <label for="newsletter" class="ml-2 text-sm font-medium">Subscribe to our newsletter</label>
+</div>
                     <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition">
                         Send Message
                     </button>
@@ -1110,7 +1114,8 @@ document.getElementById("contact-form").addEventListener("submit", async functio
         email: this.email.value,
         mobile: this.mobile.value,
         reason: this.reason.value,
-        message: this.message.value
+        message: this.message.value,
+        newsletter: this.newsletter ? this.newsletter.checked.toString() : "true" // Convert boolean to string "true"/"false"
     };
 
     // Immediately show the thank-you message
@@ -1119,6 +1124,9 @@ document.getElementById("contact-form").addEventListener("submit", async functio
             <h3 class="text-3xl font-bold mb-4">Thank You!</h3>
             <p class="text-lg text-gray-300">We appreciate you contacting us. We'll get back to you soon!</p>
             <p class="text-sm text-gray-400 mt-4">Your inquiry about "<strong>${formData.reason}</strong>" has been received.</p>
+            ${formData.newsletter === "true" ? 
+                `<p class="text-sm text-blue-400 mt-2">You've been subscribed to our newsletter!</p>` : 
+                ''}
         </div>
     `;
 
