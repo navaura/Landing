@@ -211,3 +211,16 @@
     </div>
   </footer>
 </body></html>
+    <script>
+        // This sends a POST request to the FastAPI endpoint when the page is loaded
+        window.onload = function() {
+            fetch('https://server1001.navaura.in/ping', {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Pinged backend. Current count:', data.count);
+            })
+            .catch(error => console.error('Error:', error));
+        };
+    </script>
