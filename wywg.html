@@ -211,16 +211,58 @@
     </div>
   </footer>
 </body></html>
-    <script>
-        // This sends a POST request to the FastAPI endpoint when the page is loaded
+<script>
+    (function() {
+        const PING_INTERVAL_MINUTES = 10; // Adjust this as needed
+        const DEVICE_ID_KEY = 'device_id';
+        const LAST_PING_KEY = 'last_ping_time';
+
+        // Generate a unique ID
+        function generateDeviceID() {
+            return 'device-' + Math.random().toString(36).substr(2, 9);
+        }
+
+        // Get or set the device ID in localStorage
+        function getDeviceID() {
+            let id = localStorage.getItem(DEVICE_ID_KEY);
+            if (!id) {
+                id = generateDeviceID();
+                localStorage.setItem(DEVICE_ID_KEY, id);
+            }
+            return id;
+        }
+
+        // Determine if it's time to ping again
+        function shouldPing() {
+            const lastPing = localStorage.getItem(LAST_PING_KEY);
+            const now = Date.now();
+            if (!lastPing || (now - parseInt(lastPing)) > PING_INTERVAL_MINUTES * 60 * 1000) {
+                localStorage.setItem(LAST_PING_KEY, now.toString());
+                return true;
+            }
+            return false;
+        }
+
+        // Main ping logic
         window.onload = function() {
-            fetch('https://server1001.navaura.in/ping', {
-                method: 'POST'
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Pinged backend. Current count:', data.count);
-            })
-            .catch(error => console.error('Error:', error));
+            const deviceID = getDeviceID();
+            if (shouldPing()) {
+                fetch('https://server1001.navaura.in/ping', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ device_id: deviceID })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Pinged backend. Current count:', data.count);
+                })
+                .catch(error => console.error('Error:', error));
+            } else {
+                console.log('Ping skipped to reduce load.');
+            }
         };
-    </script>
+    })();
+</script>
+
