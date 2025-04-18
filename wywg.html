@@ -1,268 +1,549 @@
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>What You Will Get at Navaura™</title>
-<style>
-  body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: linear-gradient(135deg, #0a0a1f, #1a1a3f);
-    color: #fff;
-    margin: 0;
-    min-height: 100vh;
-    line-height: 1.6;
-  }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is Navaura Arctiq?</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        *::-webkit-scrollbar {
+            display: none;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            cursor: none;
+        }
+        
+        /* Custom Cursor */
+        .cursor {
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 99999;
+            transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease;
+            mix-blend-mode: difference;
+            opacity: 1;
+            will-change: transform, width, height;
+        }
+        
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            background: rgba(252, 248, 248, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 99998;
+            transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease;
+            transform: translate(-50%, -50%);
+            opacity: 1;
+            will-change: transform, width, height;
+        }
+        
+        @media (hover: none) {
+            .cursor, .cursor-follower {
+                display: none !important;
+                pointer-events: none;
+            }
+        }
+        
+        /* Loader */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000000f3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: fadeOut 1s ease 1.2s forwards;
+            backdrop-filter: blur(5px) grayscale(100%);
+        }
+        
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+        
+        /* Header */
+        header {
+            padding: 2rem 0;
+            text-align: center;
+            width: 100%;
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+        
+        header.minimized {
+            padding: 1rem;
+            text-align: right;
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0);
+            border-bottom-left-radius: 1rem;
+            backdrop-filter: blur(0px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0);
+        }
+        
+        #logo {
+            height: 15rem;
+            margin-bottom: 1rem;
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+        
+        header.minimized #logo {
+            height: 5rem;
+            margin-bottom: 0;
+            position: relative;
+        }
+        
+        /* Language Selection */
+        .language-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background-image: url('https://www.navaura.in/bg.webp');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+        
+        .language-container.slide-up {
+            transform: translateY(-20px);
+        }
+        
+        .language-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+        
+        .language-content {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.8s ease, opacity 0.8s ease;
+        }
+        
+        .language-content.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            margin-top: 5rem;
+            background: linear-gradient(45deg, #3B82F6, #10B981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .language-options {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .language-btn {
+            padding: 1.5rem 3rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border: 2px solid #3B82F6;
+            border-radius: 0.5rem;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .language-btn:hover {
+            background-color: #3B82F6;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.5);
+        }
+        
+        .language-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: 0.6s;
+        }
+        
+        .language-btn:hover::before {
+            transform: translateX(100%);
+        }
+        
+        /* Content Sections */
+        .content-section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: none;
+        }
+        
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(45deg, #3B82F6, #10B981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .content-placeholder {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+        
+        .placeholder-text {
+            height: 1.5rem;
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), rgba(16, 185, 129, 0.2));
+            border-radius: 0.25rem;
+            margin-bottom: 1rem;
+        }
+        
+        .placeholder-text:last-child {
+            width: 60%;
+        }
+        
+        /* Go Back Button Styles */
+        .go-back-btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            margin-top: 2rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border: 2px solid #3B82F6;
+            border-radius: 0.5rem;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .go-back-btn:hover {
+            background-color: #3B82F6;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.5);
+        }
+        /* Hide custom cursor on touch devices and small screens */
+        @media (hover: none), (max-width: 768px) {
+            .cursor, .cursor-follower {
+                display: none !important;
+                pointer-events: none;
+            }
 
-  .header {
-    background: rgba(0,0,0,0.3);
-    padding: 1rem;
-    text-align: center;
-    border-bottom: 2px solid #00a2ff;
-  }
-
-  .header h1 {
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
-    margin: 0.5rem 0;
-  }
-
-  .header p {
-    font-size: clamp(1rem, 2vw, 1.2rem);
-  }
-
-  .main-content {
-    max-width: 1200px;
-    margin: 1rem auto;
-    padding: 0 1rem;
-  }
-
-  .service-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-
-  .card {
-    background: rgba(255,255,255,0.05);
-    border-radius: 15px;
-    padding: 1.2rem;
-    transition: transform 0.3s, box-shadow 0.3s;
-    border: 1px solid rgba(255,255,255,0.1);
-  }
-
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-  }
-
-  .card h3 {
-    color: #00a2ff;
-    margin-top: 0;
-    font-size: clamp(1.2rem, 3vw, 1.5rem);
-    border-bottom: 2px solid #00a2ff;
-    padding-bottom: 0.5rem;
-  }
-
-  .benefit-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .benefit-list li {
-    margin: 0.8rem 0;
-    padding-left: 1.5rem;
-    position: relative;
-    font-size: clamp(0.9rem, 2vw, 1rem);
-  }
-
-  .benefit-list li:before {
-    content: "→";
-    color: #00a2ff;
-    position: absolute;
-    left: 0;
-  }
-
-  .highlight {
-    color: #00a2ff;
-    font-weight: bold;
-  }
-
-  .cta-button {
-    display: inline-block;
-    background: linear-gradient(45deg, #00a2ff, #0077ff);
-    color: white;
-    padding: 0.8rem 1.5rem;
-    border-radius: 25px;
-    text-decoration: none;
-    margin-top: 1rem;
-    transition: transform 0.3s;
-    font-size: clamp(0.9rem, 2vw, 1rem);
-    width: fit-content;
-  }
-
-  .cta-button:hover {
-    transform: scale(1.05);
-  }
-
-  footer {
-    background: rgba(0,0,0,0.3);
-    padding: 1rem;
-    text-align: center;
-    margin-top: 2rem;
-  }
-
-  .footer-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 0.5rem;
-  }
-
-  .footer-links a {
-    color: #00a2ff;
-    text-decoration: none;
-    font-size: clamp(0.8rem, 2vw, 1rem);
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .card {
-    animation: fadeIn 0.5s ease-out forwards;
-  }
-
-  @media (max-width: 480px) {
-    .card {
-      padding: 1rem;
-    }
-
-    .benefit-list li {
-      margin: 0.6rem 0;
-    }
-
-    .cta-button {
-      width: 100%;
-      text-align: center;
-      padding: 0.6rem 1rem;
-    }
-
-    .footer-links {
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-  }
-</style>
+        
+        
+        }
+    </style>
 </head>
 <body>
-  <div class="header">
-    <h1>Welcome to Navaura™ - Your Technology Partner</h1>
-    <p>Discover how we can transform your digital presence</p>
-  </div>
-
-  <div class="main-content">
-    <div class="service-cards">
-      <div class="card">
-        <h3>For Businesses</h3>
-        <ul class="benefit-list">
-          <li><span class="highlight">Custom Web Solutions:</span> Modern, responsive websites that showcase your brand</li>
-          <li><span class="highlight">AI Integration:</span> Smart chatbots and automation tools tailored to your needs</li>
-          <li><span class="highlight">E-commerce Platform:</span> Your own branded online store with full control</li>
-          <li><span class="highlight">Business Apps:</span> Streamline operations with custom software solutions</li>
-          <li><span class="highlight">Data Analytics:</span> Make informed decisions with AI-powered insights</li>
-        </ul>
-        <a href="https://www.navaura.in/business.html" class="cta-button">Explore Business Solutions</a>
-      </div>
-
-      <div class="card">
-        <h3>For Individual Users</h3>
-        <ul class="benefit-list">
-          <li><span class="highlight">Personal Apps:</span> Custom applications built for your specific needs</li>
-          <li><span class="highlight">AI Assistants:</span> Personal AI tools to boost productivity</li>
-          <li><span class="highlight">Portfolio Websites:</span> Showcase your work with stunning web presence</li>
-          <li><span class="highlight">Digital Solutions:</span> Transform your ideas into reality</li>
-          <li><span class="highlight">Technical Support:</span> Ongoing assistance and maintenance</li>
-        </ul>
-        <a href="https://www.navaura.in/individual.html" class="cta-button">Discover Personal Solutions</a>
-      </div>
-
-      <div class="card">
-        <h3>Why Choose Navaura™?</h3>
-        <ul class="benefit-list">
-          <li><span class="highlight">Expertise:</span> Cutting-edge technology and industry best practices</li>
-          <li><span class="highlight">Customization:</span> Solutions tailored to your specific requirements</li>
-          <li><span class="highlight">Support:</span> Dedicated team for ongoing assistance</li>
-          <li><span class="highlight">Innovation:</span> Latest AI and tech advancements</li>
-          <li><span class="highlight">Quality:</span> Robust, scalable, and secure solutions</li>
-        </ul>
-        <a href="https://www.navaura.in/contact.html" class="cta-button">Get Started Today</a>
-      </div>
+    <!-- Preloader -->
+    <div class="loader">
+        <div class="text-6xl font-bold text-white" style="text-align: center;">NAVAURA ARCTIQ</div>
     </div>
-  </div>
+    
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+    
+    <!-- Header with Logo -->
+    <header id="site-header">
+        <a href="https://www.navaura.in" target="_blank" rel="noopener noreferrer">
+            <img id="logo" src="https://www.navaura.in/logow.png" alt="Navaura Logo">
+        </a>
+    </header>
+    
+    <!-- Language Selection Section -->
+    <section class="language-container" id="language-selection">
+        <div class="language-overlay"></div>
+        <div class="language-content" id="language-content">
+            <h1>Choose Your Language</h1>
+            
+            <p>Please select your preferred language to continue</p>
+            
+            <div class="language-options">
+                <button class="language-btn" onclick="selectLanguage('bangla')">বাংলা</button>
+                <button class="language-btn" onclick="selectLanguage('english')">English</button>
+            </div>
+            <br>thank-you for coming</br>
+        </div>
+    </section>
+    
 
-  <footer>
-    <p>&copy; 2024 Navaura™. All rights reserved.</p>
-    <div class="footer-links">
-      <a href="https://www.navaura.in/about.html">About Us</a>
-      <a href="https://www.navaura.in/contact.html">Contact</a>
-      <a href="https://www.navaura.in/privacy.html">Privacy Policy</a>
-      <a href="https://www.navaura.in/terms".html>Terms of Service</a>
+<!-- Bangla Content Section -->
+<section id="bangla-content" class="content-section">
+    <h2>নভৌরা আর্কটিক</h2>
+    <div class="content-placeholder">
+        <p><strong>প্রযুক্তিতে বোনা ভবিষ্যৎ</strong> — কলকাতার মাটিতে গড়ে ওঠা নভৌরা™ আজ AI ও অটোমেশনের মাধ্যমে বাংলা তথা ভারতের ব্যবসায়িক পরিকাঠামো বদলে দিচ্ছে। আমাদের বিশ্বাস, "সর্বেষাং কৃতে ভবিষ্যম্" — ভবিষ্যৎ হোক সবার জন্য।</p>
+        <p><strong>আমাদের মূল সেবা:</strong></p>
+        <ul>
+            <li>➤ বাংলাভাষী কাস্টম AI ও chatbot তৈরির সমাধান</li>
+            <li>➤ এন্টারপ্রাইজ ওয়েব অ্যাপ্লিকেশন ডেভেলপমেন্ট</li>
+            <li>➤ সাইবার সুরক্ষা ও ক্লাউড স্ট্রাকচার গঠন</li>
+            <li>➤ AI নির্ভর বিশ্লেষণ, রিপোর্টিং ও বিজনেস ইনটেলিজেন্স</li>
+        </ul>
+        <p><strong>আমাদের প্রোডাক্ট:</strong></p>
+        <ul>
+            <li><strong>Vedi AI</strong> – একজন স্বতন্ত্র গবেষণায় সহায়ক AI সহকারী</li>
+            <li><strong>SAYVA</strong> – বাংলায় নো-কোড AI চ্যাটবট তৈরির প্ল্যাটফর্ম (বেটা)</li>
+       </ul>
+        <p><strong>আমাদের লক্ষ্য:</strong> বাংলার ঘরে ঘরে প্রযুক্তি পৌঁছে দেওয়া—যেখানে স্থানীয় সমস্যা সমাধান করবে স্থানীয় প্রযুক্তি।</p>
+        <p><strong>পরিচালক:</strong> শুভম মুখার্জী – একান্তভাবে বিশ্বাস করেন, "স্বদেশী সফটওয়্যারই ভবিষ্যতের ভারত গড়বে।"</p>
+        <p style="margin-top: 1rem;">
+            🔗 <a href="https://www.navaura.in" target="_blank">navaura.in</a> |
+            <a href="https://sayva.navaura.in" target="_blank">sayva.navaura.in</a> |
+            <a href="https://vedi.navaura.in" target="_blank">vedi.navaura.in</a> |
+       </p>
     </div>
-  </footer>
-</body></html>
-<script>
-    (function() {
-        const PING_INTERVAL_MINUTES = 10; // Adjust this as needed
-        const DEVICE_ID_KEY = 'device_id';
-        const LAST_PING_KEY = 'last_ping_time';
+    <div style="text-align: center;">
+        <button class="go-back-btn" onclick="goBackToLanguageSelection()">পিছনে যান</button>
+    </div>
+</section>
 
-        // Generate a unique ID
-        function generateDeviceID() {
-            return 'device-' + Math.random().toString(36).substr(2, 9);
-        }
+    
+    
 
-        // Get or set the device ID in localStorage
-        function getDeviceID() {
-            let id = localStorage.getItem(DEVICE_ID_KEY);
-            if (!id) {
-                id = generateDeviceID();
-                localStorage.setItem(DEVICE_ID_KEY, id);
+<!-- English Content Section -->
+<section id="english-content" class="content-section">
+    <h2>Navaura Arctiq</h2>
+    <div class="content-placeholder">
+        <p><strong>Building a Smarter Future</strong> — Navaura™, born in Kolkata, is redefining the digital landscape across Eastern India with powerful, homegrown AI and automation solutions. Our philosophy, "Sarvesham Krute Bhavishyam," envisions a tech-enabled future that includes everyone.</p>
+        <p><strong>Our Core Services:</strong></p>
+        <ul>
+            <li>➤ AI Chatbot & Software Development (Bengali + English)</li>
+            <li>➤ Custom Web & Enterprise Application Design</li>
+            <li>➤ Cybersecurity & Scalable Cloud Infrastructure</li>
+            <li>➤ AI-driven Analytics, BI Dashboards & Reports</li>
+        </ul>
+        <p><strong>Flagship Products:</strong></p>
+        <ul>
+            <li><strong>Vedi AI</strong> – Research-focused AI assistant for academicians & analysts</li>
+            <li><strong>SAYVA</strong> – No-code AI chatbot builder built for regional needs (Beta)</li>
+            
+        </ul>
+        <p><strong>Mission:</strong> To empower regional entrepreneurs, educators, and innovators with intuitive AI solutions built right here in Bengal.</p>
+        <p><strong>Founder:</strong> Subham Mukherjee — A passionate technopreneur driving India's self-reliant future through local innovation.</p>
+        <p style="margin-top: 1rem;">
+            🔗 <a href="https://www.navaura.in" target="_blank">navaura.in</a> |
+            <a href="https://sayva.navaura.in" target="_blank">sayva.navaura.in</a> |
+            <a href="https://vedi.navaura.in" target="_blank">vedi.navaura.in</a> |
+          </p>
+    </div>
+    <div style="text-align: center;">
+        <button class="go-back-btn" onclick="goBackToLanguageSelection()">Go Back</button>
+    </div>
+</section>
+
+    
+    
+    <script>
+        // Function to handle language selection
+        function selectLanguage(language) {
+            // Hide language selection container
+            document.getElementById('language-selection').style.display = 'none';
+            
+            // Show appropriate content section
+            if (language === 'bangla') {
+                document.getElementById('bangla-content').classList.add('active');
+            } else if (language === 'english') {
+                document.getElementById('english-content').classList.add('active');
             }
-            return id;
         }
-
-        // Determine if it's time to ping again
-        function shouldPing() {
-            const lastPing = localStorage.getItem(LAST_PING_KEY);
-            const now = Date.now();
-            if (!lastPing || (now - parseInt(lastPing)) > PING_INTERVAL_MINUTES * 60 * 1000) {
-                localStorage.setItem(LAST_PING_KEY, now.toString());
-                return true;
-            }
-            return false;
+        
+        // Function to go back to language selection
+        function goBackToLanguageSelection() {
+            // Hide all content sections
+            document.getElementById('bangla-content').classList.remove('active');
+            document.getElementById('english-content').classList.remove('active');
+            
+            // Show language selection container
+            document.getElementById('language-selection').style.display = 'flex';
         }
-
-        // Main ping logic
-        window.onload = function() {
-            const deviceID = getDeviceID();
-            if (shouldPing()) {
-                fetch('https://server1001.navaura.in/ping', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ device_id: deviceID })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Pinged backend. Current count:', data.count);
-                })
-                .catch(error => console.error('Error:', error));
-            } else {
-                console.log('Ping skipped to reduce load.');
+        
+        // Custom cursor functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const cursor = document.querySelector('.cursor');
+            const cursorFollower = document.querySelector('.cursor-follower');
+            const header = document.getElementById('site-header');
+            const languageContainer = document.getElementById('language-selection');
+            const languageContent = document.getElementById('language-content');
+            
+            document.addEventListener('mousemove', function(e) {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                
+                // Add slight delay for follower cursor
+                setTimeout(function() {
+                    cursorFollower.style.left = e.clientX + 'px';
+                    cursorFollower.style.top = e.clientY + 'px';
+                }, 50);
+            });
+            
+            // After loader animation is complete
+            setTimeout(function() {
+                // Minimize header and move to top right
+                header.classList.add('minimized');
+                
+                // Add slide-up animation to language container
+                languageContainer.classList.add('slide-up');
+                
+                // Show language content with animation
+                languageContent.classList.add('show');
+            }, 1500); // Wait until after loader fadeOut is complete
+            
+            // Add hover effects for interactive elements
+            const interactiveElements = document.querySelectorAll('a, button');
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', function() {
+                    cursor.style.width = '20px';
+                    cursor.style.height = '20px';
+                    cursor.style.background = 'rgba(59, 130, 246, 1)';
+                    cursorFollower.style.width = '60px';
+                    cursorFollower.style.height = '60px';
+                    cursorFollower.style.borderColor = 'rgba(59, 130, 246, 0.6)';
+                });
+                
+                el.addEventListener('mouseleave', function() {
+                    cursor.style.width = '12px';
+                    cursor.style.height = '12px';
+                    cursor.style.background = 'rgba(255, 255, 255, 0.8)';
+                    cursorFollower.style.width = '40px';
+                    cursorFollower.style.height = '40px';
+                    cursorFollower.style.borderColor = 'rgba(255, 255, 255, 0.4)';
+                });
+            });
+        });
+    </script>
+    <script>
+        (function() {
+            const PING_INTERVAL_MINUTES = 10; // Adjust this as needed
+            const DEVICE_ID_KEY = 'device_id';
+            const LAST_PING_KEY = 'last_ping_time';
+    
+            // Generate a unique ID
+            function generateDeviceID() {
+                return 'device-' + Math.random().toString(36).substr(2, 9);
             }
-        };
-    })();
-</script>
-
+    
+            // Get or set the device ID in localStorage
+            function getDeviceID() {
+                let id = localStorage.getItem(DEVICE_ID_KEY);
+                if (!id) {
+                    id = generateDeviceID();
+                    localStorage.setItem(DEVICE_ID_KEY, id);
+                }
+                return id;
+            }
+    
+            // Determine if it's time to ping again
+            function shouldPing() {
+                const lastPing = localStorage.getItem(LAST_PING_KEY);
+                const now = Date.now();
+                if (!lastPing || (now - parseInt(lastPing)) > PING_INTERVAL_MINUTES * 60 * 1000) {
+                    localStorage.setItem(LAST_PING_KEY, now.toString());
+                    return true;
+                }
+                return false;
+            }
+    
+            // Main ping logic
+            window.onload = function() {
+                const deviceID = getDeviceID();
+                if (shouldPing()) {
+                    fetch('https://server1001.navaura.in/ping', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ device_id: deviceID })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Pinged backend. Current count:', data.count);
+                    })
+                    .catch(error => console.error('Error:', error));
+                } else {
+                    console.log('Ping skipped to reduce load.');
+                }
+            };
+        })();
+    </script> 
+</body>
+</html>
