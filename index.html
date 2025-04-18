@@ -719,103 +719,155 @@ section {
     </div>
 
     
-    <section id="products" class="py-24 bg-[#1a2332] relative overflow-hidden" data-aos="fade-up">
-        <div class="absolute inset-0 bg-gradient-to-br from-blue-900/10 to-transparent" data-aos="fade-in"></div>
-      
+    <section id="products" class="py-24 bg-[#1a2332] relative overflow-hidden">
+        <!-- Background effects -->
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-900/10 to-transparent"></div>
+        <div class="glow-effect"></div>
+        <div class="glow-effect" style="top: 40%; left: 70%; animation-delay: 2s;"></div>
+        
         <div class="container mx-auto px-4 md:px-8 relative">
-          <div class="text-center mb-16" data-aos="fade-down">
-            <h2 class="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-[#00E3FF] to-blue-500 bg-clip-text text-transparent pb-2">
+          <!-- Section header -->
+          <div class="text-center mb-12">
+            <h2 class="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-[#00E3FF] to-blue-500 bg-clip-text text-transparent pb-3">
               Our Products and Services
             </h2>
-            <div class="w-24 h-1 bg-gradient-to-r from-[#00E3FF] to-blue-500 mx-auto mt-4"></div>
+            <p class="text-gray-300 max-w-2xl mx-auto mt-4">Innovative solutions powered by cutting-edge AI technology to transform your business and workflow</p>
+            <div class="w-24 h-1 bg-gradient-to-r from-[#00E3FF] to-blue-500 mx-auto mt-6"></div>
           </div>
-      
-          <!-- APPS SECTION -->
-          <div class="mb-16">
-            <h3 class="text-2xl md:text-3xl font-semibold text-white mb-8 text-center">Apps</h3>
-            <div class="grid gap-8 md:grid-cols-2">
-              
-              <!-- Vedi AI -->
-              <div class="product-card">
-                <div class="product-image">
-                  <img src="https://www.navaura.in/vedi.webp" alt="Vedi AI" class="rounded-xl shadow-lg">
+          
+          <!-- Category Tabs -->
+          <div class="flex justify-center mb-12">
+            <div class="inline-flex bg-gray-800/50 rounded-lg p-1">
+              <button class="tab-button active" id="all-tab">All</button>
+              <button class="tab-button" id="apps-tab">Apps</button>
+              <button class="tab-button" id="services-tab">Services</button>
+            </div>
+          </div>
+          
+          <!-- Products Grid - Apps Section -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            <!-- Vedi AI -->
+            <div class="product-card group" data-category="apps">
+              <div class="card-tag">FREE</div>
+              <div class="product-image">
+                <img src="https://www.navaura.in/vedi.webp" alt="Vedi AI" class="rounded-t-xl">
+              </div>
+              <div class="p-6 relative">
+                <div class="flex items-center mb-3">
+                  <svg class="feature-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#00E3FF" stroke-width="2"/>
+                    <path d="M12 8V12L15 15" stroke="#00E3FF" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                  <h3 class="product-title mb-0">Vedi AI</h3>
                 </div>
-                <div class="p-6">
-                  <h3 class="product-title">Vedi AI</h3>
-                  <p class="product-desc">Deep dive into your topics with our powerful AI Researcher Tool. Ideal for students and professionals.</p>
+                <p class="product-desc">Deep dive into your topics with our powerful AI Researcher Tool. Ideal for students and professionals.</p>
+                <div class="flex items-center justify-between">
                   <div class="pricing"><span>FREE</span></div>
                   <a href="https://vedi.navaura.in" class="cta-button">RE SEARCH THE SEARCHES</a>
                 </div>
               </div>
-      
-              <!-- SAYVA -->
-              <div class="product-card">
-                <div class="product-image">
-                  <img src="https://www.navaura.in/sayva.webp" alt="SAYVA" class="rounded-xl shadow-lg">
+            </div>
+            
+            <!-- SAYVA -->
+            <div class="product-card" data-category="apps">
+              <div class="card-tag">BETA</div>
+              <div class="product-image">
+                <img src="https://www.navaura.in/sayva.webp" alt="SAYVA" class="rounded-t-xl">
+              </div>
+              <div class="p-6">
+                <div class="flex items-center mb-3">
+                  <svg class="feature-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 21H5C3.89543 17 3 12.9706 3 12C3 11.0294 3.89543 7 5 3H9" stroke="#00E3FF" stroke-width="2"/>
+                    <path d="M15 21H19C20.1046 17 21 12.9706 21 12C21 11.0294 20.1046 7 19 3H15" stroke="#00E3FF" stroke-width="2"/>
+                    <rect x="9" y="3" width="6" height="18" rx="2" stroke="#00E3FF" stroke-width="2"/>
+                  </svg>
+                  <h3 class="product-title mb-0">SAYVA</h3>
                 </div>
-                <div class="p-6">
-                  <h3 class="product-title">SAYVA (No Code AI Chatbot Builder)</h3>
-                  <p class="product-desc">Ensure safe and high-quality user-generated content with our AI moderation tools.</p>
-                  <div class="pricing-details">
-                    <p class="pricing-label">Pricing (Beta)</p>
-                    <p>Yearly: <span>TBD</span></p>
-                    <p>API: <span>TBD</span></p>
-                  </div>
-                  <a href="https://sayva.navaura.in" class="cta-button">Create Your First AI Chatbot for FREE</a>
+                <p class="product-desc">No Code AI Chatbot Builder - Ensure safe and high-quality user-generated content with our AI moderation tools.</p>
+                <div class="pricing-details">
+                  <p class="pricing-label">Pricing (Beta)</p>
+                  <p>Yearly: <span>TBD</span> | API: <span>TBD</span></p>
                 </div>
+                <a href="https://sayva.navaura.in" class="cta-button w-full">Create Your First AI Chatbot for FREE</a>
               </div>
             </div>
-          </div>
-      
-          <!-- SERVICES SECTION -->
-          <h3 class="text-2xl md:text-3xl font-semibold text-white mb-8 text-center">Services</h3>
-          <div class="grid gap-8 md:grid-cols-2">
             
             <!-- Custom AI Bots -->
-            <div class="product-card">
+            <div class="product-card" data-category="services">
               <div class="product-image">
-                <img src="https://www.navaura.in/bot.webp" alt="Custom AI Bots" class="rounded-xl shadow-lg">
+                <img src="https://www.navaura.in/bot.webp" alt="Custom AI Bots" class="rounded-t-xl">
               </div>
               <div class="p-6">
-                <h3 class="product-title">Custom AI Bots</h3>
+                <div class="flex items-center mb-3">
+                  <svg class="feature-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="3" y="6" width="18" height="15" rx="2" stroke="#00E3FF" stroke-width="2"/>
+                    <path d="M8 6V4C8 2.89543 8.89543 2 10 2H14C15.1046 2 16 2.89543 16 4V6" stroke="#00E3FF" stroke-width="2"/>
+                    <path d="M9 12L11 14L15 10" stroke="#00E3FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <h3 class="product-title mb-0">Custom AI Bots</h3>
+                </div>
                 <p class="product-desc">Intelligent AI solutions tailored to your business needs. Automate customer support and streamline operations.</p>
-                <a href="#contact" class="cta-button">Request Consultation</a>
+                <a href="#contact" class="cta-button w-full">Request Consultation</a>
               </div>
             </div>
-      
+            
             <!-- Custom Software Development -->
-            <div class="product-card">
+            <div class="product-card" data-category="services">
               <div class="product-image">
-                <img src="https://www.navaura.in/app.webp" alt="Custom Software" class="rounded-xl shadow-lg">
+                <img src="https://www.navaura.in/app.webp" alt="Custom Software" class="rounded-t-xl">
               </div>
               <div class="p-6">
-                <h3 class="product-title">Custom Software Development</h3>
+                <div class="flex items-center mb-3">
+                  <svg class="feature-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 8L3 12L7 16" stroke="#00E3FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M17 8L21 12L17 16" stroke="#00E3FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M14 4L10 20" stroke="#00E3FF" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                  <h3 class="product-title mb-0">Custom Software Development</h3>
+                </div>
                 <p class="product-desc">Full-cycle software solutions using Python and modern frameworks. From web apps to data pipelines.</p>
-                <a href="#contact" class="cta-button">Get a Quote</a>
+                <a href="#contact" class="cta-button w-full">Get a Quote</a>
               </div>
             </div>
-      
+            
             <!-- Data Science & Analytics -->
-            <div class="product-card">
+            <div class="product-card" data-category="services">
               <div class="product-image">
-                <img src="https://www.navaura.in/data.webp" alt="Data Science & Analytics" class="rounded-xl shadow-lg">
+                <img src="https://www.navaura.in/data.webp" alt="Data Science & Analytics" class="rounded-t-xl">
               </div>
               <div class="p-6">
-                <h3 class="product-title">Data Science & Analytics</h3>
+                <div class="flex items-center mb-3">
+                  <svg class="feature-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 12H5C6.10457 12 7 12.8954 7 14V17C7 18.1046 7.89543 19 9 19H15C16.1046 19 17 18.1046 17 17V14C17 12.8954 17.8954 12 19 12H21" stroke="#00E3FF" stroke-width="2"/>
+                    <path d="M12 3L12 15" stroke="#00E3FF" stroke-width="2"/>
+                    <path d="M8 7L12 3L16 7" stroke="#00E3FF" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                  <h3 class="product-title mb-0">Data Science & Analytics</h3>
+                </div>
                 <p class="product-desc">Leverage actionable insights with predictive analytics, ML models, and interactive dashboards.</p>
-                <a href="#contact" class="cta-button">Discuss Your Project</a>
+                <a href="#contact" class="cta-button w-full">Discuss Your Project</a>
               </div>
             </div>
-      
+            
             <!-- AI Integration Services -->
-            <div class="product-card">
+            <div class="product-card" data-category="services">
               <div class="product-image">
-                <img src="https://www.navaura.in/job.webp" alt="AI Integration Services" class="rounded-xl shadow-lg">
+                <img src="https://www.navaura.in/job.webp" alt="AI Integration Services" class="rounded-t-xl">
               </div>
               <div class="p-6">
-                <h3 class="product-title">AI Integration Services</h3>
+                <div class="flex items-center mb-3">
+                  <svg class="feature-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 4V6" stroke="#00E3FF" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M12 18V20" stroke="#00E3FF" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M6 12H4" stroke="#00E3FF" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M20 12H18" stroke="#00E3FF" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="12" cy="12" r="6" stroke="#00E3FF" stroke-width="2"/>
+                    <circle cx="12" cy="12" r="2" fill="#00E3FF"/>
+                  </svg>
+                  <h3 class="product-title mb-0">AI Integration Services</h3>
+                </div>
                 <p class="product-desc">Integrate cutting-edge AI into your existing systems using LLMs, NLP, and computer vision.</p>
-                <a href="#contact" class="cta-button">Explore Options</a>
+                <a href="#contact" class="cta-button w-full">Explore Options</a>
               </div>
             </div>
           </div>
@@ -938,6 +990,8 @@ section {
                     <a href="#about" class="hover:text-blue-500 transition">About</a>
                     <a href="#products" class="hover:text-blue-500 transition">Products</a>
                     <a href="#founder" class="hover:text-blue-500 transition">Founder</a>
+                    <a href="#openprojects" class="hover:text-blue-500 transition">Open Projects</a>
+                    <a href="#quotes" class="hover:text-blue-500 transition">Quotes</a>
                     <a href="#contact" class="hover:text-blue-500 transition">Contact</a>
                     <a href="/terms" class="hover:text-blue-500 transition">Our Terms</a>
                     <a href="/privacy" class="hover:text-blue-500 transition">Privacy Policies</a>
@@ -2322,7 +2376,150 @@ document.getElementById("contact-form").addEventListener("submit", async functio
         -webkit-box-orient: vertical;
         flex-grow: 1; /* Allow description to fill available space */
     }
+    .product-card {
+      position: relative;
+      background: rgba(30, 41, 59, 0.8);
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
     
+    .product-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 227, 255, 0.2);
+    }
+    
+    .product-image {
+      overflow: hidden;
+      height: 200px;
+    }
+    
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .product-card:hover .product-image img {
+      transform: scale(1.05);
+    }
+    
+    .product-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #00E3FF, #3b82f6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.75rem;
+    }
+    
+    .product-desc {
+      color: #e2e8f0;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    
+    .pricing {
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    
+    .pricing span {
+      background: linear-gradient(90deg, #00E3FF, #3b82f6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 700;
+    }
+    
+    .pricing-details {
+      margin-bottom: 1rem;
+      color: #cbd5e1;
+    }
+    
+    .pricing-label {
+      font-weight: 600;
+      color: #f8fafc;
+      margin-bottom: 0.5rem;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: linear-gradient(90deg, #00E3FF, #3b82f6);
+      color: #fff;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      text-align: center;
+    }
+    
+    .cta-button:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0, 227, 255, 0.3);
+    }
+    
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+      padding: 8px;
+      background: rgba(59, 130, 246, 0.2);
+      border-radius: 8px;
+    }
+    
+    .tab-button {
+      background: transparent;
+      color: #cbd5e1;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-weight: 600;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .tab-button.active {
+      color: #00E3FF;
+      border-bottom: 2px solid #00E3FF;
+    }
+    
+    .glow-effect {
+      position: absolute;
+      top: -100px;
+      left: -100px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(0, 227, 255, 0.3) 0%, rgba(59, 130, 246, 0.1) 50%, transparent 70%);
+      filter: blur(40px);
+      z-index: 0;
+      animation: float 10s infinite alternate;
+    }
+    
+    @keyframes float {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      100% { transform: translate(50px, 50px) rotate(20deg); }
+    }
+    
+    .card-tag {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: linear-gradient(90deg, #00E3FF, #3b82f6);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      z-index: 2;
+    }
     .project-tile a {
         color: #0366d6;
         text-decoration: none;
@@ -2368,5 +2565,61 @@ document.getElementById("contact-form").addEventListener("submit", async functio
         background-color: #0557b9;
     }
 </style>
+<script>
+    // Simple tab functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const allTab = document.getElementById('all-tab');
+      const appsTab = document.getElementById('apps-tab');
+      const servicesTab = document.getElementById('services-tab');
+      const productCards = document.querySelectorAll('.product-card');
+      
+      allTab.addEventListener('click', function() {
+        setActiveTab(allTab);
+        productCards.forEach(card => {
+          card.style.display = 'block';
+        });
+      });
+      
+      appsTab.addEventListener('click', function() {
+        setActiveTab(appsTab);
+        productCards.forEach(card => {
+          if(card.dataset.category === 'apps') {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+      
+      servicesTab.addEventListener('click', function() {
+        setActiveTab(servicesTab);
+        productCards.forEach(card => {
+          if(card.dataset.category === 'services') {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+      
+      function setActiveTab(activeTab) {
+        [allTab, appsTab, servicesTab].forEach(tab => {
+          tab.classList.remove('active');
+        });
+        activeTab.classList.add('active');
+      }
+
+      // Add hover effects
+      productCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+          this.querySelector('.product-image img').style.transform = 'scale(1.05)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+          this.querySelector('.product-image img').style.transform = 'scale(1)';
+        });
+      });
+    });
+  </script>
 </body>
 </html>
