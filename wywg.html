@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>What is Navaura Arctiq?</title>
+    <title>Navaura Arctiq</title>
     <style>
         /* Global Styles */
         * {
@@ -268,6 +268,75 @@
             margin-bottom: 2rem;
             border: 1px solid rgba(59, 130, 246, 0.3);
         }
+
+        /* Enhanced Content Styling */
+        .content-placeholder {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(59, 130, 246, 0.1));
+            border-radius: 1rem;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(8px);
+        }
+
+        .content-placeholder p {
+            margin-bottom: 1.2rem;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .content-placeholder strong {
+            color: #3B82F6;
+            font-weight: 600;
+        }
+
+        .content-placeholder ul {
+            margin: 1rem 0 1.5rem 1.5rem;
+        }
+
+        .content-placeholder li {
+            margin-bottom: 0.8rem;
+            list-style-type: none;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .content-placeholder li::before {
+            content: "➤";
+            position: absolute;
+            left: 0;
+            color: #10B981;
+        }
+
+        .content-placeholder a {
+            color: #3B82F6;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .content-placeholder a:hover {
+            color: #10B981;
+        }
+
+        .content-placeholder a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #10B981;
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease;
+        }
+
+        .content-placeholder a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
         
         .placeholder-text {
             height: 1.5rem;
@@ -278,6 +347,72 @@
         
         .placeholder-text:last-child {
             width: 60%;
+        }
+
+        /* Action Buttons */
+        .action-container {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .action-btn {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: 2px solid #3B82F6;
+            border-radius: 0.5rem;
+            background-color: rgba(59, 130, 246, 0.2);
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .action-btn:hover {
+            background-color: #3B82F6;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.5);
+        }
+
+        .action-btn i {
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .footer p {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Regional Elements */
+        .regional-flair {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            z-index: 10;
+            opacity: 0.7;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        .regional-icon {
+            margin-right: 0.5rem;
+            color: #10B981;
         }
         
         /* Go Back Button Styles */
@@ -301,6 +436,7 @@
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(59, 130, 246, 0.5);
         }
+
         /* Hide custom cursor on touch devices and small screens */
         @media (hover: none), (max-width: 768px) {
             .cursor, .cursor-follower {
@@ -308,10 +444,36 @@
                 pointer-events: none;
             }
 
-        
-        
+            .language-btn {
+                padding: 1.2rem 2rem;
+                font-size: 1.2rem;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+                margin-top: 3rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .content-placeholder {
+                padding: 1.5rem;
+            }
+
+            .action-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .action-btn {
+                width: 100%;
+                max-width: 300px;
+            }
         }
     </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <!-- Preloader -->
@@ -342,7 +504,10 @@
                 <button class="language-btn" onclick="selectLanguage('bangla')">বাংলা</button>
                 <button class="language-btn" onclick="selectLanguage('english')">English</button>
             </div>
-            <br>thank-you for coming</br>
+            <div class="regional-flair">
+                <span class="regional-icon"><i class="fas fa-map-marker-alt"></i></span>
+                Built with <span style="color: #FF5722;">♥</span> in Kolkata
+            </div>
         </div>
     </section>
     
@@ -354,10 +519,10 @@
         <p><strong>প্রযুক্তিতে বোনা ভবিষ্যৎ</strong> — কলকাতার মাটিতে গড়ে ওঠা নভৌরা™ আজ AI ও অটোমেশনের মাধ্যমে বাংলা তথা ভারতের ব্যবসায়িক পরিকাঠামো বদলে দিচ্ছে। আমাদের বিশ্বাস, "সর্বেষাং কৃতে ভবিষ্যম্" — ভবিষ্যৎ হোক সবার জন্য।</p>
         <p><strong>আমাদের মূল সেবা:</strong></p>
         <ul>
-            <li>➤ বাংলাভাষী কাস্টম AI ও chatbot তৈরির সমাধান</li>
-            <li>➤ এন্টারপ্রাইজ ওয়েব অ্যাপ্লিকেশন ডেভেলপমেন্ট</li>
-            <li>➤ সাইবার সুরক্ষা ও ক্লাউড স্ট্রাকচার গঠন</li>
-            <li>➤ AI নির্ভর বিশ্লেষণ, রিপোর্টিং ও বিজনেস ইনটেলিজেন্স</li>
+            <li>বাংলাভাষী কাস্টম AI ও chatbot তৈরির সমাধান</li>
+            <li>এন্টারপ্রাইজ ওয়েব অ্যাপ্লিকেশন ডেভেলপমেন্ট</li>
+            <li>সাইবার সুরক্ষা ও ক্লাউড স্ট্রাকচার গঠন</li>
+            <li>AI নির্ভর বিশ্লেষণ, রিপোর্টিং ও বিজনেস ইনটেলিজেন্স</li>
         </ul>
         <p><strong>আমাদের প্রোডাক্ট:</strong></p>
         <ul>
@@ -366,14 +531,37 @@
        </ul>
         <p><strong>আমাদের লক্ষ্য:</strong> বাংলার ঘরে ঘরে প্রযুক্তি পৌঁছে দেওয়া—যেখানে স্থানীয় সমস্যা সমাধান করবে স্থানীয় প্রযুক্তি।</p>
         <p><strong>পরিচালক:</strong> শুভম মুখার্জী – একান্তভাবে বিশ্বাস করেন, "স্বদেশী সফটওয়্যারই ভবিষ্যতের ভারত গড়বে।"</p>
-        <p style="margin-top: 1rem;">
-            🔗 <a href="https://www.navaura.in" target="_blank">navaura.in</a> |
-            <a href="https://sayva.navaura.in" target="_blank">sayva.navaura.in</a> |
-            <a href="https://vedi.navaura.in" target="_blank">vedi.navaura.in</a> |
-       </p>
     </div>
+
+    <div class="action-container">
+        <a href="https://www.navaura.in" class="action-btn" target="_blank">
+            <i class="fas fa-globe"></i> আমাদের ওয়েবসাইট দেখুন
+        </a>
+        <a href="https://sayva.navaura.in" class="action-btn" target="_blank">
+            <i class="fas fa-robot"></i> SAYVA ব্যবহার করুন
+        </a>
+        <a href="https://vedi.navaura.in" class="action-btn" target="_blank">
+            <i class="fas fa-brain"></i> Vedi AI দেখুন
+        </a>
+    </div>
+
+    <div class="content-placeholder" style="margin-top: 3rem;">
+        <p style="text-align: center;"><strong>আমাদের সাথে কাজ করতে চান?</strong></p>
+        <p style="text-align: center;">আপনার ব্যবসা বা শিক্ষা প্রতিষ্ঠানের জন্য AI-ভিত্তিক সমাধান খুঁজছেন? আমাদের দল আপনার পাশে আছে!</p>
+        <div style="text-align: center; margin-top: 1.5rem;">
+            <a href="https://www.navaura.in/contact" class="action-btn" target="_blank">
+                <i class="fas fa-handshake"></i> যোগাযোগ করুন
+            </a>
+        </div>
+    </div>
+
     <div style="text-align: center;">
         <button class="go-back-btn" onclick="goBackToLanguageSelection()">পিছনে যান</button>
+    </div>
+
+    <div class="footer">
+        <p>© ২০২৫ নভৌরা™ টেকনোলজিস প্রাইভেট লিমিটেড</p>
+        <p>কলকাতা, পশ্চিমবঙ্গ, ভারত</p>
     </div>
 </section>
 
@@ -387,27 +575,49 @@
         <p><strong>Building a Smarter Future</strong> — Navaura™, born in Kolkata, is redefining the digital landscape across Eastern India with powerful, homegrown AI and automation solutions. Our philosophy, "Sarvesham Krute Bhavishyam," envisions a tech-enabled future that includes everyone.</p>
         <p><strong>Our Core Services:</strong></p>
         <ul>
-            <li>➤ AI Chatbot & Software Development (Bengali + English)</li>
-            <li>➤ Custom Web & Enterprise Application Design</li>
-            <li>➤ Cybersecurity & Scalable Cloud Infrastructure</li>
-            <li>➤ AI-driven Analytics, BI Dashboards & Reports</li>
+            <li>AI Chatbot & Software Development (Bengali + English)</li>
+            <li>Custom Web & Enterprise Application Design</li>
+            <li>Cybersecurity & Scalable Cloud Infrastructure</li>
+            <li>AI-driven Analytics, BI Dashboards & Reports</li>
         </ul>
         <p><strong>Flagship Products:</strong></p>
         <ul>
             <li><strong>Vedi AI</strong> – Research-focused AI assistant for academicians & analysts</li>
             <li><strong>SAYVA</strong> – No-code AI chatbot builder built for regional needs (Beta)</li>
-            
         </ul>
         <p><strong>Mission:</strong> To empower regional entrepreneurs, educators, and innovators with intuitive AI solutions built right here in Bengal.</p>
         <p><strong>Founder:</strong> Subham Mukherjee — A passionate technopreneur driving India's self-reliant future through local innovation.</p>
-        <p style="margin-top: 1rem;">
-            🔗 <a href="https://www.navaura.in" target="_blank">navaura.in</a> |
-            <a href="https://sayva.navaura.in" target="_blank">sayva.navaura.in</a> |
-            <a href="https://vedi.navaura.in" target="_blank">vedi.navaura.in</a> |
-          </p>
     </div>
+
+    <div class="action-container">
+        <a href="https://www.navaura.in" class="action-btn" target="_blank">
+            <i class="fas fa-globe"></i> Visit Our Website
+        </a>
+        <a href="https://sayva.navaura.in" class="action-btn" target="_blank">
+            <i class="fas fa-robot"></i> Try SAYVA
+        </a>
+        <a href="https://vedi.navaura.in" class="action-btn" target="_blank">
+            <i class="fas fa-brain"></i> Explore Vedi AI
+        </a>
+    </div>
+
+    <div class="content-placeholder" style="margin-top: 3rem;">
+        <p style="text-align: center;"><strong>Want to work with us?</strong></p>
+        <p style="text-align: center;">Looking for AI-powered solutions for your business or educational institution? Our team is here to help!</p>
+        <div style="text-align: center; margin-top: 1.5rem;">
+            <a href="https://www.navaura.in/#contact" class="action-btn" target="_blank">
+                <i class="fas fa-handshake"></i> Get in Touch
+            </a>
+        </div>
+    </div>
+
     <div style="text-align: center;">
         <button class="go-back-btn" onclick="goBackToLanguageSelection()">Go Back</button>
+    </div>
+
+    <div class="footer">
+        <p>© 2025 Navaura™ Technologies Pvt Ltd</p>
+        <p>Kolkata, West Bengal, India</p>
     </div>
 </section>
 
