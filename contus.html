@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Navaura</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+        }
+        .text-gradient {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .nav-link.active {
+            color: #3b82f6;
+            position: relative;
+        }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-100">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-black bg-opacity-90 z-50 border-b border-gray-800" id="navbar">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <img id="logo" src="https://www.navaura.in/logow.png" alt="Navaura Logo" class="h-10">
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#services" class="hover:text-blue-500 transition nav-link">Services</a>
+                    <a href="#about" class="hover:text-blue-500 transition nav-link">About</a>
+                    <a href="#founder" class="hover:text-blue-500 transition nav-link">Founder</a>
+                    <a href="#products" class="hover:text-blue-500 transition nav-link">Products</a>
+                    <a href="#openprojects" class="hover:text-blue-500 transition nav-link">Sarvesham</a>
+                    <a href="#contact" class="hover:text-blue-500 transition nav-link active">Contact Us</a>
+                </div>
+                <button class="md:hidden menu-toggle">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-16 6h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div class="fixed inset-0 bg-black bg-opacity-95 z-40 transform translate-x-full transition-transform duration-300" id="mobile-menu">
+        <div class="container mx-auto px-6 py-8">
+            <div class="flex justify-end">
+                <button class="mobile-close">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="flex flex-col space-y-6 mt-8">
+                <a href="#services" class="text-2xl hover:text-blue-500 transition mobile-link">Services</a>
+                <a href="#about" class="text-2xl hover:text-blue-500 transition mobile-link">About</a>
+                <a href="#founder" class="text-2xl hover:text-blue-500 transition mobile-link">Founder</a>
+                <a href="#products" class="text-2xl hover:text-blue-500 transition mobile-link">Products</a>
+                <a href="#openprojects" class="text-2xl hover:text-blue-500 transition mobile-link">Sarvesham</a>
+                <a href="#contact" class="text-2xl hover:text-blue-500 transition mobile-link active">Contact Us</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-black min-h-screen">
+        <div class="container mx-auto px-6 pt-24">
+            <h2 class="text-4xl font-bold text-center mb-16 text-gradient" data-aos="fade-down">Contact Us</h2>
+            <div class="max-w-2xl mx-auto">
+                <!-- Form Container -->
+                <div id="form-container">
+                    <form id="contact-form" class="space-y-6" data-aos="fade-up">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Name</label>
+                                <input type="text" name="name" required class="w-full px-4 py-3 bg-black border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Email</label>
+                                <input type="email" name="email" required class="w-full px-4 py-3 bg-black border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Mobile Number</label>
+                            <input type="tel" name="mobile" required class="w-full px-4 py-3 bg-black border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500"
+                            pattern="[0-9]{10}" placeholder="10 digit mobile number">
+                            <p class="text-xs text-gray-500 mt-1">Format: 10 digit number without spaces or dashes</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Reason for Contact</label>
+                            <select name="reason" required class="w-full px-4 py-3 bg-black border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500">
+                                <option value="">Select a reason</option>
+                                <option value="General Inquiry">General Inquiry</option>
+                                <option value="Product Support">Product Support</option>
+                                <option value="Sales Consultation">Sales Consultation</option>
+                                <option value="Technical Support">Technical Support</option>
+                                <option value="Partnership">Partnership</option>
+                                <option value="A HELP FOR WB SSC DESERVING TEACHER's">PROMPT ENGINEERING FREE COURSE(only WestBengal)</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Message</label>
+                            <textarea name="message" required rows="4" class="w-full px-4 py-3 bg-black border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500"></textarea>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" name="newsletter" id="newsletter" checked class="w-4 h-4 text-blue-600 bg-black border-gray-700 rounded focus:ring-blue-500">
+                            <label for="newsletter" class="ml-2 text-sm font-medium">Subscribe to our newsletter</label>
+                        </div>
+                        <button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-6 py-3 rounded-lg transition font-medium text-lg">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Contact info section -->
+            <div class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-10 max-w-4xl mx-auto text-center" data-aos="fade-up" data-aos-delay="200">
+                <div class="p-6 rounded-xl border border-gray-800 hover:border-gray-700 transition">
+                    <div class="w-12 h-12 bg-blue-500 bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-medium mb-2">Phone</h3>
+                    <p class="text-gray-400">+91 9073888611</p>
+                </div>
+                
+                <div class="p-6 rounded-xl border border-gray-800 hover:border-gray-700 transition">
+                    <div class="w-12 h-12 bg-purple-500 bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-medium mb-2">Email</h3>
+                    <p class="text-gray-400">namaskar@navaura.in</p>
+                </div>
+                
+                <div class="p-6 rounded-xl border border-gray-800 hover:border-gray-700 transition">
+                    <div class="w-12 h-12 bg-green-500 bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-medium mb-2">Location</h3>
+                    <p class="text-gray-400">Kolkata, West Bengal<br>India</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Initialize AOS animation library
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+        
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileClose = document.querySelector('.mobile-close');
+        
+        menuToggle.addEventListener('click', function() {
+            mobileMenu.classList.remove('translate-x-full');
+        });
+        
+        mobileClose.addEventListener('click', function() {
+            mobileMenu.classList.add('translate-x-full');
+        });
+        
+        // Mobile menu links
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.add('translate-x-full');
+            });
+        });
+        
+        // Form handling with API integration
+        document.getElementById("contact-form").addEventListener("submit", async function(e) {
+            e.preventDefault();
+            // Disable the submit button to prevent double submission
+            const submitBtn = this.querySelector("button[type='submit']");
+            submitBtn.disabled = true;
+            submitBtn.innerText = "Submitting...";
+            
+            // Validate mobile number (10 digits)
+            const mobileInput = this.mobile;
+            if (!/^\d{10}$/.test(mobileInput.value)) {
+                alert('Please enter a valid 10-digit mobile number');
+                mobileInput.focus();
+                submitBtn.disabled = false;
+                submitBtn.innerText = "Send Message";
+                return;
+            }
+            
+            const formData = {
+                name: this.name.value,
+                email: this.email.value,
+                mobile: this.mobile.value,
+                reason: this.reason.value,
+                message: this.message.value,
+                newsletter: this.newsletter ? this.newsletter.checked.toString() : "true" // Convert boolean to string "true"/"false"
+            };
+            
+            // Immediately show the thank-you message
+            document.getElementById("form-container").innerHTML = `
+                <div class="text-center py-16" data-aos="fade-up">
+                    <div class="mx-auto w-16 h-16 mb-6">
+                        <svg class="w-full h-full text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-3xl font-bold mb-4">Thank You!</h3>
+                    <p class="text-lg text-gray-300">We appreciate you contacting us. We'll get back to you soon!</p>
+                    <p class="text-sm text-gray-400 mt-4">Your inquiry about "<strong>${formData.reason}</strong>" has been received.</p>
+                    ${formData.newsletter === "true" ?
+                    `<p class="text-sm text-blue-400 mt-2">You've been subscribed to our newsletter!</p>` :
+                    ''}
+                </div>
+            `;
+            
+            // Perform the request in the background
+            try {
+                await fetch('https://server1001.navaura.in/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+            } catch (error) {
+                console.error("Form submission failed:", error);
+            }
+        });
+    </script>
+</body>
+</html>
