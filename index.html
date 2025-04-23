@@ -974,11 +974,7 @@ section {
         </div>
     </div>
 </section>
-<section class="bg-black py-12 px-6 md:px-16"style="
-    z-index: 10!important;
-    cursor: none;
-    pointer-events: none;
-">
+<section class="bg-black py-12 px-6 md:px-16">
     <div class="max-w-7xl mx-auto">
       <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">🌍 Operation Destination</h2>
       <p class="text-center text-lg text-gray-700 mb-10">
@@ -2664,6 +2660,137 @@ document.getElementById("contact-form").addEventListener("submit", async functio
           this.querySelector('.product-image img').style.transform = 'scale(1)';
         });
       });
+    });
+  </script>
+  <!-- Add this HTML at the end of your body, before closing body tag -->
+<div id="back-to-top" class="fixed bottom-6 right-6 bg-black p-3 rounded-full opacity-0 transform translate-y-10 transition-all duration-500 ease-in-out shadow-lg z-50 overflow-hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="12" y1="19" x2="12" y2="5"></line>
+      <polyline points="5 12 12 5 19 12"></polyline>
+    </svg>
+    <span class="ripple-container absolute inset-0"></span>
+  </div>
+  
+  <style>
+    #back-to-top {
+      visibility: hidden;
+    }
+    
+    #back-to-top.active {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Ripple effect styles */
+    .ripple-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    
+    .ripple {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      transform: scale(0);
+      animation: ripple-animation 0.6s linear;
+    }
+    
+    @keyframes ripple-animation {
+      to {
+        transform: scale(2.5);
+        opacity: 0;
+      }
+    }
+  </style>
+  
+  <!-- Add this JavaScript before closing body tag -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const backToTop = document.getElementById('back-to-top');
+      const heroSection = document.getElementById('hero');
+      let scrolling = false;
+      let lastScrollPosition = 0;
+      
+      // Function to check scroll position and show/hide button with better performance
+      function toggleBackToTopButton() {
+        if (!scrolling) {
+          scrolling = true;
+          window.requestAnimationFrame(function() {
+            const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+            const currentScrollPosition = window.scrollY;
+            
+            // Only update if there's a significant change in scroll position
+            if (Math.abs(currentScrollPosition - lastScrollPosition) > 10) {
+              if (currentScrollPosition > heroBottom - 100) {
+                backToTop.classList.add('active');
+              } else {
+                backToTop.classList.remove('active');
+              }
+              lastScrollPosition = currentScrollPosition;
+            }
+            
+            scrolling = false;
+          });
+        }
+      }
+      
+      // Add scroll event listener
+      window.addEventListener('scroll', toggleBackToTopButton);
+      
+      // Add click event to scroll back to top with ripple effect
+      backToTop.addEventListener('click', function(e) {
+        // Create ripple effect
+        const ripple = document.createElement('span');
+        const rect = backToTop.getBoundingClientRect();
+        
+        // Calculate ripple position
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        ripple.className = 'ripple';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        
+        // Add ripple to button
+        const rippleContainer = backToTop.querySelector('.ripple-container');
+        rippleContainer.appendChild(ripple);
+        
+        // Remove ripple after animation completes
+        setTimeout(() => {
+          ripple.remove();
+        }, 600);
+        
+        // Scroll to top
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+      
+      // Create ripple effect on hover as well (optional)
+      backToTop.addEventListener('mouseenter', function(e) {
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple';
+        ripple.style.left = '50%';
+        ripple.style.top = '50%';
+        
+        const rippleContainer = backToTop.querySelector('.ripple-container');
+        rippleContainer.appendChild(ripple);
+        
+        setTimeout(() => {
+          ripple.remove();
+        }, 600);
+      });
+      
+      // Initial check on page load
+      toggleBackToTopButton();
     });
   </script>
 </body>
