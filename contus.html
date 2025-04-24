@@ -31,9 +31,83 @@
             height: 2px;
             background: linear-gradient(90deg, #3b82f6, #8b5cf6);
         }
+        /* Primary cursor */
+.cursor {
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 99999;
+    transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease;
+    mix-blend-mode: difference;
+    opacity: 1;
+    will-change: transform, width, height;
+}
+
+/* Secondary cursor (outer ring) */
+.cursor-follower {
+    width: 40px;
+    height: 40px;
+    background: rgba(252, 248, 248, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 99998;
+    transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease;
+    opacity: 1;
+    will-change: transform, width, height;
+}
+
+
+html,body, * {
+    cursor: none;
+}
+/* Remove focus outlines that can cause orange highlight */
+a, button, input, select, textarea, [role="button"] {
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    user-select: none;
+}
+
+/* Fix default highlight color on links and buttons */
+a:focus, button:focus, .nav-item:focus {
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+}
+
+/* Extra protection against text selection during navigation */
+nav, header {
+    user-select: none;
+}
+
+/* Prevent orange highlight in webkit browsers */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 768px) {
+    .cursor, .cursor-follower {
+        display: none;
+    }
+    
+    html {
+        cursor: auto;
+    }
+}
     </style>
 </head>
 <body class="bg-black text-gray-100">
+    <!-- Add cursor elements -->
+<div class="cursor-container">
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+  </div>
     <!-- Navigation -->
     <nav class="fixed w-full bg-black bg-opacity-90 z-50 border-b border-gray-800" id="navbar">
         <div class="container mx-auto px-6 py-4">
@@ -253,5 +327,236 @@
             }
         });
     </script>
+    <script>
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+        let mouseX = 0, mouseY = 0;
+        let followerX = 0, followerY = 0;
+        let isCursorVisible = !isMobile();
+        let animationRunning = false;
+        let frameId = null;
+        let lastScrollY = window.scrollY;
+        
+        // Improved mobile detection
+        function isMobile() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+        }
+        
+        function updateCursorVisibility() {
+            const isNowMobile = isMobile();
+            
+            if (isNowMobile && isCursorVisible) {
+                isCursorVisible = false;
+                cursor.style.display = 'none';
+                cursorFollower.style.display = 'none';
+                removeCursorEvents();
+            } else if (!isNowMobile && !isCursorVisible) {
+                isCursorVisible = true;
+                cursor.style.display = 'block';
+                cursorFollower.style.display = 'block';
+                addCursorEvents();
+                restartAnimation();
+            }
+        }
+        
+        function restartAnimation() {
+            if (!animationRunning) {
+                animationRunning = true;
+                cancelAnimationFrame(frameId);
+                animate();
+            }
+        }
+        
+        function removeCursorEvents() {
+            document.removeEventListener('mousemove', trackMouse);
+            document.removeEventListener('mouseout', hideCursor);
+            document.removeEventListener('mouseover', showCursor);
+            document.removeEventListener('mousedown', enlargeCursor);
+            document.removeEventListener('mouseup', resetCursor);
+            document.removeEventListener('scroll', handleScroll);
+            
+            // Remove element-specific event listeners
+            removeElementEventListeners();
+        }
+        
+        function addCursorEvents() {
+            document.addEventListener('mousemove', trackMouse);
+            document.addEventListener('mouseout', hideCursor);
+            document.addEventListener('mouseover', showCursor);
+            document.addEventListener('mousedown', enlargeCursor);
+            document.addEventListener('mouseup', resetCursor);
+            document.addEventListener('scroll', handleScroll);
+            
+            // Add element-specific event listeners
+            addElementEventListeners();
+        }
+        
+        function trackMouse(e) {
+            if (!isCursorVisible) return;
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        }
+        
+        function hideCursor() {
+            if (!isCursorVisible) return;
+            cursor.style.opacity = '0';
+            cursorFollower.style.opacity = '0';
+        }
+        
+        function showCursor() {
+            if (!isCursorVisible) return;
+            cursor.style.opacity = '1';
+            cursorFollower.style.opacity = '1';
+        }
+        
+        function enlargeCursor() {
+            if (!isCursorVisible) return;
+            cursor.classList.add('cursor-active');
+            cursorFollower.classList.add('follower-active');
+        }
+        
+        function resetCursor() {
+            if (!isCursorVisible) return;
+            cursor.classList.remove('cursor-active');
+            cursorFollower.classList.remove('follower-active');
+        }
+        
+        function handleScroll() {
+            if (!isCursorVisible) return;
+            
+            // Add a subtle effect when scrolling
+            const scrollDelta = window.scrollY - lastScrollY;
+            if (Math.abs(scrollDelta) > 10) {
+                cursorFollower.style.height = '10px';
+                cursorFollower.style.width = '10px';
+                
+                setTimeout(() => {
+                    cursorFollower.style.height = '40px';
+                    cursorFollower.style.width = '40px';
+                }, 100);
+            }
+            
+            lastScrollY = window.scrollY;
+        }
+        
+        function addElementEventListeners() {
+            // For links and buttons
+            const clickables = document.querySelectorAll('a, button, .clickable, input[type="submit"], input[type="button"]');
+            clickables.forEach(el => {
+                el.addEventListener('mouseenter', () => hoverEffect(true, 'clickable'));
+                el.addEventListener('mouseleave', () => hoverEffect(false, 'clickable'));
+            });
+            
+            // For input fields
+            const inputs = document.querySelectorAll('input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="tel"], textarea, select');
+        
+        inputs.forEach(el => {
+          el.addEventListener('mouseenter', () => hoverEffect(true, 'input'));
+          el.addEventListener('mouseleave', () => hoverEffect(false, 'input'));
+        });
+            
+            // For images and media
+            const media = document.querySelectorAll('img, video');
+            media.forEach(el => {
+                el.addEventListener('mouseenter', () => hoverEffect(true, 'media'));
+                el.addEventListener('mouseleave', () => hoverEffect(false, 'media'));
+            });
+        }
+        
+        function removeElementEventListeners() {
+            const allElements = document.querySelectorAll('a, button, .clickable, input, textarea, select, img, video');
+            allElements.forEach(el => {
+                el.removeEventListener('mouseenter', () => hoverEffect(true));
+                el.removeEventListener('mouseleave', () => hoverEffect(false));
+            });
+        }
+        
+        function hoverEffect(isHovering, elementType) {
+            if (!isCursorVisible) return;
+            
+            if (isHovering) {
+                cursor.classList.add('cursor-hover');
+                cursorFollower.classList.add('follower-hover');
+                
+                switch(elementType) {
+                    case 'clickable':
+                        cursor.classList.add('cursor-pointer');
+                        cursorFollower.textContent = '';
+                        cursorFollower.style.width = '50px';
+                        cursorFollower.style.height = '50px';
+                        cursorFollower.style.backgroundColor = 'rgba(255, 255, 255, 0.15)';
+                        break;
+                    case 'input':
+                        cursor.classList.add('cursor-text');
+                        cursorFollower.style.width = '12px';
+                        cursorFollower.style.height = '25px';
+                        cursorFollower.style.borderRadius = '4px';
+                        break;
+                    case 'media':
+                        cursor.classList.add('cursor-zoom');
+                        cursorFollower.style.width = '60px';
+                        cursorFollower.style.height = '60px';
+                        cursorFollower.style.mixBlendMode = 'overlay';
+                        break;
+                }
+            } else {
+                cursor.classList.remove('cursor-hover', 'cursor-pointer', 'cursor-text', 'cursor-zoom');
+                cursorFollower.classList.remove('follower-hover');
+                cursorFollower.textContent = '';
+                cursorFollower.style.width = '40px';
+                cursorFollower.style.height = '40px';
+                cursorFollower.style.borderRadius = '50%';
+                cursorFollower.style.backgroundColor = 'rgba(252, 248, 248, 0.1)';
+                cursorFollower.style.mixBlendMode = 'normal';
+            }
+        }
+        
+        function animate() {
+            if (!isCursorVisible) {
+                animationRunning = false;
+                return;
+            }
+            
+            // Smoother easing for follower with improved performance
+            const easeFactor = 0.1;
+            const dx = mouseX - followerX - 10;
+            const dy = mouseY - followerY - 10;
+            
+            // Only update when there's significant movement
+            if (Math.abs(dx) > 0.1 || Math.abs(dy) > 0.1) {
+                followerX += dx * easeFactor;
+                followerY += dy * easeFactor;
+                
+                cursorFollower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0)`;
+            }
+            
+            // Direct positioning for the main cursor (no lag)
+            cursor.style.transform = `translate3d(${mouseX - 6}px, ${mouseY - 6}px, 0)`;
+            
+            frameId = requestAnimationFrame(animate);
+        }
+        
+        // Performance optimization: Use passive event listeners when possible
+        function addPassiveEventListener(element, eventName, handler) {
+            element.addEventListener(eventName, handler, { passive: true });
+        }
+        
+        // Initialize everything
+        function init() {
+            updateCursorVisibility();
+            
+            // Use passive listeners for better performance
+            window.addEventListener('resize', updateCursorVisibility, { passive: true });
+            window.addEventListener('orientationchange', updateCursorVisibility, { passive: true });
+            
+            if (!isMobile()) {
+                addCursorEvents();
+                animate();
+            }
+        }
+        
+        // Run initialization
+        document.addEventListener('DOMContentLoaded', init);
+        </script>
 </body>
 </html>
