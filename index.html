@@ -2359,23 +2359,25 @@ document.getElementById("contact-form").addEventListener("submit", async functio
     }
   </style> 
 <style>
-/* Reset and base styles for popup */
+/* Popup Overlay - Base Layer */
 .popup-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(0, 0, 0, 0.92);
   z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-  overflow-y: auto; /* Enable scrolling */
-  padding: 10px; /* Small padding around edges */
+  transition: opacity 0.4s cubic-bezier(0.19, 1, 0.22, 1),
+              visibility 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  overflow-y: auto;
+  padding: 15px;
+  box-sizing: border-box;
 }
 
 .popup-overlay.active {
@@ -2383,25 +2385,44 @@ document.getElementById("contact-form").addEventListener("submit", async functio
   visibility: visible;
 }
 
-/* Container for popup content */
+/* Popup Container */
 .popup-container {
   position: relative;
   width: 100%;
-  max-width: 90%;
-  margin: auto;
-  background: linear-gradient(135deg, #00000063 0%, #0a0a0a 100%);
-  border-radius: 16px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+  max-width: 92%;
+  margin: 15px auto;
+  background: linear-gradient(135deg, rgba(25, 25, 25, 0.85) 0%, rgba(10, 10, 10, 0.95) 100%);
+  border-radius: 18px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7),
+              0 4px 10px rgba(0, 0, 0, 0.2),
+              inset 0 1px 1px rgba(255, 255, 255, 0.05);
   color: #e0e0e0;
   transform: scale(0.95);
   opacity: 0;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  display: block; /* Changed to block for mobile */
-  padding: 20px;
-  max-height: 90vh; /* Limit height on mobile */
-  overflow-y: auto; /* Enable scrolling within container */
+  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1),
+              opacity 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  display: block;
+  padding: 22px;
+  max-height: 90vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+
+.popup-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.popup-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.popup-container::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
 }
 
 .popup-overlay.active .popup-container {
@@ -2409,91 +2430,135 @@ document.getElementById("contact-form").addEventListener("submit", async functio
   opacity: 1;
 }
 
-/* Section styling (each product) */
+/* Popup Sections */
 .popup-section {
   width: 100%;
-  margin-bottom: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 15px;
-  border-radius: 12px;
-  background-color: rgba(255, 255, 255, 0.03);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  margin-bottom: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 18px;
+  border-radius: 14px;
+  background-color: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Image styling */
+.popup-section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+/* Image Wrapper and Image */
 .popup-image-wrapper {
   position: relative;
   width: 100%;
-  margin-bottom: 15px;
+  margin-bottom: 16px;
   display: block;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .popup-image {
   width: 100%;
   height: auto;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  display: block; /* Ensure proper display */
+  display: block;
+  transition: transform 0.5s ease;
 }
 
+.popup-image-wrapper:hover .popup-image {
+  transform: scale(1.02);
+}
+
+/* "NEW" Tag */
 .popup-tag {
   position: absolute;
-  top: 8px;
-  right: 8px;
-  background-color: red;
+  top: 10px;
+  right: 10px;
+  background: linear-gradient(135deg, #ff0000, #cc0000);
   color: white;
-  padding: 3px 8px;
+  padding: 4px 10px;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 700;
   border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  animation: pulse 2s infinite;
 }
 
-/* Text styling */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Text Content */
 .popup-title {
-  font-size: 18px;
-  font-weight: bold;
-  margin: 12px 0;
+  font-size: 19px;
+  font-weight: 700;
+  margin: 14px 0 12px;
   background: linear-gradient(to right, #ffb347, #ffcc33);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .popup-content {
   font-size: 14px;
-  line-height: 1.4;
-  margin-bottom: 15px;
+  line-height: 1.5;
+  margin-bottom: 18px;
   color: rgba(255, 230, 200, 0.85);
+  letter-spacing: 0.2px;
 }
 
-/* Button styling */
+/* Button Styling */
 .popup-button {
-  display: block; /* Full width on mobile */
+  display: block;
   width: 100%;
-  max-width: 100%;
   background: linear-gradient(to right, #ffcc33, #ff9900);
   color: #2b1600;
   font-weight: 600;
-  padding: 10px 0;
+  padding: 12px 0;
   text-align: center;
-  border-radius: 6px;
+  border-radius: 8px;
   text-decoration: none;
   cursor: pointer;
   border: none;
-  box-shadow: 0 2px 10px rgba(255, 170, 0, 0.3);
-  margin: 0 auto; /* Center the button */
+  box-shadow: 0 4px 12px rgba(255, 153, 0, 0.3),
+              inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  margin: 5px auto 0;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+  font-size: 14px;
+  text-transform: uppercase;
 }
 
-/* Close button */
+.popup-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(255, 153, 0, 0.4),
+              inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  background: linear-gradient(to right, #ffcc33, #ffa700);
+}
+
+.popup-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(255, 153, 0, 0.3),
+              inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+/* Close Button */
 .popup-close {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 15px;
+  right: 15px;
   background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   color: rgba(255, 255, 255, 0.8);
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -2501,72 +2566,94 @@ document.getElementById("contact-form").addEventListener("submit", async functio
   cursor: pointer;
   z-index: 10;
   font-size: 18px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Media queries for tablet and desktop */
+.popup-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 1);
+  transform: rotate(90deg);
+}
+
+/* Media Queries for Tablet and Desktop */
 @media (min-width: 768px) {
   .popup-container {
     padding: 35px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    gap: 20px;
+    gap: 25px;
     max-width: 1000px;
     max-height: 85vh;
   }
   
   .popup-section {
-    flex: 0 0 calc(50% - 20px);
+    flex: 0 0 calc(50% - 25px);
     margin-bottom: 0;
-    padding: 20px;
+    padding: 22px;
   }
   
   .popup-title {
     font-size: 22px;
+    margin-top: 0;
   }
   
   .popup-content {
     font-size: 15px;
-    line-height: 1.5;
+    line-height: 1.6;
   }
   
   .popup-button {
     display: inline-block;
     width: auto;
-    padding: 12px 24px;
+    padding: 12px 28px;
+    font-size: 15px;
   }
 }
 
-/* Fix for very small mobile screens */
+/* Adjustments for Very Small Mobile Screens */
 @media (max-width: 360px) {
   .popup-container {
-    padding: 15px;
+    padding: 16px;
     max-width: 95%;
   }
   
   .popup-section {
-    padding: 12px;
+    padding: 14px;
   }
   
   .popup-title {
-    font-size: 16px;
+    font-size: 17px;
   }
   
   .popup-content {
     font-size: 13px;
+    line-height: 1.4;
   }
   
   .popup-button {
-    padding: 8px 0;
-    font-size: 14px;
+    padding: 10px 0;
+    font-size: 13px;
   }
   
   .popup-close {
-    top: 8px;
-    right: 8px;
-    width: 25px;
-    height: 25px;
+    top: 10px;
+    right: 10px;
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
   }
+}
+
+/* Animation for Popup Entry */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.popup-overlay.active {
+  animation: fadeIn 0.4s forwards;
 }
 </style>
 <script>
