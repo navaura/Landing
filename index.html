@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="robots" content="index, follow" />
   <meta name="theme-color" content="#070b14" />
-
+<script src="cookies.ns"></script>
   <!-- Favicon and Icons -->
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <link rel="icon" href="favicon.png" sizes="16x16" type="image/png" />
@@ -498,9 +498,16 @@ section {
             transform: scale(1.1);
         }
     }
+    
 </style>
 
-
+<script>  window.addEventListener('DOMContentLoaded', () => {
+    if (typeof AOS !== "undefined") {
+      AOS.init({ once: true, duration: 800 });
+    } else {
+      console.warn("AOS not loaded");
+    }
+  });</script>
 <!-- Services Section -->
 <section id="services" class="py-20 bg-black">
     <div class="container mx-auto px-6">
