@@ -494,10 +494,10 @@
         }
     };
 
-    // If there's a .chatus element, add click event listener
-    const chatusButton = document.querySelector(".chatus");
-    if (chatusButton) {
-        chatusButton.addEventListener("click", toggleChat);
+    // If there's a .chatui element, add click event listener
+    const chatuiButton = document.querySelector(".chatui");
+    if (chatuiButton) {
+        chatuiButton.addEventListener("click", toggleChat);
     }
 
     document.getElementById("chatOverlay").addEventListener("click", toggleChat);
